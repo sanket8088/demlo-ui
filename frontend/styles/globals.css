@@ -1,13 +1,16 @@
-*,html,body{
+*,
+html,
+body {
   margin: 0;
   padding: 0;
 }
-body{
+body {
   box-sizing: border-box;
   text-rendering: optimizeLegibility;
   width: 100%;
   height: 100%;
-  font-family: "Poppins";
+  font-family: 'Poppins';
+  font-style: normal;
 }
 
 :root {
