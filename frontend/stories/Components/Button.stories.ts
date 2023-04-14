@@ -20,7 +20,8 @@ export const Primary: Story = {
  size:"medium",
  variant:"contained",
  label:"Button",
-disabled:false
+ disabled:false,
+ fullWidth:false
   },
 };
 
