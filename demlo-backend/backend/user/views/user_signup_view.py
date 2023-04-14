@@ -5,7 +5,6 @@ from rest_framework import status
 from user.serilaizers.request import UserSerializer, SignUpRequest
 from django.db import transaction
 from common import Utils, BaseResponse
-from user.models import User
 
 
 class UserSignUpView(APIView):
