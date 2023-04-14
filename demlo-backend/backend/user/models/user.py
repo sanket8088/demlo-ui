@@ -20,12 +20,3 @@ class User(AbstractUser):
     def __str__(self):
        return str(self.id)
 
-    @classmethod
-    def get_user_name(cls, user_id):
-        try:
-            user = User.objects.get(pk=user_id)
-            last_name = user.last_name if user.last_name is not None else ""
-            return user.first_name + last_name
-        except:
-            return None
-
