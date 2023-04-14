@@ -3,9 +3,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from user.serilaizers.request import UserSerializer, SignUpRequest
-from base64 import b64encode, b64decode
 from django.db import transaction
-from common import Utils
+from common import Utils, BaseResponse
 from user.models import User
 
 
@@ -32,21 +31,7 @@ class UserSignUpView(APIView):
         if isinstance(user_instance, dict):
             return Response(user_instance, status=status.HTTP_400_BAD_REQUEST)
         else:
-            resp = self.format_response(user_instance)
-            return Response(resp, status=status.HTTP_200_OK)
-
-    def format_response(self, user_instance: User) -> dict:
-        """Converts a user instance to dictionary.
-
-        Args:
-            user (User): user instance
-
-        Returns:
-            dict: json of required user info
-        """
-
-        return {"id": user_instance.id,
-                "first_name": user_instance.first_name,
-                "contact_number": user_instance.contact_number,
-                "email": user_instance.email,
-                }
+            resp = Utils.generate_user_response(request.user)
+            resp = BaseResponse(data=resp)
+            _ = resp.is_valid(raise_exception=True)
+            return Response(resp.validated_data, status=status.HTTP_201_CREATED)

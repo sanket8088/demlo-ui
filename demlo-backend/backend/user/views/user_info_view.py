@@ -2,9 +2,12 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from user.models import User
-from user.serilaizers.response import UserDetailResponse
 from rest_framework.permissions import IsAuthenticated
 from django.http import HttpRequest
+from common import BaseResponse
+from common import Utils
+from user.serilaizers.request import UpdateUserInfoRequest, UserSerializer
+from django.db import transaction
 
 
 class UserView(APIView):
@@ -23,25 +26,28 @@ class UserView(APIView):
         Returns:
             Response: User info
         """
-        user = request.user
-        resp = self.format_response(user)
-        response = UserDetailResponse(data=resp)
-        _ = response.is_valid(raise_exception=True)
-        return Response(response.validated_data, status=status.HTTP_200_OK)
+        resp = Utils.generate_user_response(request.user)
+        resp = BaseResponse(data=resp)
+        _ = resp.is_valid(raise_exception=True)
+        return Response(resp.validated_data, status=status.HTTP_200_OK)
 
-    def format_response(self, user: User) -> dict:
-        """Converts a user instance to dictionary.
+    @transaction.atomic
+    def patch(self, request: HttpRequest) -> Response:
+        """PATCH method to update the user info
 
         Args:
-            user (User): user instance
+            request (HttpRequest)
 
         Returns:
-            dict: json of required user info
+            Response: User info
         """
-        return {"id": user.id,
-                "name": user.first_name,
-                "contact": user.contact_number,
-                "email": user.email,
-                "username": user.username,
-                "dob": user.dob,
-                }
+        req_data = request.data
+        user = request.user
+        request_data = UpdateUserInfoRequest(data=req_data)
+        _ = request_data.is_valid(raise_exception=True)
+        request_data = request_data.validated_data
+        user_instance = UserSerializer.update(user, request_data)
+        resp = Utils.generate_user_response(user_instance)
+        resp = BaseResponse(data=resp)
+        _ = resp.is_valid(raise_exception=True)
+        return Response(resp.validated_data, status=status.HTTP_200_OK)
