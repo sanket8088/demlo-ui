@@ -7,34 +7,41 @@ interface IButtonTypes {
   variant?: "text" | "contained" | "outlined" | undefined;
   label: string;
   disabled?: boolean;
+  fullWidth?: boolean;
 }
-const Main = styled.div`
-  background: linear-gradient(111.76deg, #0a66c2 27.13%, #00b5d1 90.6%);
-  border-radius: 14px;
-`;
+
 const ButtonComponent = ({
   size = "medium",
   variant,
   label,
   disabled,
+  fullWidth,
 }: IButtonTypes) => {
   const background =
     variant === "contained"
       ? "linear-gradient(111.76deg, #0A66C2 27.13%, #00B5D1 90.6%)"
       : "rgba(81, 205, 222, 0.1)";
+  const paddingInline =
+    size === "large" ? "34px" : size === "small" ? "24px" : "36px";
+  const paddingBlock =
+    size === "large" ? "16px" : size === "small" ? "var(--spacing-1)" : "10px";
+  const fontSize =
+    size === "large" ? "16px" : size === "small" ? "12px" : "14px";
+  const borderRadius = size === "small" ? "8px" : "14px";
   return (
     <Button
       variant={variant}
       size={size}
       disabled={disabled}
+      fullWidth={fullWidth}
       sx={{
         background: background,
-        paddingInline: "34px",
-        paddingBlock: "16px",
-        fontSize: "16px",
+        paddingInline: paddingInline,
+        paddingBlock: paddingBlock,
+        fontSize: fontSize,
         lineHeight: "120%",
         fontWeight: "500",
-        borderRadius: "14px",
+        borderRadius: borderRadius,
         "&:hover": {
           background:
             "linear-gradient(0deg, rgba(5, 56, 107, 0.4), rgba(5, 56, 107, 0.4)), linear-gradient(111.76deg, #0A66C2 27.13%, #00B5D1 90.6%)",

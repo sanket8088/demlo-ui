@@ -21,20 +21,26 @@ body {
   --color-black-1: #191919;
   --color-black-2: #333333;
   --color-black-3: #4d4d4d;
-  --color-black-4: #666666;
-  --color-black-5: #808080;
-  --color-black-6: #999999;
-  --color-black-7: #b3b3b3;
-  --color-black-8: #cccccc;
-  --color-black-9: #d9d9d9;
-  --color-black-10: #e6e6e6;
-  --color-black-11: #f2f2f2;
-  --color-black-12: #fafafa;
-  --color-black-13: #f7f7f7;
-  --color-black-14: #262626;
-  --color-black-trans: rgba(0, 0, 0, 0.3);
+
   /* Notification Colours */
   --color-error: #b72d00;
   --color-error-1: #ff460f;
   --color-error-2: #ffebe5;
+}
+
+:root {
+  --spacing-1: 0.5rem;
+  --spacing-2: 0.625rem;
+  --spacing-3: 1rem;
+  --spacing-4: 1.25rem;
+  --spacing-5: 1.5rem;
+  --spacing-6: 1.75rem;
+  --spacing-7: 2rem;
+  --spacing-8: 2.25rem;
+  --spacing-9: 2.5rem;
+  --spacing-10: 3rem;
+  --spacing-11: 3.5rem;
+  --spacing-12: 4rem;
+  --spacing-13: 4.5rem;
+  --spacing-14: 5rem;
 }

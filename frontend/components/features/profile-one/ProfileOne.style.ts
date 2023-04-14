@@ -5,6 +5,7 @@ const Main = styled.div`
   left: 50%;
   width: 60%;
   height: 80vh;
+  padding: 1%;
   position: absolute;
   background: #1c232d;
   transform: translate(-50%, -50%);
