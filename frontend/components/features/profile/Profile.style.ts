@@ -3,25 +3,28 @@ import styled from '@emotion/styled';
 const Main = styled.div`
   top: 50%;
   left: 50%;
-  width: 60%;
-  height: 85vh;
+  width: 70%;
+  height: 90vh;
   padding: 1%;
   position: absolute;
   transform: translate(-50%, -50%);
+  border: 1px solid red;
 `;
 
 const MainOne = styled.div`
-  width: 60%;
+  width: 50%;
   margin: auto;
   color: white;
   margin-bottom: 3%;
+  border: 1px solid red;
 `;
 
 const MainTwo = styled.div`
-  width: 50%;
-  height: 16%;
+  width: 40%;
+  height: 15%;
   margin: auto;
   margin-bottom: 3%;
+  border: 1px solid red;
 `;
 
 const Heading = styled.h1`
@@ -43,24 +46,19 @@ const Paragraph = styled.p`
 const MainThree = styled.div`
   width: 100%;
   height: 45%;
-  display: grid;
   margin-bottom: 3%;
-  grid-template-columns: repeat(5, 22%);
-  border: 1px solid red;
-  &:hover {
-    cursor: pointer;
-  }
 `;
 
 const MainFour = styled.div`
-  width: 55%;
-  height: 16%;
+  width: 45%;
+  height: 15%;
   margin: auto;
   display: flex;
   align-items: center;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  border: 1px solid red;
 `;
 
 const Link = styled.p`

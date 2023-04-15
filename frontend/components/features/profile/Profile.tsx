@@ -1,6 +1,7 @@
 import React from 'react';
 import HorizontalStepper from '../../stepper';
-import BadgeAvatars from '@/components/core-components/avatar/Avatar';
+import SelectAvatar from '@/components/SelectAvatar/SelectAvatar';
+import SelectInterest from '@/components/SelectInterest/SelectInterest';
 import ButtonComponent from '@/components/core-components/button/ButtonComponent';
 import {
   Main,
@@ -24,16 +25,8 @@ export const ProfileOne = () => {
         <Paragraph>Pick your style</Paragraph>
       </MainTwo>
       <MainThree>
-        <BadgeAvatars />
-        <BadgeAvatars />
-        <BadgeAvatars />
-        <BadgeAvatars />
-        <BadgeAvatars />
-        <BadgeAvatars />
-        <BadgeAvatars />
-        <BadgeAvatars />
-        <BadgeAvatars />
-        <BadgeAvatars />
+        {/* <SelectAvatar /> */}
+        <SelectInterest />
       </MainThree>
       <MainFour>
         <ButtonComponent
