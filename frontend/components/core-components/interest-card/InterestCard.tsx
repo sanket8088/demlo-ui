@@ -16,6 +16,7 @@ export default function InterestAreaCard() {
         background:
           'linear-gradient(to bottom right, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0) 100%)',
         backdropFilter: 'blur(21px)',
+        marginBottom: '10px',
       }}
     >
       <CardActionArea

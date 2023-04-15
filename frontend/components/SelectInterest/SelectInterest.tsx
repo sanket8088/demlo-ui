@@ -21,6 +21,10 @@ const SelectInterest = () => {
         <InterestAreaCard />
         <InterestAreaCard />
         <InterestAreaCard />
+        <InterestAreaCard />
+        <InterestAreaCard />
+        <InterestAreaCard />
+        <InterestAreaCard />
       </MainBottom>
     </Main>
   );

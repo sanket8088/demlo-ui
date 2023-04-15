@@ -3,7 +3,6 @@ import styled from '@emotion/styled';
 const Main = styled.div`
   width: 100%;
   height: 100%;
-  border: 1px solid red;
   &:hover {
     cursor: pointer;
   }
@@ -12,7 +11,7 @@ const Main = styled.div`
 const MainTop = styled.div`
   width: 70%;
   margin: auto;
-  height: 28%;
+  height: 26%;
   margin-bottom: 2%;
   border: 1px solid red;
 `;
@@ -27,12 +26,25 @@ const MainTopInput = styled.div`
 
 const MainBottom = styled.div`
   width: 100%;
-  height: 70%;
+  max-height: 72%;
   margin: auto;
   display: grid;
-  gap: 5px;
+  overflow: auto;
   grid-template-columns: repeat(4, 25%);
-  border: 1px solid red;
+
+  && {
+    &::-webkit-scrollbar {
+      width: 4px !important;
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: #1c232d !important;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #a5a5a5 !important;
+    }
+  }
 `;
 
 export { Main, MainTop, MainTopInput, MainBottom };
