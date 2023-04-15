@@ -11,22 +11,20 @@ const Main = styled.div`
 const MainTop = styled.div`
   width: 70%;
   margin: auto;
-  height: 26%;
+  max-height: 26%;
   margin-bottom: 2%;
-  border: 1px solid red;
 `;
 
 const MainTopInput = styled.div`
   width: 70%;
-  height: 68%;
+  height: 65%;
   margin: auto;
   margin-bottom: 2%;
-  border: 1px solid red;
 `;
 
 const MainBottom = styled.div`
   width: 100%;
-  max-height: 72%;
+  max-height: 80%;
   margin: auto;
   display: grid;
   overflow: auto;

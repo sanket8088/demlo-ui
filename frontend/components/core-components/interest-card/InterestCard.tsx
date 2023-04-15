@@ -46,7 +46,7 @@ export default function InterestAreaCard() {
           >
             Science
           </Typography>
-          <Typography sx={{ color: '#fff', fontSize: '8px' }}>
+          <Typography sx={{ color: '#A5A5A5', fontSize: '8px' }}>
             Lizards are a widespread group of squamate reptiles, with over 6,000
             species.
           </Typography>

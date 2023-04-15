@@ -1,19 +1,19 @@
-import React from 'react';
-import Input from '../core-components/input/Input';
-import InterestAreaCard from '../core-components/interest-card/InterestCard';
 import {
   Main,
   MainTop,
   MainTopInput,
   MainBottom,
 } from './SelectInterest.style';
+import React from 'react';
+import SearchBar from '../core-components/searchbar/Searchbar';
+import InterestAreaCard from '../core-components/interest-card/InterestCard';
 
 const SelectInterest = () => {
   return (
     <Main>
       <MainTop>
         <MainTopInput>
-          <Input label="Search your topics" />
+          <SearchBar />
         </MainTopInput>
       </MainTop>
       <MainBottom>
