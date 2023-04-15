@@ -1,4 +1,4 @@
-import LoginComponent from "@/components/features/login-page";
+import AuthComponent from "@/components/features/auth-modal";
 import React from "react";
 
 const login = () => {
@@ -9,7 +9,7 @@ const login = () => {
       display:"flex",
       justifyContent:"center"}}>
       <>
-      <LoginComponent title={"Create Account"} subTitle={"Get started with an account on Demlo"} />
+      <AuthComponent title={"Create Account"} subTitle={"Get started with an account on Demlo"} />
     </>
     </div>
     

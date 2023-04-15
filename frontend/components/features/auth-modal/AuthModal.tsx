@@ -7,7 +7,7 @@ interface ITestTypes {
   title: string;
   subTitle: string;
 }
-export const LoginComponent = ({ title, subTitle }: ITestTypes) => {
+export const AuthComponent = ({ title, subTitle }: ITestTypes) => {
   return (
         <ModalComponent title={title} subTitle={subTitle} />
   );
