@@ -1,31 +1,36 @@
+from django.http import HttpRequest
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from user.serilaizers.request import UserSerializer, SignUpRequest
-from base64 import b64encode, b64decode
 from django.db import transaction
-from common import Utils
+from common import Utils, BaseResponse
 
 
 class UserSignUpView(APIView):
+    """
+    A view to create an account for user
+    """
 
     @transaction.atomic
-    def post(self, request):
-        req_data =request.data
-        request_data = SignUpRequest(data = req_data)
-        validation = request_data.is_valid(raise_exception=True)
+    def post(self, request: HttpRequest) -> Response:
+        """POST method to save data to db
+
+        Args:
+            request (HttpRequest)
+
+        Returns:
+            Response: User info
+        """
+        req_data = request.data
+        request_data = SignUpRequest(data=req_data)
+        _ = request_data.is_valid(raise_exception=True)
         request_data = request_data.validated_data
-        userInstance = UserSerializer.create(request_data)
-        if type(userInstance) == dict:
-            return Response(userInstance, status = status.HTTP_400_BAD_REQUEST)
+        user_instance = UserSerializer.create(request_data)
+        if isinstance(user_instance, dict):
+            return Response(user_instance, status=status.HTTP_400_BAD_REQUEST)
         else:
-            resp = self.generateResponse(userInstance)
-            return Response(resp, status = status.HTTP_200_OK)
-
-    def generateResponse(self, instance):
-        resp = dict()
-        resp["id"] = instance.id
-        resp["first_name"] = instance.first_name
-        resp["contact_number"] = instance.contact_number
-
-        return resp
+            resp = Utils.generate_user_response(request.user)
+            resp = BaseResponse(data=resp)
+            _ = resp.is_valid(raise_exception=True)
+            return Response(resp.validated_data, status=status.HTTP_201_CREATED)
