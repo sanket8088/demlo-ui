@@ -23,16 +23,18 @@
     "@types/react-dom": "18.0.11",
     "eslint": "8.38.0",
     "eslint-config-next": "13.3.0",
+    "formik": "^2.2.9",
     "next": "13.3.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "typescript": "5.0.4"
+    "typescript": "5.0.4",
+    "yup": "^1.1.1"
   },
   "devDependencies": {
+    "@storybook/addon-a11y": "^7.0.4",
     "@storybook/addon-essentials": "^7.0.4",
     "@storybook/addon-interactions": "^7.0.4",
     "@storybook/addon-links": "^7.0.4",
-    "@storybook/addon-a11y": "^7.0.4",
     "@storybook/blocks": "^7.0.4",
     "@storybook/nextjs": "^7.0.4",
     "@storybook/react": "^7.0.4",

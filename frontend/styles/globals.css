@@ -41,3 +41,7 @@ body{
   --spacing-13: 4.5rem;
   --spacing-14: 5rem;
 }
+
+.label_astrik{
+  margin-left: 5px;
+}
