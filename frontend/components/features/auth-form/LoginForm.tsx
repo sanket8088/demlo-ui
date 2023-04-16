@@ -51,8 +51,8 @@ const LoginForm = () => {
   return (
     <div style={{ marginTop: "120px" }}>
       <ModalComponent
-        title="Create Account"
-        subTitle="Get started with an account on Demlo"
+        title="Welcome back !"
+        subTitle="Please Sign in to continue"
       >
         <Formik
           validateOnMount

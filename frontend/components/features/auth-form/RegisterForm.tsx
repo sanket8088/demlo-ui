@@ -59,7 +59,7 @@ const RegisterForm = () => {
     mutate({
       email: values?.email,
       dob: values?.dob,
-      contact_number: "7830746977",
+      contact_number: "7830746988",
       password: values?.password,
       first_name: values?.firstName,
       last_name: values?.lastName,
