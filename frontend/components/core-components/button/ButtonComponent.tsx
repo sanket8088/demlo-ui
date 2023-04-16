@@ -8,6 +8,7 @@ interface IButtonTypes {
   label: string;
   disabled?: boolean;
   fullWidth?: boolean;
+  onClick?: () => void;
 }
 
 const ButtonComponent = ({
@@ -16,6 +17,7 @@ const ButtonComponent = ({
   label,
   disabled,
   fullWidth,
+  onClick = () => null,
 }: IButtonTypes) => {
   const background =
     variant === "contained"
@@ -34,6 +36,8 @@ const ButtonComponent = ({
       size={size}
       disabled={disabled}
       fullWidth={fullWidth}
+      type="button"
+      onClick={onClick}
       sx={{
         background: background,
         paddingInline: paddingInline,

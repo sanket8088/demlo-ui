@@ -81,7 +81,7 @@ const Input = ({
   disabled,
 }: IInputTypes) => {
   return (
-    <FormControl>
+    <FormControl sx={{ width: "100%" }}>
       {label !== undefined ? (
         <InputLabel
           sx={{
@@ -107,12 +107,12 @@ const Input = ({
         value={value}
         helperText={helperText}
         required={required}
-        fullWidth
+        fullWidth={true}
         disabled={disabled}
         // focused={true}
         sx={{
           outline: "0",
-          width: "100%",
+          width: "100",
           fontFamily: "poppins",
           backdropFilter: "blur(21px)",
           marginTop: "10px",

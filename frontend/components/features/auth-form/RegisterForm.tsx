@@ -19,58 +19,65 @@ const RegisterForm = () => {
       >
         <Formik
           validateOnMount
-          initialValues={{ email: "", name: "" }}
+          initialValues={{
+            email: "",
+            firstName: "",
+            lastName: "",
+            username: "",
+            password: "",
+            confirmPassword: "",
+            dob: "",
+          }}
           validationSchema={Yup.object().shape({
             email: Yup.string().email().required(),
           })}
           onSubmit={handleSubmit}
         >
           {(props) => {
-            const { email, name } = props.values;
+            const {
+              email,
+              firstName,
+              lastName,
+              username,
+              password,
+              confirmPassword,
+              dob,
+            } = props.values;
             return (
               <form onSubmit={props.handleSubmit}>
                 <GridContainer spacing={2}>
                   <GridItem xs={6}>
-                    <FastInput name="email" label="Email" required />
+                    <FastInput name="firstName" label="First Name" required />
                   </GridItem>
                   <GridItem xs={6}>
-                    <FastInput name="name" />
+                    <FastInput name="lastName" label="Last Name " required />
                   </GridItem>
-                  <GridItem xs={6}>
-                    <FastInput name="email" label="Email" required />
-                  </GridItem>
-                  <GridItem xs={6}>
-                    <FastInput name="name" />
-                  </GridItem>{" "}
                   <GridItem xs={6}>
                     <FastInput name="email" label="Email" required />
                   </GridItem>
                   <GridItem xs={6}>
-                    <FastInput name="name" />
-                  </GridItem>{" "}
-                  <GridItem xs={6}>
-                    <FastInput name="email" label="Email" required />
+                    <FastInput name="dob" label="Date" required type="date" />
+                  </GridItem>
+
+                  <GridItem xs={12}>
+                    <FastInput name="username" label="Username" required />
                   </GridItem>
                   <GridItem xs={6}>
-                    <FastInput name="name" />
-                  </GridItem>{" "}
-                  <GridItem xs={6}>
-                    <FastInput name="email" label="Email" required />
+                    <FastInput name="password" label="Password" required />
                   </GridItem>
                   <GridItem xs={6}>
-                    <FastInput name="name" />
-                  </GridItem>{" "}
-                  <GridItem xs={6}>
-                    <FastInput name="email" label="Email" required />
-                  </GridItem>
-                  <GridItem xs={6}>
-                    <FastInput name="name" />
+                    <FastInput
+                      name="confirmPassword"
+                      label="Confirm Password"
+                      required
+                    />
                   </GridItem>
                   <GridItem xs={12}>
                     <ButtonComponent
                       label="submit"
                       variant="contained"
                       fullWidth
+                      onClick={props.handleSubmit}
                     />
                   </GridItem>
                 </GridContainer>
