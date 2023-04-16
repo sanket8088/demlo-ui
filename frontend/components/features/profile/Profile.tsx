@@ -33,12 +33,18 @@ export const ProfileOne = () => {
         <HorizontalStepper count={count} />
       </MainOne>
       <MainTwo>
-        <Heading>Welcome Michael!</Heading>
-        <Paragraph>Pick your style</Paragraph>
+        <Heading>
+          {count === 0 ? ' Welcome Michael!' : 'Select your interests'}
+        </Heading>
+        <Paragraph>
+          {count === 0
+            ? ' Pick your style'
+            : 'Select any 5 options to help us to  set and priorities your interests.'}
+          Pick your style
+        </Paragraph>
       </MainTwo>
       <MainThree>
-        {/* <SelectAvatar /> */}
-        <SelectInterest />
+        {count === 0 ? <SelectAvatar /> : <SelectInterest />}
       </MainThree>
       <MainFour>
         <ButtonComponent
@@ -46,7 +52,7 @@ export const ProfileOne = () => {
           label="Next"
           variant="contained"
           fullWidth
-          // onClick={handleClick}
+          onClick={handleClick}
         />
         <Link>I'll do it later</Link>
       </MainFour>

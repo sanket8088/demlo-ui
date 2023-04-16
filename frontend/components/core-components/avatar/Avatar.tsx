@@ -43,7 +43,17 @@ const SmallAvatar = styled(Avatar)(({ theme }) => ({
 
 export default function BadgeAvatars() {
   return (
-    <Stack direction="row" spacing={2}>
+    <Stack
+      direction="row"
+      sx={{
+        width: '110px',
+        height: '110px',
+        display: 'flex',
+        marginTop: '15px',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
       <Badge
         overlap="circular"
         anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
@@ -63,8 +73,8 @@ export default function BadgeAvatars() {
       >
         <Avatar
           sx={{
-            width: '90px',
-            height: '90px',
+            width: '100px',
+            height: '100px',
           }}
           alt="Travis Howard"
           src="https://i.pinimg.com/474x/51/96/b3/5196b34be5aec2079e4b68190299a544.jpg"

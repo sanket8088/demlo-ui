@@ -18,7 +18,7 @@ const MainOne = styled.div`
 `;
 
 const MainTwo = styled.div`
-  width: 40%;
+  width: 70%;
   height: 14%;
   margin: auto;
   margin-bottom: 1%;

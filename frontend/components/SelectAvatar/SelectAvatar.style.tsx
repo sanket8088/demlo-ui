@@ -5,8 +5,7 @@ const Main = styled.div`
   height: 100%;
   margin: auto;
   display: grid;
-  grid-template-columns: repeat(5, 22%);
-  border: 1px solid red;
+  grid-template-columns: repeat(5, 21%);
   &:hover {
     cursor: pointer;
   }
