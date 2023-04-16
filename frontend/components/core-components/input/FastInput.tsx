@@ -19,7 +19,7 @@ const FastInput = ({
     <FastField name={name}>
       {({ field, meta }: any) => {
         const { error, touched } = meta;
-        console.log("error=", error, "touched", touched);
+
         return (
           <Input
             inputProps={{

@@ -2,7 +2,10 @@ import React, { useRef } from "react";
 import { Formik, Form, FastField } from "formik";
 import FastInput from "@/components/core-components/input/FastInput";
 import * as Yup from "yup";
-import Input from "@/components/core-components/input/Input";
+import GridContainer from "@/components/core-components/grid/GridContainer";
+import GridItem from "@/components/core-components/grid/GridItem";
+import { RegisterForm } from "@/components/features/auth-form";
+
 const register = () => {
   const formikRef = useRef();
 
@@ -10,31 +13,13 @@ const register = () => {
     console.log("onsubmit", values);
   };
   return (
-    <div style={{ background: "black" }}>
-      <p>Formik test</p>
-      {/* <FastInput name={"dr"} /> */}
-      <Formik
-        validateOnMount
-        initialValues={{ email: "", name: "" }}
-        validationSchema={Yup.object().shape({
-          email: Yup.string().email().required(),
-        })}
-        onSubmit={handleSubmit}
-      >
-        {(props) => {
-          const { email, name } = props.values;
-          return (
-            <form onSubmit={props.handleSubmit}>
-              <FastInput name="email" label="Email" required />
-              <FastInput name="name" />
-              <button onClick={props.submitForm} type="button">
-                submit
-              </button>
-            </form>
-          );
-        }}
-      </Formik>
-    </div>
+    <main>
+      <div className="grid">
+        <div className="grid-span-medium">
+          <RegisterForm />
+        </div>
+      </div>
+    </main>
   );
 };
 
