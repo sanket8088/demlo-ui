@@ -6,10 +6,14 @@ import StepLabel from '@mui/material/StepLabel';
 
 const steps = ['Profile', 'Interests'];
 
-export const HorizontalStepper = () => {
+interface ChildProps {
+  count: number;
+}
+
+export const HorizontalStepper = ({ count }: ChildProps) => {
   return (
     <Box sx={{ width: '100%' }}>
-      <Stepper activeStep={0} alternativeLabel>
+      <Stepper activeStep={count} alternativeLabel>
         {steps.map((label) => (
           <Step
             key={label}

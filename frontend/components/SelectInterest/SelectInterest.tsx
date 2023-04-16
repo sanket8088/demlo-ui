@@ -1,11 +1,13 @@
 import {
   Main,
   MainTop,
-  MainTopInput,
   MainBottom,
+  MainTopInput,
+  SelectedIntrests,
 } from './SelectInterest.style';
 import React from 'react';
 import SearchBar from '../core-components/searchbar/Searchbar';
+import SelectedIntrestCard from '../SelectedIntrestCard/SelectedIntrestCard';
 import InterestAreaCard from '../core-components/interest-card/InterestCard';
 
 const SelectInterest = () => {
@@ -15,6 +17,13 @@ const SelectInterest = () => {
         <MainTopInput>
           <SearchBar />
         </MainTopInput>
+        <SelectedIntrests>
+          <SelectedIntrestCard />
+          <SelectedIntrestCard />
+          <SelectedIntrestCard />
+          <SelectedIntrestCard />
+          <SelectedIntrestCard />
+        </SelectedIntrests>
       </MainTop>
       <MainBottom>
         <InterestAreaCard />

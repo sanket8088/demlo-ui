@@ -62,6 +62,7 @@ const CustomInput = styled(TextField)`
 export default function SearchBar() {
   return (
     <CustomInput
+      className="searchbar"
       placeholder="Search your topics"
       InputProps={{
         endAdornment: (

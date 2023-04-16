@@ -11,7 +11,7 @@ const Main = styled.div`
 const MainTop = styled.div`
   width: 70%;
   margin: auto;
-  max-height: 26%;
+  height: 28%;
   margin-bottom: 2%;
 `;
 
@@ -19,12 +19,19 @@ const MainTopInput = styled.div`
   width: 70%;
   height: 65%;
   margin: auto;
-  margin-bottom: 2%;
+`;
+
+const SelectedIntrests = styled.div`
+  width: 90%;
+  height: 33%;
+  margin: auto;
+  display: flex;
+  justify-content: space-evenly;
 `;
 
 const MainBottom = styled.div`
   width: 100%;
-  max-height: 80%;
+  max-height: 75%;
   margin: auto;
   display: grid;
   overflow: auto;
@@ -45,4 +52,4 @@ const MainBottom = styled.div`
   }
 `;
 
-export { Main, MainTop, MainTopInput, MainBottom };
+export { Main, MainTop, MainBottom, MainTopInput, SelectedIntrests };
