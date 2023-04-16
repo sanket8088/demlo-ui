@@ -1,18 +1,22 @@
-import React, { useState } from 'react';
-import HorizontalStepper from '../../stepper';
-import SelectAvatar from '@/components/SelectAvatar/SelectAvatar';
-import SelectInterest from '@/components/SelectInterest/SelectInterest';
-import ButtonComponent from '@/components/core-components/button/ButtonComponent';
 import {
   Main,
   Link,
-  MainOne,
-  MainTwo,
   Heading,
   MainFour,
   Paragraph,
   MainThree,
+  ProgressBar,
+  Instructions,
+  SearchContainer,
+  IntrestTagContainer,
 } from './Profile.style';
+import React, { useState } from 'react';
+import Tag from '@/components/core-components/tag/Tag';
+import SelectAvatar from '@/components/SelectAvatar/SelectAvatar';
+import SelectInterest from '@/components/SelectInterest/SelectInterest';
+import SearchBar from '@/components/core-components/searchbar/Searchbar';
+import HorizontalStepper from '@/components/core-components/stepper/Stepper';
+import ButtonComponent from '@/components/core-components/button/ButtonComponent';
 
 interface ChildProps {
   count: number;
@@ -29,10 +33,10 @@ export const ProfileOne = () => {
 
   return (
     <Main>
-      <MainOne>
+      <ProgressBar>
         <HorizontalStepper count={count} />
-      </MainOne>
-      <MainTwo>
+      </ProgressBar>
+      <Instructions>
         <Heading>
           {count === 0 ? ' Welcome Michael!' : 'Select your interests'}
         </Heading>
@@ -42,7 +46,9 @@ export const ProfileOne = () => {
             : 'Select any 5 options to help us to  set and priorities your interests.'}
           Pick your style
         </Paragraph>
-      </MainTwo>
+      </Instructions>
+      <SearchContainer>{count === 1 ? <SearchBar /> : null}</SearchContainer>
+      <IntrestTagContainer>{count === 1 ? <Tag /> : null}</IntrestTagContainer>
       <MainThree>
         {count === 0 ? <SelectAvatar /> : <SelectInterest />}
       </MainThree>

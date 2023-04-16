@@ -10,7 +10,7 @@ interface ChildProps {
   count: number;
 }
 
-export const HorizontalStepper = ({ count }: ChildProps) => {
+const HorizontalStepper = ({ count }: ChildProps) => {
   return (
     <Box sx={{ width: '100%' }}>
       <Stepper activeStep={count} alternativeLabel>
@@ -54,3 +54,5 @@ export const HorizontalStepper = ({ count }: ChildProps) => {
     </Box>
   );
 };
+
+export default HorizontalStepper;

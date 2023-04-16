@@ -10,14 +10,14 @@ const Main = styled.div`
   transform: translate(-50%, -50%);
 `;
 
-const MainOne = styled.div`
+const ProgressBar = styled.div`
   width: 50%;
   margin: auto;
   color: white;
   margin-bottom: 1%;
 `;
 
-const MainTwo = styled.div`
+const Instructions = styled.div`
   width: 70%;
   height: 14%;
   margin: auto;
@@ -38,6 +38,23 @@ const Paragraph = styled.p`
   line-height: 27px;
   text-align: center;
   color: #cdcdcd;
+`;
+
+const SearchContainer = styled.div`
+  width: 70%;
+  margin: auto;
+  display: flex;
+  margin-bottom: 2%;
+  align-items: center;
+  justify-content: center;
+`;
+
+const IntrestTagContainer = styled.div`
+  width: 90%;
+  margin: auto;
+  display: flex;
+  margin-bottom: 2%;
+  justify-content: space-evenly;
 `;
 
 const MainThree = styled.div`
@@ -68,10 +85,12 @@ const Link = styled.p`
 export {
   Main,
   Link,
-  MainOne,
-  MainTwo,
   Heading,
   MainFour,
   Paragraph,
   MainThree,
+  ProgressBar,
+  Instructions,
+  SearchContainer,
+  IntrestTagContainer,
 };
