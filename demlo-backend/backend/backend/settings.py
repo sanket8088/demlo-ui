@@ -37,6 +37,7 @@ SECRET_KEY = 'django-insecure-o-n9k_!#2664fttidmdvqa21mzz8$tpkx(mf!l$9co)u@p-lo3
 DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = ["*"]
+CORS_ORIGIN_ALLOW_ALL = True
 
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
