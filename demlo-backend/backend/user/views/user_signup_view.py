@@ -30,7 +30,7 @@ class UserSignUpView(APIView):
         if isinstance(user_instance, dict):
             return Response(user_instance, status=status.HTTP_400_BAD_REQUEST)
         else:
-            resp = Utils.generate_user_response(request.user)
+            resp = Utils.generate_user_response(user_instance)
             resp = BaseResponse(data=resp)
             _ = resp.is_valid(raise_exception=True)
             return Response(resp.validated_data, status=status.HTTP_201_CREATED)

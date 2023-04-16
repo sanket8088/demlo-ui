@@ -6,6 +6,7 @@ interface ITypesFastField {
   inputProps?: any;
   label?: string;
   required?: boolean;
+  type?: string;
 }
 
 const FastInput = ({
@@ -13,13 +14,14 @@ const FastInput = ({
   inputProps,
   label,
   required,
+  type,
   ...props
 }: ITypesFastField) => {
   return (
     <FastField name={name}>
       {({ field, meta }: any) => {
         const { error, touched } = meta;
-        console.log("error=", error, "touched", touched);
+
         return (
           <Input
             inputProps={{
@@ -33,6 +35,7 @@ const FastInput = ({
             helperText={touched && error ? error : null}
             label={label}
             required={required}
+            type={type}
             {...props}
           />
         );
