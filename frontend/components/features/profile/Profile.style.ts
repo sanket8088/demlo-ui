@@ -4,8 +4,7 @@ const Main = styled.div`
   top: 50%;
   left: 50%;
   width: 70%;
-  height: 88vh;
-  padding: 1%;
+  height: 86vh;
   position: absolute;
   transform: translate(-50%, -50%);
 `;
@@ -19,7 +18,7 @@ const ProgressBar = styled.div`
 
 const Instructions = styled.div`
   width: 70%;
-  height: 14%;
+  height: 12%;
   margin: auto;
   margin-bottom: 1%;
 `;
@@ -33,11 +32,11 @@ const Heading = styled.h1`
 `;
 
 const Paragraph = styled.p`
-  font-weight: 400;
+  color: #cdcdcd;
   font-size: 14px;
+  font-weight: 400;
   line-height: 27px;
   text-align: center;
-  color: #cdcdcd;
 `;
 
 const SearchContainer = styled.div`
@@ -57,13 +56,43 @@ const IntrestTagContainer = styled.div`
   justify-content: space-evenly;
 `;
 
-const MainThree = styled.div`
-  width: 100%;
+const AvatarSelectionContainer = styled.div`
+  width: 80%;
   height: 52%;
-  margin-bottom: 5%;
+  margin: auto;
+  display: grid;
+  margin-bottom: 2%;
+  grid-template-columns: repeat(5, 21%);
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
-const MainFour = styled.div`
+const InterestSelectionContainer = styled.div`
+  width: 100%;
+  max-height: 40%;
+  margin: auto;
+  display: grid;
+  overflow: auto;
+  margin-bottom: 2%;
+  grid-template-columns: repeat(4, 25%);
+
+  && {
+    &::-webkit-scrollbar {
+      width: 4px !important;
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: #1c232d !important;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #a5a5a5 !important;
+    }
+  }
+`;
+
+const NextButtonContainer = styled.div`
   width: 45%;
   height: 14%;
   margin: auto;
@@ -86,11 +115,12 @@ export {
   Main,
   Link,
   Heading,
-  MainFour,
   Paragraph,
-  MainThree,
   ProgressBar,
   Instructions,
   SearchContainer,
   IntrestTagContainer,
+  NextButtonContainer,
+  AvatarSelectionContainer,
+  InterestSelectionContainer,
 };

@@ -88,7 +88,7 @@ export default function SearchBar() {
         },
         input: {
           outline: '0',
-          height: '7px',
+          height: '5px',
           color: '#A5A5A5',
           borderRadius: '14px',
           fontFamily: 'poppins',

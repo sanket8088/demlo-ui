@@ -2,18 +2,19 @@ import {
   Main,
   Link,
   Heading,
-  MainFour,
   Paragraph,
-  MainThree,
   ProgressBar,
   Instructions,
   SearchContainer,
+  NextButtonContainer,
   IntrestTagContainer,
+  AvatarSelectionContainer,
+  InterestSelectionContainer,
 } from './Profile.style';
 import React, { useState } from 'react';
 import Tag from '@/components/core-components/tag/Tag';
-import SelectAvatar from '@/components/SelectAvatar/SelectAvatar';
-import SelectInterest from '@/components/SelectInterest/SelectInterest';
+import Card from '@/components/core-components/card/Card';
+import BadgeAvatars from '@/components/core-components/avatar/Avatar';
 import SearchBar from '@/components/core-components/searchbar/Searchbar';
 import HorizontalStepper from '@/components/core-components/stepper/Stepper';
 import ButtonComponent from '@/components/core-components/button/ButtonComponent';
@@ -49,10 +50,32 @@ export const ProfileOne = () => {
       </Instructions>
       <SearchContainer>{count === 1 ? <SearchBar /> : null}</SearchContainer>
       <IntrestTagContainer>{count === 1 ? <Tag /> : null}</IntrestTagContainer>
-      <MainThree>
-        {count === 0 ? <SelectAvatar /> : <SelectInterest />}
-      </MainThree>
-      <MainFour>
+      {count === 0 ? (
+        <AvatarSelectionContainer>
+          <BadgeAvatars />
+          <BadgeAvatars />
+          <BadgeAvatars />
+          <BadgeAvatars />
+          <BadgeAvatars />
+          <BadgeAvatars />
+          <BadgeAvatars />
+          <BadgeAvatars />
+          <BadgeAvatars />
+          <BadgeAvatars />
+        </AvatarSelectionContainer>
+      ) : (
+        <InterestSelectionContainer>
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+        </InterestSelectionContainer>
+      )}
+      <NextButtonContainer>
         <ButtonComponent
           size="medium"
           label="Next"
@@ -61,7 +84,7 @@ export const ProfileOne = () => {
           onClick={handleClick}
         />
         <Link>I'll do it later</Link>
-      </MainFour>
+      </NextButtonContainer>
     </Main>
   );
 };
