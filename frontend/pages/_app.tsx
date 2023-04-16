@@ -1,8 +1,9 @@
 import * as React from "react";
+import { useState } from "react";
 import type { AppProps } from "next/app";
 import { CacheProvider, EmotionCache } from "@emotion/react";
 import { ThemeProvider, CssBaseline, createTheme } from "@mui/material";
-
+import { QueryClient, QueryClientProvider } from "react-query";
 import "@fontsource/poppins/300.css";
 import "@fontsource/poppins/400.css";
 import "@fontsource/poppins/500.css";
@@ -18,12 +19,14 @@ const clientSideEmotionCache = createEmotionCache();
 
 const MyApp: React.FunctionComponent<MyAppProps> = (props) => {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
-
+  const [queryClient] = useState(() => new QueryClient());
   return (
-    <CacheProvider value={emotionCache}>
-      <CssBaseline />
-      <Component {...pageProps} />
-    </CacheProvider>
+    <QueryClientProvider client={queryClient}>
+      <CacheProvider value={emotionCache}>
+        <CssBaseline />
+        <Component {...pageProps} />
+      </CacheProvider>
+    </QueryClientProvider>
   );
 };
 

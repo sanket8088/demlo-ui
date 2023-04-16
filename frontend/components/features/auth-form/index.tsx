@@ -1,3 +1,4 @@
 import { AuthComponent } from "./AuthModal";
 import RegisterForm from "./RegisterForm";
-export { AuthComponent, RegisterForm };
+import LoginForm from "./LoginForm";
+export { AuthComponent, RegisterForm, LoginForm };
