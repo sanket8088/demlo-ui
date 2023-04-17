@@ -86,12 +86,13 @@ export const UserProfile = () => {
         </Paragraph>
       </Instructions>
       <SearchContainer>{count === 1 ? <SearchBar /> : null}</SearchContainer>
-      <InterestTagContainer>{count === 1 ? <Tag /> : null}</InterestTagContainer>
+      <InterestTagContainer>
+        {count === 1 ? <Tag /> : null}
+      </InterestTagContainer>
       {count === 0 ? (
         <AvatarSelectionContainer>
           {avatarList &&
             avatarList.map((avatar) => {
-<<<<<<< HEAD
               return (
                 <BadgeAvatars
                   key={avatar.id}
@@ -102,9 +103,6 @@ export const UserProfile = () => {
                   isSelected={selectedAvatarId === avatar.id}
                 />
               );
-=======
-              return <BadgeAvatars alt={avatar.name} src={avatar.img_url} />;
->>>>>>> 11be2cae32263fe833a15dee11c90a420bd22c0c
             })}
         </AvatarSelectionContainer>
       ) : (
