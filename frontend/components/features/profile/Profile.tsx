@@ -20,10 +20,6 @@ import SearchBar from '@/components/core-components/searchbar/Searchbar';
 import HorizontalStepper from '@/components/core-components/stepper/Stepper';
 import ButtonComponent from '@/components/core-components/button/ButtonComponent';
 
-interface ChildProps {
-  count: number;
-}
-
 interface Avatars {
   id: number;
   name: string;
@@ -34,7 +30,6 @@ interface Avatars {
 export const UserProfile = () => {
   let token: string | null = null;
   const [count, setCount] = useState<number>(0);
-  const [selected, setSelected] = useState<boolean>(false);
   const [avatarList, setAvatarList] = useState<Avatars[]>([]);
   const [selectedAvatarId, setSelectedAvatarId] = useState<number | null>(null);
 
