@@ -11,7 +11,8 @@ import {
   AvatarSelectionContainer,
   InterestSelectionContainer,
 } from './Profile.style';
-import React, { useState } from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import Tag from '@/components/core-components/tag/Tag';
 import Card from '@/components/core-components/card/Card';
 import BadgeAvatars from '@/components/core-components/avatar/Avatar';
@@ -23,14 +24,45 @@ interface ChildProps {
   count: number;
 }
 
+interface Avatars {
+  id: number;
+  name: string;
+  img_url: string;
+}
+
 export const ProfileOne = () => {
+  let token: string | null = null;
   const [count, setCount] = useState<number>(0);
+  const [avatarList, setAvatarList] = useState<Avatars[]>([]);
+
+  if (typeof localStorage !== 'undefined') {
+    token = localStorage.getItem('token');
+  }
 
   type HandleClick = () => void;
 
   const handleClick: HandleClick = () => {
     setCount(count + 1);
   };
+
+  const fetchAvatarData = () => {
+    axios
+      .get('http://66.94.102.196:9001/v1/api/user/avatar', {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        setAvatarList(response.data.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  useEffect(() => {
+    fetchAvatarData();
+  }, []);
+
+  console.log(avatarList);
 
   return (
     <Main>
@@ -52,16 +84,10 @@ export const ProfileOne = () => {
       <IntrestTagContainer>{count === 1 ? <Tag /> : null}</IntrestTagContainer>
       {count === 0 ? (
         <AvatarSelectionContainer>
-          <BadgeAvatars />
-          <BadgeAvatars />
-          <BadgeAvatars />
-          <BadgeAvatars />
-          <BadgeAvatars />
-          <BadgeAvatars />
-          <BadgeAvatars />
-          <BadgeAvatars />
-          <BadgeAvatars />
-          <BadgeAvatars />
+          {avatarList &&
+            avatarList.map((avatr) => {
+              return <BadgeAvatars alt={avatr.name} src={avatr.img_url} />;
+            })}
         </AvatarSelectionContainer>
       ) : (
         <InterestSelectionContainer>

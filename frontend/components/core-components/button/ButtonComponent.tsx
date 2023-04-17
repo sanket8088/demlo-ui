@@ -38,7 +38,6 @@ const ButtonComponent = ({
       disabled={disabled}
       fullWidth={fullWidth}
       type="button"
-      onClick={onClick}
       sx={{
         fontWeight: '500',
         lineHeight: '120%',

@@ -1,9 +1,15 @@
 import * as React from 'react';
+import { useState } from 'react';
 import Badge from '@mui/material/Badge';
 import Stack from '@mui/material/Stack';
 import Avatar from '@mui/material/Avatar';
 import { styled } from '@mui/material/styles';
 import DoneIcon from '@mui/icons-material/Done';
+
+interface IAvatarType {
+  alt: string;
+  src: string;
+}
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   '& .MuiBadge-badge': {
@@ -41,7 +47,8 @@ const SmallAvatar = styled(Avatar)(({ theme }) => ({
   border: `2px solid ${theme.palette.background.paper}`,
 }));
 
-export default function BadgeAvatars() {
+export default function BadgeAvatars({ alt, src }: IAvatarType) {
+  const [selected, setSelected] = useState<boolean>(false);
   return (
     <Stack
       direction="row"
@@ -55,20 +62,23 @@ export default function BadgeAvatars() {
       }}
     >
       <Badge
+        onClick={() => setSelected(!selected)}
         overlap="circular"
         anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
         badgeContent={
-          <DoneIcon
-            sx={{
-              fontSize: '1.6rem',
-              color: '#fff',
-              padding: '5px',
-              borderRadius: '50%',
-              background:
-                'radial-gradient(84.28% 51.82% at 51.28% 4.93%, rgba(226, 255, 254, 0.5) 0%, rgba(226, 255, 254, 0) 100%), #51CDDE',
-              boxShadow: '0px 8px 10px rgba(81, 205, 222, 0.14)',
-            }}
-          />
+          selected ? (
+            <DoneIcon
+              sx={{
+                fontSize: '1.6rem',
+                color: '#fff',
+                padding: '5px',
+                borderRadius: '50%',
+                background:
+                  'radial-gradient(84.28% 51.82% at 51.28% 4.93%, rgba(226, 255, 254, 0.5) 0%, rgba(226, 255, 254, 0) 100%), #51CDDE',
+                boxShadow: '0px 8px 10px rgba(81, 205, 222, 0.14)',
+              }}
+            />
+          ) : null
         }
       >
         <Avatar
@@ -76,8 +86,8 @@ export default function BadgeAvatars() {
             width: '100px',
             height: '100px',
           }}
-          alt="Travis Howard"
-          src="https://i.pinimg.com/474x/51/96/b3/5196b34be5aec2079e4b68190299a544.jpg"
+          alt={alt}
+          src={src}
         />
       </Badge>
     </Stack>
