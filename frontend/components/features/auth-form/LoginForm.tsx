@@ -105,7 +105,7 @@ const LoginForm = () => {
                 </GridItem>
                 <GridItem xs={12} paddingBottom="0px">
                   <ForgotLink>
-                    <Link href="/">Forgot password</Link>
+                    <Link href="/forgot-password">Forgot password</Link>
                   </ForgotLink>
                 </GridItem>
 

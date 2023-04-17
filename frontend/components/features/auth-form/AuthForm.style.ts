@@ -70,8 +70,17 @@ a{
 
 `
 
+
+const Form = styled.form`
+padding-top: 30px;
+`
+
+const SubtitleDiv = styled.div`
+padding-top: 30px;
+`
+
 export {
     PolicyWrap,
     HR,
-    SwitchTab,ForgotLink
+    SwitchTab,ForgotLink, Form, SubtitleDiv
   };
