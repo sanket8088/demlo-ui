@@ -40,7 +40,9 @@ export const UserProfile = () => {
   const { token } = getAuthFromStorage();
 
   const [count, setCount] = useState<number>(0);
+
   const [avatarList, setAvatarList] = useState<Avatars[]>([]);
+  const [selectedAvatarId, setSelectedAvatarId] = useState<number | null>(null);
   const value = useContext(UserContext);
   type HandleClick = () => void;
   console.log("value", value);
@@ -64,13 +66,19 @@ export const UserProfile = () => {
 
   const { isLoading, error, data } = useQuery({
     queryFn: () => fetchQueries("user/avatar"),
+    onSuccess(data) {
+      setAvatarList(data?.data);
+    },
   });
 
-  useEffect(() => {
-    if (data) {
-      setAvatarList(data?.data);
-    }
-  });
+  // useEffect(() => {
+  //   if (data) {
+  //     setAvatarList(data?.data);
+  //   }
+  // });
+  const handleAvatarClick = (id: number) => {
+    setSelectedAvatarId(id);
+  };
 
   console.log(avatarList);
   if (isLoading)
@@ -110,12 +118,16 @@ export const UserProfile = () => {
       {count === 0 ? (
         <AvatarSelectionContainer>
           {avatarList &&
-            avatarList?.map((avatr) => {
+            avatarList?.map((avatar) => {
+              console.log("avatar", avatar);
               return (
                 <BadgeAvatars
-                  key={avatr.name}
-                  alt={avatr.name}
-                  src={avatr.img_url}
+                  key={avatar?.id}
+                  name={avatar?.name}
+                  imageUrl={avatar?.img_url}
+                  onClick={handleAvatarClick}
+                  isSelected={selectedAvatarId === avatar.id}
+                  id={avatar?.id}
                 />
               );
             })}

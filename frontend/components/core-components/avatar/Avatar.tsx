@@ -6,9 +6,12 @@ import Avatar from "@mui/material/Avatar";
 import { styled } from "@mui/material/styles";
 import DoneIcon from "@mui/icons-material/Done";
 
-interface IAvatarType {
-  alt: string;
-  src: string;
+interface AvatarProps {
+  id: number;
+  name: string;
+  imageUrl: string;
+  isSelected: boolean;
+  onClick: (id: number) => void;
 }
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
