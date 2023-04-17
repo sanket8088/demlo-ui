@@ -10,7 +10,6 @@ class Utils:
         """
         user_resp = {"id": user_instance.id,
                      "name": user_instance.first_name,
-                     "contact": user_instance.contact_number,
                      "email": user_instance.email,
                      "username": user_instance.username,
                      "dob": str(user_instance.dob),
