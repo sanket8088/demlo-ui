@@ -13,6 +13,8 @@ import { useRouter } from "next/router";
 import createEmotionCache from "../utility/createEmotionCache";
 import "../styles/globals.css";
 import { getAuthFromStorage } from "@/utility/auth";
+import { UserContext } from "../utility/Store";
+
 interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache;
 }
@@ -38,7 +40,9 @@ const MyApp: NextPage<MyAppProps> = (props) => {
     <QueryClientProvider client={queryClient}>
       <CacheProvider value={emotionCache}>
         <CssBaseline />
-        <Component {...pageProps} />
+        <UserContext.Provider value="test">
+          <Component {...pageProps} />
+        </UserContext.Provider>
       </CacheProvider>
     </QueryClientProvider>
   );

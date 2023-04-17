@@ -10,60 +10,83 @@ import {
   InterestTagContainer,
   AvatarSelectionContainer,
   InterestSelectionContainer,
-} from './Profile.style';
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import Tag from '@/components/core-components/tag/Tag';
-import Card from '@/components/core-components/card/Card';
-import BadgeAvatars from '@/components/core-components/avatar/Avatar';
-import SearchBar from '@/components/core-components/searchbar/Searchbar';
-import HorizontalStepper from '@/components/core-components/stepper/Stepper';
-import ButtonComponent from '@/components/core-components/button/ButtonComponent';
+} from "./Profile.style";
+import axios from "axios";
+import React, { useEffect, useState, useContext } from "react";
+import Tag from "@/components/core-components/tag/Tag";
+import Card from "@/components/core-components/card/Card";
+import BadgeAvatars from "@/components/core-components/avatar/Avatar";
+import SearchBar from "@/components/core-components/searchbar/Searchbar";
+import HorizontalStepper from "@/components/core-components/stepper/Stepper";
+import ButtonComponent from "@/components/core-components/button/ButtonComponent";
+import { fetchQueries } from "@/utility/queryController";
+import { useQuery, useQueries } from "react-query";
+import { getAuthFromStorage } from "@/utility/auth";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
+import { UserContext } from "@/utility/Store";
+
+interface ChildProps {
+  count: number;
+}
 
 interface Avatars {
   id: number;
   name: string;
   img_url: string;
-  onClick: (id: number) => void;
 }
 
 export const UserProfile = () => {
-  let token: string | null = null;
+  const { token } = getAuthFromStorage();
+
   const [count, setCount] = useState<number>(0);
   const [avatarList, setAvatarList] = useState<Avatars[]>([]);
-  const [selectedAvatarId, setSelectedAvatarId] = useState<number | null>(null);
-
-  if (typeof localStorage !== 'undefined') {
-    token = localStorage.getItem('token');
-  }
-
+  const value = useContext(UserContext);
   type HandleClick = () => void;
+  console.log("value", value);
 
   const handleClick: HandleClick = () => {
     setCount(count + 1);
   };
 
-  const fetchAvatarData = () => {
-    axios
-      .get('http://66.94.102.196:9001/v1/api/user/avatar', {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((response) => {
-        setAvatarList(response.data.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
+  // const fetchAvatarData = () => {
+  //   axios
+  //     .get("http://66.94.102.196:9001/v1/api/user/avatar", {
+  //       headers: { Authorization: `Bearer ${token}` },
+  //     })
+  //     .then((response) => {
+  //       setAvatarList(response.data.data);
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+  // };
+
+  const { isLoading, error, data } = useQuery({
+    queryFn: () => fetchQueries("user/avatar"),
+  });
 
   useEffect(() => {
-    fetchAvatarData();
-  }, []);
+    if (data) {
+      setAvatarList(data?.data);
+    }
+  });
 
-  const handleAvatarClick = (id: number) => {
-    setSelectedAvatarId(id);
-  };
-
+  console.log(avatarList);
+  if (isLoading)
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          width: "100vw",
+          height: "100vh",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <CircularProgress />
+      </Box>
+    );
   return (
     <Main>
       <ProgressBar>
@@ -71,12 +94,12 @@ export const UserProfile = () => {
       </ProgressBar>
       <Instructions>
         <Heading>
-          {count === 0 ? ' Welcome Michael!' : 'Select your interests'}
+          {count === 0 ? " Welcome Michael!" : "Select your interests"}
         </Heading>
         <Paragraph>
           {count === 0
-            ? ' Pick your style'
-            : 'Select any 5 options to help us to  set and priorities your interests.'}
+            ? " Pick your style"
+            : "Select any 5 options to help us to  set and priorities your interests."}
           Pick your style
         </Paragraph>
       </Instructions>
@@ -87,15 +110,12 @@ export const UserProfile = () => {
       {count === 0 ? (
         <AvatarSelectionContainer>
           {avatarList &&
-            avatarList.map((avatar) => {
+            avatarList?.map((avatr) => {
               return (
                 <BadgeAvatars
-                  key={avatar.id}
-                  id={avatar.id}
-                  name={avatar.name}
-                  imageUrl={avatar.img_url}
-                  onClick={handleAvatarClick}
-                  isSelected={selectedAvatarId === avatar.id}
+                  key={avatr.name}
+                  alt={avatr.name}
+                  src={avatr.img_url}
                 />
               );
             })}
