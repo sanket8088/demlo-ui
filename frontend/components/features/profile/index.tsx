@@ -1,3 +1,3 @@
-import { ProfileOne } from './Profile';
+import { UserProfile } from './Profile';
 
-export default ProfileOne;
+export default UserProfile;

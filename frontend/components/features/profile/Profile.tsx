@@ -7,7 +7,7 @@ import {
   Instructions,
   SearchContainer,
   NextButtonContainer,
-  IntrestTagContainer,
+  InterestTagContainer,
   AvatarSelectionContainer,
   InterestSelectionContainer,
 } from './Profile.style';
@@ -30,7 +30,7 @@ interface Avatars {
   img_url: string;
 }
 
-export const ProfileOne = () => {
+export const UserProfile = () => {
   let token: string | null = null;
   const [count, setCount] = useState<number>(0);
   const [avatarList, setAvatarList] = useState<Avatars[]>([]);
@@ -62,7 +62,6 @@ export const ProfileOne = () => {
     fetchAvatarData();
   }, []);
 
-  console.log(avatarList);
 
   return (
     <Main>
@@ -81,12 +80,12 @@ export const ProfileOne = () => {
         </Paragraph>
       </Instructions>
       <SearchContainer>{count === 1 ? <SearchBar /> : null}</SearchContainer>
-      <IntrestTagContainer>{count === 1 ? <Tag /> : null}</IntrestTagContainer>
+      <InterestTagContainer>{count === 1 ? <Tag /> : null}</InterestTagContainer>
       {count === 0 ? (
         <AvatarSelectionContainer>
           {avatarList &&
-            avatarList.map((avatr) => {
-              return <BadgeAvatars alt={avatr.name} src={avatr.img_url} />;
+            avatarList.map((avatar) => {
+              return <BadgeAvatars alt={avatar.name} src={avatar.img_url} />;
             })}
         </AvatarSelectionContainer>
       ) : (
