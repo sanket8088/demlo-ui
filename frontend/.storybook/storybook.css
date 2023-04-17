@@ -69,3 +69,8 @@ body {
 .grid-span-narrow{
   grid-column:4/-4;
 }
+
+/* //mui date picker calendar icon color override */
+::-webkit-calendar-picker-indicator {
+  filter: brightness(0) invert(1);
+}
