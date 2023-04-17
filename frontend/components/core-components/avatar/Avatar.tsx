@@ -6,9 +6,12 @@ import Avatar from '@mui/material/Avatar';
 import { styled } from '@mui/material/styles';
 import DoneIcon from '@mui/icons-material/Done';
 
-interface IAvatarType {
-  alt: string;
-  src: string;
+interface AvatarProps {
+  id: number;
+  name: string;
+  imageUrl: string;
+  isSelected: boolean;
+  onClick: (id: number) => void;
 }
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -47,8 +50,13 @@ const SmallAvatar = styled(Avatar)(({ theme }) => ({
   border: `2px solid ${theme.palette.background.paper}`,
 }));
 
-export default function BadgeAvatars({ alt, src }: IAvatarType) {
-  const [selected, setSelected] = useState<boolean>(false);
+export default function BadgeAvatars({
+  id,
+  name,
+  onClick,
+  imageUrl,
+  isSelected,
+}: AvatarProps) {
   return (
     <Stack
       direction="row"
@@ -62,11 +70,11 @@ export default function BadgeAvatars({ alt, src }: IAvatarType) {
       }}
     >
       <Badge
-        onClick={() => setSelected(!selected)}
+        onClick={() => onClick(id)}
         overlap="circular"
         anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
         badgeContent={
-          selected ? (
+          isSelected ? (
             <DoneIcon
               sx={{
                 fontSize: '1.6rem',
@@ -86,8 +94,8 @@ export default function BadgeAvatars({ alt, src }: IAvatarType) {
             width: '100px',
             height: '100px',
           }}
-          alt={alt}
-          src={src}
+          alt={name}
+          src={imageUrl}
         />
       </Badge>
     </Stack>

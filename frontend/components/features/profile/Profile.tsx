@@ -28,12 +28,15 @@ interface Avatars {
   id: number;
   name: string;
   img_url: string;
+  onClick: (id: number) => void;
 }
 
 export const ProfileOne = () => {
   let token: string | null = null;
   const [count, setCount] = useState<number>(0);
+  const [selected, setSelected] = useState<boolean>(false);
   const [avatarList, setAvatarList] = useState<Avatars[]>([]);
+  const [selectedAvatarId, setSelectedAvatarId] = useState<number | null>(null);
 
   if (typeof localStorage !== 'undefined') {
     token = localStorage.getItem('token');
@@ -62,6 +65,10 @@ export const ProfileOne = () => {
     fetchAvatarData();
   }, []);
 
+  const handleAvatarClick = (id: number) => {
+    setSelectedAvatarId(id);
+  };
+
   console.log(avatarList);
 
   return (
@@ -85,8 +92,17 @@ export const ProfileOne = () => {
       {count === 0 ? (
         <AvatarSelectionContainer>
           {avatarList &&
-            avatarList.map((avatr) => {
-              return <BadgeAvatars alt={avatr.name} src={avatr.img_url} />;
+            avatarList.map((avatar) => {
+              return (
+                <BadgeAvatars
+                  key={avatar.id}
+                  id={avatar.id}
+                  name={avatar.name}
+                  imageUrl={avatar.img_url}
+                  onClick={handleAvatarClick}
+                  isSelected={selectedAvatarId === avatar.id}
+                />
+              );
             })}
         </AvatarSelectionContainer>
       ) : (
