@@ -82,3 +82,10 @@ body {
 .grid-span-narrow {
   grid-column: 4/-4;
 }
+
+.auth-form_alignment{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}

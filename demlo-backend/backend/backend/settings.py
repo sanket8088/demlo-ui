@@ -37,6 +37,7 @@ SECRET_KEY = 'django-insecure-o-n9k_!#2664fttidmdvqa21mzz8$tpkx(mf!l$9co)u@p-lo3
 DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = ["*"]
+CORS_ORIGIN_ALLOW_ALL = True
 
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
@@ -50,12 +51,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "corsheaders",
     'rest_framework.authtoken',
     'rest_framework',
     'user',
     ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

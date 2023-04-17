@@ -1,10 +1,14 @@
-import { RegisterForm } from "@/components/features/auth-form";
+import { LoginForm } from "@/components/features/auth-form";
 import React from "react";
 
 const login = () => {
   return (
-    <main className="grid">
-      <div className="grid-span-medium"></div>
+    <main className="auth-form_alignment">
+      <div className="grid">
+        <div className="grid-span-medium">
+          <LoginForm />
+        </div>
+      </div>
     </main>
   );
 };
