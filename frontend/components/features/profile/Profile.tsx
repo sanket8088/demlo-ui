@@ -12,7 +12,7 @@ import {
   InterestSelectionContainer,
 } from "./Profile.style";
 import axios from "axios";
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useCallback } from "react";
 import Tag from "@/components/core-components/tag/Tag";
 import Card from "@/components/core-components/card/Card";
 import BadgeAvatars from "@/components/core-components/avatar/Avatar";
@@ -44,25 +44,10 @@ export const UserProfile = () => {
   const [avatarList, setAvatarList] = useState<Avatars[]>([]);
   const [selectedAvatarId, setSelectedAvatarId] = useState<number | null>(null);
   const value = useContext(UserContext);
-  type HandleClick = () => void;
-  console.log("value", value);
 
-  const handleClick: HandleClick = () => {
-    setCount(count + 1);
-  };
-
-  // const fetchAvatarData = () => {
-  //   axios
-  //     .get("http://66.94.102.196:9001/v1/api/user/avatar", {
-  //       headers: { Authorization: `Bearer ${token}` },
-  //     })
-  //     .then((response) => {
-  //       setAvatarList(response.data.data);
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  // };
+  const handleClick = useCallback(() => {
+    setCount((count) => count + 1);
+  }, []);
 
   const { isLoading, error, data } = useQuery({
     queryFn: () => fetchQueries("user/avatar"),
@@ -71,11 +56,6 @@ export const UserProfile = () => {
     },
   });
 
-  // useEffect(() => {
-  //   if (data) {
-  //     setAvatarList(data?.data);
-  //   }
-  // });
   const handleAvatarClick = (id: number) => {
     setSelectedAvatarId(id);
   };
