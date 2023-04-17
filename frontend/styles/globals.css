@@ -1,18 +1,30 @@
-*,html,body{
+*,
+html,
+body {
   margin: 0;
   padding: 0;
 }
 html {
   scroll-behavior: smooth;
 }
-body{
+body {
   box-sizing: border-box;
   text-rendering: optimizeLegibility;
   width: 100%;
   height: 100%;
-  font-family: "Poppins";
+  font-family: 'Poppins';
 
-  background: radial-gradient(20.04% 35.63% at 20.04% 38.89%, rgba(0, 103, 255, 0.2) 0%, rgba(0, 103, 255, 0) 100%), radial-gradient(30.97% 15.76% at 93.79% 86.18%, rgba(0, 231, 190, 0.1) 0%, rgba(0, 231, 190, 0) 100%), #1C232D;
+  background: radial-gradient(
+      20.04% 35.63% at 20.04% 38.89%,
+      rgba(0, 103, 255, 0.2) 0%,
+      rgba(0, 103, 255, 0) 100%
+    ),
+    radial-gradient(
+      30.97% 15.76% at 93.79% 86.18%,
+      rgba(0, 231, 190, 0.1) 0%,
+      rgba(0, 231, 190, 0) 100%
+    ),
+    #1c232d;
 }
 
 :root {
@@ -47,12 +59,11 @@ body{
   --spacing-14: 5rem;
 }
 
-.label_astrik{
+.label_astrik {
   margin-left: 5px;
 }
 
-
-.grid{
+.grid {
   width: 100%;
   margin-inline: auto;
   max-width: 1440px;
@@ -62,17 +73,15 @@ body{
   grid-gap: var(--spacing-5);
 }
 
-.grid-span-wide{
-  grid-column:2/-2;
+.grid-span-wide {
+  grid-column: 2/-2;
 }
-.grid-span-medium{
-  grid-column:3/-3;
+.grid-span-medium {
+  grid-column: 3/-3;
 }
-.grid-span-narrow{
-  grid-column:4/-4;
+.grid-span-narrow {
+  grid-column: 4/-4;
 }
-
-
 
 .auth-form_alignment{
   width: 100%;
