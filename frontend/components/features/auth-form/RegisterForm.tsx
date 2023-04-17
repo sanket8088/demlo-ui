@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-
+import Link from "next/link";
 import ModalComponent from "@/components/core-components/modal/ModalComponent";
 import { Formik, Form, FastField } from "formik";
 import FastInput from "@/components/core-components/input/FastInput";
@@ -11,7 +11,11 @@ import { useQuery, useMutation } from "react-query";
 import { fetchQueries, postQueries } from "@/utility/queryController";
 import axios from "axios";
 import { useRouter } from "next/router";
-
+import FastCheckbox from "@/components/core-components/checkbox/FastCheckbox";
+import { PolicyWrap, HR, SwitchTab } from "./AuthForm.style";
+import SocialLink from "@/components/core-components/links/SocialLink";
+import GoogleIcon from "@/assets/icons/jsx/GoogleIcon";
+import MicrosoftIcon from "@/assets/icons/jsx/MicrosoftIcon";
 const RegisterForm = () => {
   const router = useRouter();
   const formikRef = useRef();
@@ -60,7 +64,6 @@ const RegisterForm = () => {
     mutate({
       email: values?.email,
       dob: values?.dob,
-      contact_number: "7830746988",
       password: values?.password,
       first_name: values?.firstName,
       last_name: values?.lastName,
@@ -76,10 +79,13 @@ const RegisterForm = () => {
   useEffect(() => {
     if (data) {
       console.log(data);
+
       // router.push({
       //   pathname: '/login'})
     }
   }, [data]);
+
+  console.log("loading", isLoading);
 
   const registerValidation = Yup.object().shape({
     email: Yup.string().email().required(),
@@ -87,9 +93,14 @@ const RegisterForm = () => {
     lastName: Yup.string().required(),
     username: Yup.string().required(),
     password: Yup.string().required(),
+    dob: Yup.string().required(),
     confirmPassword: Yup.string()
       .oneOf([Yup.ref("password"), undefined], "Passwords must match")
       .required("Required"),
+    termsAndConditions: Yup.bool().oneOf(
+      [true],
+      "You need to accept the terms and conditions"
+    ),
   });
   return (
     <ModalComponent
@@ -106,6 +117,7 @@ const RegisterForm = () => {
           password: "",
           confirmPassword: "",
           dob: "",
+          termsAndConditions: false,
         }}
         validationSchema={registerValidation}
         onSubmit={handleSubmit}
@@ -123,16 +135,31 @@ const RegisterForm = () => {
           return (
             <form onSubmit={props.handleSubmit}>
               <GridContainer spacing={2}>
-                <GridItem xs={6}>
+                <GridItem xs={6} paddingBottom="1.255rem">
+                  <SocialLink
+                    label="Sign up with google"
+                    icon={<GoogleIcon />}
+                  />
+                </GridItem>
+                <GridItem xs={6} paddingBottom="1.25rem">
+                  <SocialLink
+                    label="Sign up with Microsoft"
+                    icon={<MicrosoftIcon />}
+                  />
+                </GridItem>
+                <GridItem xs={12} paddingBottom="1.25rem">
+                  <HR>or sign up with email</HR>
+                </GridItem>
+                <GridItem xs={6} paddingBottom="1.875rem">
                   <FastInput name="firstName" label="First Name" required />
                 </GridItem>
-                <GridItem xs={6}>
+                <GridItem xs={6} paddingBottom="1.875rem">
                   <FastInput name="lastName" label="Last Name " required />
                 </GridItem>
-                <GridItem xs={6}>
+                <GridItem xs={6} paddingBottom="1.875rem">
                   <FastInput name="email" label="Email" required />
                 </GridItem>
-                <GridItem xs={6}>
+                <GridItem xs={6} paddingBottom="1.875rem">
                   <FastInput
                     name="dob"
                     label="Date of Birth"
@@ -141,7 +168,7 @@ const RegisterForm = () => {
                   />
                 </GridItem>
 
-                <GridItem xs={12}>
+                <GridItem xs={12} paddingBottom="1.875rem">
                   <FastInput name="username" label="Username" required />
                 </GridItem>
                 <GridItem xs={6}>
@@ -160,13 +187,28 @@ const RegisterForm = () => {
                     required
                   />
                 </GridItem>
-                <GridItem xs={12}>
+                <GridItem xs={12} paddingBottom="15px">
+                  <PolicyWrap>
+                    <FastCheckbox name="termsAndConditions" />
+                    <p>
+                      I agree <span>Terms</span> and <span>Policy</span>
+                    </p>
+                  </PolicyWrap>
+                </GridItem>
+                <GridItem xs={12} paddingBottom="1rem">
                   <ButtonComponent
-                    label="submit"
+                    label="Create account"
                     variant="contained"
                     fullWidth
                     onClick={props.handleSubmit}
+                    disabled={isLoading}
+                    size="large"
                   />
+                </GridItem>
+                <GridItem xs={12} paddingBottom="1.25rem">
+                  <SwitchTab>
+                    Already have an account? <Link href="/login">Log in</Link>
+                  </SwitchTab>
                 </GridItem>
               </GridContainer>
             </form>

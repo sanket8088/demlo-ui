@@ -7,7 +7,7 @@ import {
   Instructions,
   SearchContainer,
   NextButtonContainer,
-  IntrestTagContainer,
+  InterestTagContainer,
   AvatarSelectionContainer,
   InterestSelectionContainer,
 } from './Profile.style';
@@ -31,7 +31,7 @@ interface Avatars {
   onClick: (id: number) => void;
 }
 
-export const ProfileOne = () => {
+export const UserProfile = () => {
   let token: string | null = null;
   const [count, setCount] = useState<number>(0);
   const [selected, setSelected] = useState<boolean>(false);
@@ -69,8 +69,6 @@ export const ProfileOne = () => {
     setSelectedAvatarId(id);
   };
 
-  console.log(avatarList);
-
   return (
     <Main>
       <ProgressBar>
@@ -88,11 +86,12 @@ export const ProfileOne = () => {
         </Paragraph>
       </Instructions>
       <SearchContainer>{count === 1 ? <SearchBar /> : null}</SearchContainer>
-      <IntrestTagContainer>{count === 1 ? <Tag /> : null}</IntrestTagContainer>
+      <InterestTagContainer>{count === 1 ? <Tag /> : null}</InterestTagContainer>
       {count === 0 ? (
         <AvatarSelectionContainer>
           {avatarList &&
             avatarList.map((avatar) => {
+<<<<<<< HEAD
               return (
                 <BadgeAvatars
                   key={avatar.id}
@@ -103,6 +102,9 @@ export const ProfileOne = () => {
                   isSelected={selectedAvatarId === avatar.id}
                 />
               );
+=======
+              return <BadgeAvatars alt={avatar.name} src={avatar.img_url} />;
+>>>>>>> 11be2cae32263fe833a15dee11c90a420bd22c0c
             })}
         </AvatarSelectionContainer>
       ) : (

@@ -48,7 +48,7 @@ const SearchContainer = styled.div`
   justify-content: center;
 `;
 
-const IntrestTagContainer = styled.div`
+const InterestTagContainer = styled.div`
   width: 90%;
   margin: auto;
   display: flex;
@@ -119,7 +119,7 @@ export {
   ProgressBar,
   Instructions,
   SearchContainer,
-  IntrestTagContainer,
+  InterestTagContainer,
   NextButtonContainer,
   AvatarSelectionContainer,
   InterestSelectionContainer,
