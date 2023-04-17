@@ -10,10 +10,12 @@ import { useQuery, useMutation } from "react-query";
 import { fetchQueries, postQueries } from "@/utility/queryController";
 import axios from "axios";
 import { useRouter } from "next/router";
-
+import { setAuthToStorage } from "@/utility/auth";
 const LoginForm = () => {
   const router = useRouter();
   const formikRef = useRef();
+
+  const [dataVal, setDataVal] = useState(null);
   interface ITypesFetchUser {
     password: string;
 
@@ -24,11 +26,12 @@ const LoginForm = () => {
       "http://66.94.102.196:9001/api/token/",
       data
     );
-    return response.data;
+
+    return response;
   };
   const { isLoading, isError, error, mutate, data } = useMutation(fetchUser, {
-    onSuccess(data, variables, context) {
-      console.log("sucess", data);
+    onSuccess: (data) => {
+      setAuthToStorage(data?.access, data?.refresh);
       router.push({
         pathname: "/dashboard",
       });
@@ -43,58 +46,58 @@ const LoginForm = () => {
       username: values?.username,
     });
   };
-
+  useEffect(() => {
+    console.log("login", dataVal);
+  }, [data]);
   const loginValidation = Yup.object().shape({
     username: Yup.string().required(),
     password: Yup.string().required(),
   });
   return (
-    <div style={{ marginTop: "120px" }}>
-      <ModalComponent
-        title="Welcome back !"
-        subTitle="Please Sign in to continue"
+    <ModalComponent
+      title="Welcome back !"
+      subTitle="Please Sign in to continue"
+    >
+      <Formik
+        validateOnMount
+        initialValues={{
+          username: "",
+          password: "",
+        }}
+        validationSchema={loginValidation}
+        onSubmit={handleSubmit}
       >
-        <Formik
-          validateOnMount
-          initialValues={{
-            username: "",
-            password: "",
-          }}
-          validationSchema={loginValidation}
-          onSubmit={handleSubmit}
-        >
-          {(props) => {
-            const { username, password } = props.values;
-            return (
-              <form onSubmit={props.handleSubmit}>
-                <GridContainer spacing={2}>
-                  <GridItem xs={12}>
-                    <FastInput name="username" label="Username" required />
-                  </GridItem>
-                  <GridItem xs={12}>
-                    <FastInput
-                      name="password"
-                      label="Password"
-                      type="password"
-                      required
-                    />
-                  </GridItem>
+        {(props) => {
+          const { username, password } = props.values;
+          return (
+            <form onSubmit={props.handleSubmit}>
+              <GridContainer spacing={2}>
+                <GridItem xs={12}>
+                  <FastInput name="username" label="Username" required />
+                </GridItem>
+                <GridItem xs={12}>
+                  <FastInput
+                    name="password"
+                    label="Password"
+                    type="password"
+                    required
+                  />
+                </GridItem>
 
-                  <GridItem xs={12}>
-                    <ButtonComponent
-                      label="submit"
-                      variant="contained"
-                      fullWidth
-                      onClick={props.handleSubmit}
-                    />
-                  </GridItem>
-                </GridContainer>
-              </form>
-            );
-          }}
-        </Formik>
-      </ModalComponent>
-    </div>
+                <GridItem xs={12}>
+                  <ButtonComponent
+                    label="Sign in"
+                    variant="contained"
+                    fullWidth
+                    onClick={props.handleSubmit}
+                  />
+                </GridItem>
+              </GridContainer>
+            </form>
+          );
+        }}
+      </Formik>
+    </ModalComponent>
   );
 };
 

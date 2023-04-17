@@ -1,5 +1,6 @@
-import ModalComponent from "@/components/core-components/modal/ModalComponent";
 import React, { useEffect, useRef, useState } from "react";
+
+import ModalComponent from "@/components/core-components/modal/ModalComponent";
 import { Formik, Form, FastField } from "formik";
 import FastInput from "@/components/core-components/input/FastInput";
 import * as Yup from "yup";
@@ -91,90 +92,88 @@ const RegisterForm = () => {
       .required("Required"),
   });
   return (
-    <div style={{ marginTop: "45px" }}>
-      <ModalComponent
-        title="Create Account"
-        subTitle="Get started with an account on Demlo"
+    <ModalComponent
+      title="Create Account"
+      subTitle="Get started with an account on Demlo"
+    >
+      <Formik
+        validateOnMount
+        initialValues={{
+          email: "",
+          firstName: "",
+          lastName: "",
+          username: "",
+          password: "",
+          confirmPassword: "",
+          dob: "",
+        }}
+        validationSchema={registerValidation}
+        onSubmit={handleSubmit}
       >
-        <Formik
-          validateOnMount
-          initialValues={{
-            email: "",
-            firstName: "",
-            lastName: "",
-            username: "",
-            password: "",
-            confirmPassword: "",
-            dob: "",
-          }}
-          validationSchema={registerValidation}
-          onSubmit={handleSubmit}
-        >
-          {(props) => {
-            const {
-              email,
-              firstName,
-              lastName,
-              username,
-              password,
-              confirmPassword,
-              dob,
-            } = props.values;
-            return (
-              <form onSubmit={props.handleSubmit}>
-                <GridContainer spacing={2}>
-                  <GridItem xs={6}>
-                    <FastInput name="firstName" label="First Name" required />
-                  </GridItem>
-                  <GridItem xs={6}>
-                    <FastInput name="lastName" label="Last Name " required />
-                  </GridItem>
-                  <GridItem xs={6}>
-                    <FastInput name="email" label="Email" required />
-                  </GridItem>
-                  <GridItem xs={6}>
-                    <FastInput
-                      name="dob"
-                      label="Date of Birth"
-                      required
-                      type="date"
-                    />
-                  </GridItem>
+        {(props) => {
+          const {
+            email,
+            firstName,
+            lastName,
+            username,
+            password,
+            confirmPassword,
+            dob,
+          } = props.values;
+          return (
+            <form onSubmit={props.handleSubmit}>
+              <GridContainer spacing={2}>
+                <GridItem xs={6}>
+                  <FastInput name="firstName" label="First Name" required />
+                </GridItem>
+                <GridItem xs={6}>
+                  <FastInput name="lastName" label="Last Name " required />
+                </GridItem>
+                <GridItem xs={6}>
+                  <FastInput name="email" label="Email" required />
+                </GridItem>
+                <GridItem xs={6}>
+                  <FastInput
+                    name="dob"
+                    label="Date of Birth"
+                    required
+                    type="date"
+                  />
+                </GridItem>
 
-                  <GridItem xs={12}>
-                    <FastInput name="username" label="Username" required />
-                  </GridItem>
-                  <GridItem xs={6}>
-                    <FastInput
-                      name="password"
-                      label="Password"
-                      type="password"
-                      required
-                    />
-                  </GridItem>
-                  <GridItem xs={6}>
-                    <FastInput
-                      name="confirmPassword"
-                      label="Confirm Password"
-                      type="password"
-                      required
-                    />
-                  </GridItem>
-                  <GridItem xs={12}>
-                    <ButtonComponent
-                      label="submit"
-                      variant="contained"
-                      fullWidth
-                      onClick={props.handleSubmit}
-                    />
-                  </GridItem>
-                </GridContainer>
-              </form>
-            );
-          }}
-        </Formik>
-      </ModalComponent>
-    </div>
+                <GridItem xs={12}>
+                  <FastInput name="username" label="Username" required />
+                </GridItem>
+                <GridItem xs={6}>
+                  <FastInput
+                    name="password"
+                    label="Password"
+                    type="password"
+                    required
+                  />
+                </GridItem>
+                <GridItem xs={6}>
+                  <FastInput
+                    name="confirmPassword"
+                    label="Confirm Password"
+                    type="password"
+                    required
+                  />
+                </GridItem>
+                <GridItem xs={12}>
+                  <ButtonComponent
+                    label="submit"
+                    variant="contained"
+                    fullWidth
+                    onClick={props.handleSubmit}
+                  />
+                </GridItem>
+              </GridContainer>
+            </form>
+          );
+        }}
+      </Formik>
+    </ModalComponent>
   );
 };
 

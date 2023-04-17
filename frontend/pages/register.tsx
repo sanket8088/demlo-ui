@@ -9,7 +9,7 @@ const register = () => {
     console.log("onsubmit", values);
   };
   return (
-    <main>
+    <main className="auth-form_alignment">
       <div className="grid">
         <div className="grid-span-medium">
           <RegisterForm />
