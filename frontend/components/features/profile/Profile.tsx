@@ -1,5 +1,4 @@
 import {
-  Main,
   Link,
   Heading,
   Paragraph,
@@ -10,25 +9,20 @@ import {
   InterestTagContainer,
   AvatarSelectionContainer,
   InterestSelectionContainer,
-} from "./Profile.style";
-import axios from "axios";
-import React, { useEffect, useState, useContext, useCallback } from "react";
-import Tag from "@/components/core-components/tag/Tag";
-import Card from "@/components/core-components/card/Card";
-import BadgeAvatars from "@/components/core-components/avatar/Avatar";
-import SearchBar from "@/components/core-components/searchbar/Searchbar";
-import HorizontalStepper from "@/components/core-components/stepper/Stepper";
-import ButtonComponent from "@/components/core-components/button/ButtonComponent";
-import { fetchQueries } from "@/utility/queryController";
-import { useQuery, useQueries } from "react-query";
-import { getAuthFromStorage } from "@/utility/auth";
-import CircularProgress from "@mui/material/CircularProgress";
-import Box from "@mui/material/Box";
-import { UserContext } from "@/utility/Store";
-
-interface ChildProps {
-  count: number;
-}
+} from './Profile.style';
+import Box from '@mui/material/Box';
+import { useQuery } from 'react-query';
+import React, { useState, useCallback } from 'react';
+import Tag from '@/components/core-components/tag/Tag';
+import { fetchQueries } from '@/utility/queryController';
+import Card from '@/components/core-components/card/Card';
+import CircularProgress from '@mui/material/CircularProgress';
+import GridItem from '@/components/core-components/grid/GridItem';
+import BadgeAvatars from '@/components/core-components/avatar/Avatar';
+import SearchBar from '@/components/core-components/searchbar/Searchbar';
+import GridContainer from '@/components/core-components/grid/GridContainer';
+import HorizontalStepper from '@/components/core-components/stepper/Stepper';
+import ButtonComponent from '@/components/core-components/button/ButtonComponent';
 
 interface Avatars {
   id: number;
@@ -37,20 +31,16 @@ interface Avatars {
 }
 
 export const UserProfile = () => {
-  const { token } = getAuthFromStorage();
-
   const [count, setCount] = useState<number>(0);
-
   const [avatarList, setAvatarList] = useState<Avatars[]>([]);
   const [selectedAvatarId, setSelectedAvatarId] = useState<number | null>(null);
-  const value = useContext(UserContext);
 
   const handleClick = useCallback(() => {
     setCount((count) => count + 1);
   }, []);
 
   const { isLoading, error, data } = useQuery({
-    queryFn: () => fetchQueries("user/avatar"),
+    queryFn: () => fetchQueries('user/avatar'),
     onSuccess(data) {
       setAvatarList(data?.data);
     },
@@ -60,46 +50,49 @@ export const UserProfile = () => {
     setSelectedAvatarId(id);
   };
 
-  console.log(avatarList);
   if (isLoading)
     return (
       <Box
         sx={{
-          display: "flex",
-          width: "100vw",
-          height: "100vh",
-          justifyContent: "center",
-          alignItems: "center",
+          width: '100vw',
+          height: '100vh',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
         }}
       >
         <CircularProgress />
       </Box>
     );
   return (
-    <Main>
-      <ProgressBar>
+    <GridContainer spacing={2}>
+      <GridItem xs={12}>
         <HorizontalStepper count={count} />
-      </ProgressBar>
-      <Instructions>
+      </GridItem>
+      <GridItem xs={12}>
         <Heading>
-          {count === 0 ? " Welcome Michael!" : "Select your interests"}
+          {count === 0 ? ' Welcome Michael!' : 'Select your interests'}
         </Heading>
         <Paragraph>
           {count === 0
-            ? " Pick your style"
-            : "Select any 5 options to help us to  set and priorities your interests."}
-          Pick your style
+            ? ' Pick your style'
+            : 'Select any 5 options to help us to  set and priorities your interests.'}
         </Paragraph>
-      </Instructions>
-      <SearchContainer>{count === 1 ? <SearchBar /> : null}</SearchContainer>
-      <InterestTagContainer>
-        {count === 1 ? <Tag /> : null}
-      </InterestTagContainer>
+      </GridItem>
+      {count === 1 ? (
+        <GridItem xs={12}>
+          <SearchBar />
+        </GridItem>
+      ) : null}
+      {count === 1 ? (
+        <GridItem xs={12}>
+          <Tag />
+        </GridItem>
+      ) : null}
       {count === 0 ? (
         <AvatarSelectionContainer>
           {avatarList &&
             avatarList?.map((avatar) => {
-              console.log("avatar", avatar);
               return (
                 <BadgeAvatars
                   key={avatar?.id}
@@ -124,7 +117,7 @@ export const UserProfile = () => {
           <Card />
         </InterestSelectionContainer>
       )}
-      <NextButtonContainer>
+      <GridItem xs={8}>
         <ButtonComponent
           size="medium"
           label="Next"
@@ -132,8 +125,10 @@ export const UserProfile = () => {
           fullWidth
           onClick={handleClick}
         />
+      </GridItem>
+      <GridItem xs={12}>
         <Link>I'll do it later</Link>
-      </NextButtonContainer>
-    </Main>
+      </GridItem>
+    </GridContainer>
   );
 };

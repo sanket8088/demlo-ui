@@ -1,23 +1,13 @@
 import styled from '@emotion/styled';
 
-const Main = styled.div`
-  top: 50%;
-  left: 50%;
-  width: 70%;
-  height: 86vh;
-  position: absolute;
-  transform: translate(-50%, -50%);
-`;
-
 const ProgressBar = styled.div`
-  width: 50%;
+  width: 10%;
   margin: auto;
   color: white;
-  margin-bottom: 1%;
+  padding-bottom: 1.255rem;
 `;
 
 const Instructions = styled.div`
-  width: 70%;
   height: 12%;
   margin: auto;
   margin-bottom: 1%;
@@ -25,7 +15,7 @@ const Instructions = styled.div`
 
 const Heading = styled.h1`
   color: #ffffff;
-  font-size: 20px;
+  font-size: 1.5rem;
   font-weight: 600;
   line-height: 45px;
   text-align: center;
@@ -33,7 +23,7 @@ const Heading = styled.h1`
 
 const Paragraph = styled.p`
   color: #cdcdcd;
-  font-size: 14px;
+  font-size: 1rem;
   font-weight: 400;
   line-height: 27px;
   text-align: center;
@@ -57,8 +47,7 @@ const InterestTagContainer = styled.div`
 `;
 
 const AvatarSelectionContainer = styled.div`
-  width: 80%;
-  height: 52%;
+  width: 100%;
   margin: auto;
   display: grid;
   margin-bottom: 2%;
@@ -70,10 +59,10 @@ const AvatarSelectionContainer = styled.div`
 
 const InterestSelectionContainer = styled.div`
   width: 100%;
-  max-height: 40%;
   margin: auto;
   display: grid;
   overflow: auto;
+  max-height: 40%;
   margin-bottom: 2%;
   grid-template-columns: repeat(4, 25%);
 
@@ -98,8 +87,8 @@ const NextButtonContainer = styled.div`
   margin: auto;
   display: flex;
   align-items: center;
-  flex-direction: column;
   align-items: center;
+  flex-direction: column;
   justify-content: space-between;
 `;
 
@@ -112,15 +101,14 @@ const Link = styled.p`
 `;
 
 export {
-  Main,
   Link,
   Heading,
   Paragraph,
   ProgressBar,
   Instructions,
   SearchContainer,
-  InterestTagContainer,
   NextButtonContainer,
+  InterestTagContainer,
   AvatarSelectionContainer,
   InterestSelectionContainer,
 };
