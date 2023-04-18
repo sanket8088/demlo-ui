@@ -1,0 +1,1 @@
+for row in data["data"]: Avatar.objects.create(name = row["name"], img_url = row["img_url"])

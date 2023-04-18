@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 
 import { RegisterForm } from "@/components/features/auth-form";
+import OnBoardingTemplate from "@/layouts/OnBoardingTemplate";
 
 const register = () => {
   const formikRef = useRef();
@@ -9,13 +10,9 @@ const register = () => {
     console.log("onsubmit", values);
   };
   return (
-    <main>
-      <div className="grid">
-        <div className="grid-span-medium">
-          <RegisterForm />
-        </div>
-      </div>
-    </main>
+    <OnBoardingTemplate>
+      <RegisterForm />
+    </OnBoardingTemplate>
   );
 };
 

@@ -1,6 +1,33 @@
 import Head from "next/head";
 import TestComponent from "@/components/features/test-page";
+import { useQuery } from "react-query";
+import { fetchQueries } from "@/utility/queryController";
 export default function Home() {
+  // const {
+  //   isLoading: load,
+  //   error: err,
+  //   data: userData,
+  // } = useQuery({
+  //   queryFn: () => fetchQueries("user/"),
+  //   onSuccess(data) {
+  //     console.log(data);
+  //   },
+  // });
+
+  // const {
+  //   isLoading,
+  //   error,
+  //   data: avatar,
+  //   isIdle,
+  // } = useQuery({
+  //   queryFn: () => fetchQueries("user/avatar"),
+  //   enabled: !!success,
+  // });
+
+  // console.log("userData", userData);
+
+  // console.log(success);
+
   return (
     <>
       <Head>

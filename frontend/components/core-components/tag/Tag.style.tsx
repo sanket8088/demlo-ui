@@ -32,6 +32,10 @@ const TagClose = styled.span`
   color: #fff;
   font-size: 11px;
   text-align: center;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export { TagMain, TagImg, TagTitle, TagClose };

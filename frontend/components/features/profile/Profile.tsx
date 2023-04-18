@@ -7,31 +7,74 @@ import {
   Instructions,
   SearchContainer,
   NextButtonContainer,
-  IntrestTagContainer,
+  InterestTagContainer,
   AvatarSelectionContainer,
   InterestSelectionContainer,
-} from './Profile.style';
-import React, { useState } from 'react';
-import Tag from '@/components/core-components/tag/Tag';
-import Card from '@/components/core-components/card/Card';
-import BadgeAvatars from '@/components/core-components/avatar/Avatar';
-import SearchBar from '@/components/core-components/searchbar/Searchbar';
-import HorizontalStepper from '@/components/core-components/stepper/Stepper';
-import ButtonComponent from '@/components/core-components/button/ButtonComponent';
+} from "./Profile.style";
+import axios from "axios";
+import React, { useEffect, useState, useContext, useCallback } from "react";
+import Tag from "@/components/core-components/tag/Tag";
+import Card from "@/components/core-components/card/Card";
+import BadgeAvatars from "@/components/core-components/avatar/Avatar";
+import SearchBar from "@/components/core-components/searchbar/Searchbar";
+import HorizontalStepper from "@/components/core-components/stepper/Stepper";
+import ButtonComponent from "@/components/core-components/button/ButtonComponent";
+import { fetchQueries } from "@/utility/queryController";
+import { useQuery, useQueries } from "react-query";
+import { getAuthFromStorage } from "@/utility/auth";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
+import { UserContext } from "@/utility/Store";
 
 interface ChildProps {
   count: number;
 }
 
-export const ProfileOne = () => {
+interface Avatars {
+  id: number;
+  name: string;
+  img_url: string;
+}
+
+export const UserProfile = () => {
+  const { token } = getAuthFromStorage();
+
   const [count, setCount] = useState<number>(0);
 
-  type HandleClick = () => void;
+  const [avatarList, setAvatarList] = useState<Avatars[]>([]);
+  const [selectedAvatarId, setSelectedAvatarId] = useState<number | null>(null);
+  const value = useContext(UserContext);
 
-  const handleClick: HandleClick = () => {
-    setCount(count + 1);
+  const handleClick = useCallback(() => {
+    setCount((count) => count + 1);
+  }, []);
+
+  const { isLoading, error, data } = useQuery({
+    queryFn: () => fetchQueries("user/avatar"),
+    onSuccess(data) {
+      setAvatarList(data?.data);
+    },
+  });
+
+  const handleAvatarClick = (id: number) => {
+    setSelectedAvatarId(id);
   };
 
+  console.log(avatarList);
+  if (isLoading)
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          width: "100vw",
+          height: "100vh",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <CircularProgress />
+      </Box>
+    );
   return (
     <Main>
       <ProgressBar>
@@ -39,29 +82,35 @@ export const ProfileOne = () => {
       </ProgressBar>
       <Instructions>
         <Heading>
-          {count === 0 ? ' Welcome Michael!' : 'Select your interests'}
+          {count === 0 ? " Welcome Michael!" : "Select your interests"}
         </Heading>
         <Paragraph>
           {count === 0
-            ? ' Pick your style'
-            : 'Select any 5 options to help us to  set and priorities your interests.'}
+            ? " Pick your style"
+            : "Select any 5 options to help us to  set and priorities your interests."}
           Pick your style
         </Paragraph>
       </Instructions>
       <SearchContainer>{count === 1 ? <SearchBar /> : null}</SearchContainer>
-      <IntrestTagContainer>{count === 1 ? <Tag /> : null}</IntrestTagContainer>
+      <InterestTagContainer>
+        {count === 1 ? <Tag /> : null}
+      </InterestTagContainer>
       {count === 0 ? (
         <AvatarSelectionContainer>
-          <BadgeAvatars />
-          <BadgeAvatars />
-          <BadgeAvatars />
-          <BadgeAvatars />
-          <BadgeAvatars />
-          <BadgeAvatars />
-          <BadgeAvatars />
-          <BadgeAvatars />
-          <BadgeAvatars />
-          <BadgeAvatars />
+          {avatarList &&
+            avatarList?.map((avatar) => {
+              console.log("avatar", avatar);
+              return (
+                <BadgeAvatars
+                  key={avatar?.id}
+                  name={avatar?.name}
+                  imageUrl={avatar?.img_url}
+                  onClick={handleAvatarClick}
+                  isSelected={selectedAvatarId === avatar.id}
+                  id={avatar?.id}
+                />
+              );
+            })}
         </AvatarSelectionContainer>
       ) : (
         <InterestSelectionContainer>

@@ -1,0 +1,46 @@
+{
+    "success": True,
+    "message": "",
+    "data": [
+        {
+            "id": 1,
+            "name": "Batman",
+            "img_url": "https://i.pinimg.com/736x/11/2b/52/112b5273f8224dc0ab6598e92efed3ef.jpg"
+        },
+        {
+            "id": 2,
+            "name": "Joker",
+            "img_url": "https://i.pinimg.com/736x/11/9a/e6/119ae619292d6c626eac79d0b9d27364--joker-batman-the-joker.jpg"
+        },
+        {
+            "id": 3,
+            "name": "Pokemon",
+            "img_url": "https://i.pinimg.com/736x/67/91/3b/67913bc7fc70daac0c6209f058210940--victini-pokemon-santiago.jpg"
+        },
+        {
+            "id": 4,
+            "name": "Pikachu",
+            "img_url": "https://e7.pngegg.com/pngimages/476/159/png-clipart-pokemon-pikachu-pikachu-pokemon-games-pokemon-thumbnail.png"
+        },
+        {
+            "id": 5,
+            "name": "Eve",
+            "img_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS67--0Cm8T67Wa2wCAuS12oRjVLJBIxeyAEA&usqp=CAU"
+        },
+        {
+            "id": 6,
+            "name": "Cyndaquil",
+            "img_url": "https://legends.pokemon.com/assets/pokemon/pokemon_cyndaquil.png"
+        },
+        {
+            "id": 7,
+            "name": "Dog",
+            "img_url": "https://legends.pokemon.com/assets/pokemon/pokemon_regional_g_1.png"
+        },
+        {
+            "id": 8,
+            "name": "Rowlet",
+            "img_url": "https://legends.pokemon.com/assets/pokemon/pokemon_rowlet.png"
+        }
+    ]
+}

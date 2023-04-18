@@ -1,14 +1,16 @@
-import React from 'react';
-import Button from '@mui/material/Button';
+import React from "react";
+import Button from "@mui/material/Button";
 
-import styled from '@emotion/styled';
+import styled from "@emotion/styled";
+import GoogleIcon from "../../../assets/icons/jsx/GoogleIcon";
 interface IButtonTypes {
-  size?: 'medium' | 'small' | 'large' | undefined;
-  variant?: 'text' | 'contained' | 'outlined' | undefined;
+  size?: "medium" | "small" | "large" | undefined;
+  variant?: "text" | "contained" | "outlined" | undefined;
   label: string;
   disabled?: boolean;
   fullWidth?: boolean;
   onClick?: () => void;
+  icon?: React.ReactNode;
 }
 
 const ButtonComponent = ({
@@ -16,20 +18,21 @@ const ButtonComponent = ({
   variant,
   disabled,
   fullWidth,
-  size = 'medium',
-  onClick = () => null,
+  size = "medium",
+  icon,
+  onClick,
 }: IButtonTypes) => {
   const background =
-    variant === 'contained'
-      ? 'linear-gradient(111.76deg, #0A66C2 27.13%, #00B5D1 90.6%)'
-      : 'rgba(81, 205, 222, 0.1)';
+    variant === "contained"
+      ? "linear-gradient(111.76deg, #0A66C2 27.13%, #00B5D1 90.6%)"
+      : "rgba(81, 205, 222, 0.1)";
   const paddingInline =
-    size === 'large' ? '34px' : size === 'small' ? '24px' : '36px';
+    size === "large" ? "34px" : size === "small" ? "24px" : "36px";
   const paddingBlock =
-    size === 'large' ? '16px' : size === 'small' ? 'var(--spacing-1)' : '10px';
+    size === "large" ? "16px" : size === "small" ? "var(--spacing-1)" : "10px";
   const fontSize =
-    size === 'large' ? '16px' : size === 'small' ? '12px' : '14px';
-  const borderRadius = size === 'small' ? '8px' : '14px';
+    size === "large" ? "16px" : size === "small" ? "12px" : "14px";
+  const borderRadius = size === "small" ? "8px" : "14px";
   return (
     <Button
       size={size}
@@ -37,19 +40,19 @@ const ButtonComponent = ({
       variant={variant}
       disabled={disabled}
       fullWidth={fullWidth}
+      startIcon={icon}
       type="button"
-      onClick={onClick}
       sx={{
-        fontWeight: '500',
-        lineHeight: '120%',
+        fontWeight: "500",
+        lineHeight: "120%",
         fontSize: fontSize,
         background: background,
         borderRadius: borderRadius,
         paddingBlock: paddingBlock,
         paddingInline: paddingInline,
-        '&:hover': {
+        "&:hover": {
           background:
-            'linear-gradient(0deg, rgba(5, 56, 107, 0.4), rgba(5, 56, 107, 0.4)), linear-gradient(111.76deg, #0A66C2 27.13%, #00B5D1 90.6%)',
+            "linear-gradient(0deg, rgba(5, 56, 107, 0.4), rgba(5, 56, 107, 0.4)), linear-gradient(111.76deg, #0A66C2 27.13%, #00B5D1 90.6%)",
         },
       }}
     >
