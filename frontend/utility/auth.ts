@@ -4,7 +4,7 @@ import { Amplify,Auth } from "aws-amplify";
 import { CognitoHostedUIIdentityProvider } from "@aws-amplify/auth/lib/types";
 Amplify.configure({
   Auth: {
-    identityPoolId:'us-east-1:c53ecffa-8a3a-4f1a-a732-ec0c5ba0239e',
+    identityPoolId:'us-east-1:b373596e-9db0-4439-84ef-bc94547b2e8e',
     //identityPoolId:'us-east-1:b373596e-9db0-4439-84ef-bc94547b2e8e',
       region:'us-east-1',
  //     identityPoolRegion:'us-east-1',
