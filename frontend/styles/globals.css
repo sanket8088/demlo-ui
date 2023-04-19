@@ -14,7 +14,7 @@ body {
   height: 100%;
   font-family: 'Poppins';
 
-  background: radial-gradient(
+  /* background: radial-gradient(
       20.04% 35.63% at 20.04% 38.89%,
       rgba(0, 103, 255, 0.2) 0%,
       rgba(0, 103, 255, 0) 100%
@@ -24,7 +24,7 @@ body {
       rgba(0, 231, 190, 0.1) 0%,
       rgba(0, 231, 190, 0) 100%
     ),
-    #1c232d;
+    #1c232d; */
 }
 
 :root {
@@ -40,6 +40,7 @@ body {
   --color-error: #b72d00;
   --color-error-1: #ff460f;
   --color-error-2: #ffebe5;
+  --theme-bg: var(--color-black);
 }
 
 :root {
@@ -89,6 +90,9 @@ body {
   min-height: 100vh;
   display: flex;
   align-items: center;
+  position: relative;
+  background: radial-gradient(20.04% 35.63% at 20.04% 38.89%, rgba(0, 103, 255, 0.2) 0%, rgba(0, 103, 255, 0) 100%) , radial-gradient(30.97% 15.76% at 93.79% 86.18%, rgba(0, 231, 190, 0.1) 0%, rgba(0, 231, 190, 0) 100%), #1C232D;
+  z-index: 1;
 }
 
 /* //mui date picker calendar icon color override */
@@ -96,3 +100,52 @@ body {
   filter: brightness(0) invert(1);
 }
 
+[data-theme="light"] {
+  --theme-bg: var(--color-white);
+}
+.top-right-planet{
+  position: absolute;
+  top: 1%;
+  right: 14%;
+  z-index: -9;
+  background: radial-gradient(50% 50% at 50% 50%, #00EBF3 0%, #00D5DD 7%, #008A8F 33%, #004F52 56%, #002425 76%, #000A0A 91%, #000000 100%);
+background-blend-mode: screen;
+mix-blend-mode: screen;
+}
+.bottom-right-planet{
+  position: absolute;
+  right: 19%;
+  z-index: -9;
+  bottom: 28%;
+  background: radial-gradient(50% 50% at 50% 50%, #00DED3 0%, #000000 100%);
+background-blend-mode: screen;
+mix-blend-mode: screen;
+}
+.top-left-planet{
+  position: absolute;
+  top: 44%;
+
+    left: 13%;
+  z-index: -9;
+  background: radial-gradient(50% 50% at 50% 50%, #9B19FF 0%, #580E91 41%, #000000 97%);
+background-blend-mode: screen;
+mix-blend-mode: screen;
+  
+}
+.bottom-left-planet{
+  position: absolute;
+
+    bottom: 12%;
+
+    left: 20%;
+  z-index: -9;
+  background: radial-gradient(50% 50% at 50% 50%, #00DED3 0%, #000000 100%);
+background-blend-mode: screen;
+mix-blend-mode: screen;
+  
+}
+
+.stars{
+  position: absolute;
+  z-index: -10;
+}

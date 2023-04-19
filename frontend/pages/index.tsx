@@ -2,6 +2,13 @@ import Head from "next/head";
 import TestComponent from "@/components/features/test-page";
 import { useQuery } from "react-query";
 import { fetchQueries } from "@/utility/queryController";
+import Image from "next/image";
+import TopRightPlanet from "../assets/icons/top-right-planet.svg";
+import BottomRightPlanet from "../assets/icons/bottom-right-planet.svg";
+import BottomLeftPlanet from "../assets/icons/bottom-left-planet.svg";
+
+import TopLeftPlanet from "../assets/icons/top-left-planet.svg";
+import Stars from "../assets/icons/Stars.svg";
 export default function Home() {
   // const {
   //   isLoading: load,
@@ -36,8 +43,43 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
-        <TestComponent title="TestPage" sliderWidth={30} />
+      <main className="main-auth">
+        <Image src={Stars} alt="stars" layout="fill" className="stars" />
+        <Image
+          src={TopRightPlanet}
+          alt={"Earth side"}
+          width={179}
+          height={183}
+          className="top-right-planet"
+        />
+        <Image
+          src={BottomRightPlanet}
+          alt={"Earth side"}
+          width={51}
+          height={51}
+          className="bottom-right-planet"
+        />
+        <Image
+          src={TopLeftPlanet}
+          alt={"Earth side"}
+          width={67}
+          height={67}
+          className="top-left-planet"
+        />
+        <Image
+          src={BottomLeftPlanet}
+          alt={"Earth side"}
+          width={84}
+          height={82}
+          className="bottom-left-planet"
+        />
+
+        <div className="stars"></div>
+        <div className="grid">
+          <div className={`grid-span-wide`}>
+            {/* <TestComponent title={"Test"} /> */}
+          </div>
+        </div>
       </main>
     </>
   );

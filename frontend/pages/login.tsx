@@ -4,7 +4,7 @@ import OnBoardingTemplate from "@/layouts/OnBoardingTemplate";
 
 const login = () => {
   return (
-    <OnBoardingTemplate>
+    <OnBoardingTemplate theme="light">
       <LoginForm />
     </OnBoardingTemplate>
   );
