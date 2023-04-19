@@ -11,6 +11,7 @@ import {
 } from './Profile.style';
 import Box from '@mui/material/Box';
 import { useQuery } from 'react-query';
+import SearchIcon from '@mui/icons-material/Search';
 import React, { useState, useCallback } from 'react';
 import Tag from '@/components/core-components/tag/Tag';
 import { fetchQueries } from '@/utility/queryController';
@@ -83,7 +84,21 @@ export const UserProfile = () => {
       <GridItem xs={12}>
         {count === 1 ? (
           <SearchContainer>
-            <SearchBar />
+            <SearchBar
+              placeholder="Search your topics"
+              fullWidth
+              InputProps={{
+                endAdornment: (
+                  <SearchIcon
+                    sx={{
+                      left: '10px',
+                      color: 'white',
+                      position: 'absolute',
+                    }}
+                  />
+                ),
+              }}
+            />
           </SearchContainer>
         ) : null}
       </GridItem>

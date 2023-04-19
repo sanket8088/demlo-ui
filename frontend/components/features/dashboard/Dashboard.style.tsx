@@ -2,13 +2,11 @@ import styled from '@emotion/styled';
 
 const HeaderContainer = styled.div`
   width: 100%;
-  height: 10%;
   display: flex;
   align-items: center;
   border-radius: 20px;
   background: #1d2331;
   justify-content: space-between;
-  border: 0.1px solid white;
 `;
 
 const HeaderLeftContainer = styled.div`
@@ -17,28 +15,26 @@ const HeaderLeftContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border: 0.1px solid white;
 `;
 
 const LogoContainer = styled.div`
   width: 15%;
   padding: 2%;
   display: flex;
+  cursor: pointer;
   align-items: center;
   justify-content: center;
-  border: 0.1px solid white;
 `;
 
 const SearchBarContainer = styled.div`
   width: 60%;
-  border: 0.1px solid white;
 `;
 
 const HeaderRightContainer = styled.div`
   width: 55%;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
 `;
 
 const NavigationsContainer = styled.div`
@@ -50,10 +46,10 @@ const NavigationIcon = styled.div`
   width: 20%;
   padding: 1.5%;
   display: flex;
-  flex-direction: column;
+  cursor: pointer;
   align-items: center;
+  flex-direction: column;
   justify-content: space-around;
-  border: 0.1px solid white;
 `;
 
 const NavigationText = styled.span`
@@ -65,8 +61,11 @@ const NavigationText = styled.span`
 `;
 
 const NotificationContainer = styled.div`
-  width: 20%;
-  border: 0.1px solid white;
+  width: 23%;
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: space-around;
 `;
 
 export {

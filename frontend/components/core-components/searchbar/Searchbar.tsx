@@ -1,20 +1,11 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
 import TextField from '@mui/material/TextField';
-import SearchIcon from '@mui/icons-material/Search';
 
-interface InputTypes {
-  label?: string;
+interface ISearchTypes {
+  InputProps: any;
+  fullWidth?: boolean;
   placeholder?: string;
-  type?: string;
-  inputProps?: any;
-  formControlProps?: any;
-  error?: boolean;
-  onChange: () => void;
-  value: string;
-  helperText?: string;
-  required?: boolean;
-  disabled?: boolean;
 }
 
 const CustomInput = styled(TextField)`
@@ -59,38 +50,26 @@ const CustomInput = styled(TextField)`
   }
 `;
 
-export default function SearchBar() {
+export default function SearchBar({
+  fullWidth,
+  InputProps,
+  placeholder,
+}: ISearchTypes) {
   return (
     <CustomInput
-      className="searchbar"
-      placeholder="Search your topics"
-      InputProps={{
-        endAdornment: (
-          <SearchIcon
-            sx={{
-              top: '50%',
-              left: '10px',
-              color: 'white',
-              position: 'absolute',
-              transform: 'translateY(-50%)',
-            }}
-          />
-        ),
-      }}
+      fullWidth={fullWidth}
+      InputProps={InputProps}
+      placeholder={placeholder}
       sx={{
         border: '0',
         outline: '0',
-        width: '450px',
         fontFamily: 'poppins',
         backdropFilter: 'blur(21px)',
-        '&:hover': {
-          border: 'none !important',
-        },
         input: {
           outline: '0',
           height: '5px',
           color: '#A5A5A5',
-          borderRadius: '14px',
+          borderRadius: '22px',
           fontFamily: 'poppins',
           border: '0.1px solid rgba(255, 255, 255, 0.16)',
           padding: 'var(--spacing-3)',
@@ -102,12 +81,7 @@ export default function SearchBar() {
             textOverflow: 'ellipsis !important',
             color: '#A5A5A5',
           },
-          position: 'relative',
           paddingLeft: '40px',
-          '&:focused': {
-            background:
-              'radial-gradient(100% 100% at 0% 0%, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0) 100%)',
-          },
         },
       }}
     />
