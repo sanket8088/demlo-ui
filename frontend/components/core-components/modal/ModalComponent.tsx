@@ -23,31 +23,6 @@ interface IModalTypes {
 const ModalComponent = ({ title, subTitle, children }: IModalTypes) => {
   return (
     <ModalContainer>
-      <TopRightImageContainer>
-        <Image
-          src={TopRightPlanet}
-          alt={"Earth side"}
-          width={183}
-          height={179}
-        />
-      </TopRightImageContainer>
-      <BottomRightImageContainer>
-        <Image
-          src={BottomRightPlanet}
-          alt={"Earth side"}
-          width={46}
-          height={48}
-        />
-      </BottomRightImageContainer>
-
-      <BottomLeftImageContainer>
-        <Image
-          src={BottomLeftPlanet}
-          alt={"Earth side"}
-          width={84}
-          height={82}
-        />
-      </BottomLeftImageContainer>
       <Modal>
         <Title>{title}</Title>
         <SubTitleSpan>{subTitle}</SubTitleSpan>
