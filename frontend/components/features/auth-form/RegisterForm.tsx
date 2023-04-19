@@ -16,6 +16,8 @@ import { PolicyWrap, HR, SwitchTab } from "./AuthForm.style";
 import SocialLink from "@/components/core-components/links/SocialLink";
 import GoogleIcon from "@/assets/icons/jsx/GoogleIcon";
 import MicrosoftIcon from "@/assets/icons/jsx/MicrosoftIcon";
+import { signUp } from "@/utility/auth";
+import { handleGoogleAuthentication } from "@/utility/auth";
 const RegisterForm = () => {
   const router = useRouter();
   const formikRef = useRef();
@@ -60,15 +62,21 @@ const RegisterForm = () => {
 
   const handleSubmit = (values: any, actions: any) => {
     console.log("onsubmit", values);
-
-    mutate({
-      email: values?.email,
-      dob: values?.dob,
-      password: values?.password,
-      first_name: values?.firstName,
-      last_name: values?.lastName,
-      username: values?.username,
-    });
+    signUp(
+      values?.username,
+      values?.password,
+      values?.firstName,
+      values?.lastName,
+      values?.email
+    );
+    // mutate({
+    //   email: values?.email,
+    //   dob: values?.dob,
+    //   password: values?.password,
+    //   first_name: values?.firstName,
+    //   last_name: values?.lastName,
+    //   username: values?.username,
+    // });
   };
   useEffect(() => {
     if (error) {
@@ -139,6 +147,7 @@ const RegisterForm = () => {
                   <SocialLink
                     label="Sign up with google"
                     icon={<GoogleIcon />}
+                    onClick={handleGoogleAuthentication}
                   />
                 </GridItem>
                 <GridItem xs={6} paddingBottom="1.25rem">

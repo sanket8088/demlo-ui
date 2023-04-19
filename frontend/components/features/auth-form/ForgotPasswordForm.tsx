@@ -20,7 +20,7 @@ const ForgotPasswordForm = () => {
   }
   const sendResetLink = async (data: ITypesFetchEmail) => {
     const { data: response } = await axios.get(
-      "http://66.94.102.196:9001/health-check",
+      "http://66.94.102.196:9001/health-check"
     );
     return response;
   };
@@ -28,8 +28,7 @@ const ForgotPasswordForm = () => {
     sendResetLink,
     {
       onSuccess: (data) => {
-        setResetLinkSent(true)
-        
+        setResetLinkSent(true);
       },
     }
   );
@@ -41,12 +40,6 @@ const ForgotPasswordForm = () => {
     });
   };
 
-  const redirectToLogin = (values: any, actions: any) => {
-    router.push({
-          pathname: "/login",
-        });
-    
-  };
   useEffect(() => {}, [data]);
   const loginValidation = Yup.object().shape({
     email: Yup.string().email().required(),
@@ -54,29 +47,20 @@ const ForgotPasswordForm = () => {
   return (
     <>
       {resetLinkSent ? (
-         <ModalComponent
-         title="Email Sent"
-         subTitle="An email with instructions on how to reset your password has been sent to abc@gmail.com"
-       >
-        <SubtitleDiv>
-            <GridItem xs={12} paddingBottom="30px">
-          <ButtonComponent
-            label="Back to Sign in"
-            variant="contained"
-            fullWidth
-            onClick={redirectToLogin}
-            disabled={isLoading}
-            size="large"
-          />
-        </GridItem>
-        <GridItem xs={12} paddingBottom="1.25rem">
-          <SwitchTab>
-            Didn't receive Email ? <Link href="/forgot-password">Resend Email</Link>
-          </SwitchTab>
-        </GridItem>
-        </SubtitleDiv>
-       </ModalComponent>
-        
+        <ModalComponent
+          title="Email Sent"
+          subTitle="An email with instructions on how to reset your password has been sent to abc@gmail.com"
+        >
+          <SubtitleDiv>
+            <GridItem xs={12} paddingBottom="30px"></GridItem>
+            <GridItem xs={12} paddingBottom="1.25rem">
+              <SwitchTab>
+                Didn't receive Email ?{" "}
+                <Link href="/forgot-password">Resend Email</Link>
+              </SwitchTab>
+            </GridItem>
+          </SubtitleDiv>
+        </ModalComponent>
       ) : (
         <ModalComponent
           title="Forgot Password ?"
