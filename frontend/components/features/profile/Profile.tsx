@@ -3,7 +3,6 @@ import {
   Heading,
   Paragraph,
   ProgressBar,
-  Instructions,
   SearchContainer,
   NextButtonContainer,
   InterestTagContainer,
@@ -67,7 +66,9 @@ export const UserProfile = () => {
   return (
     <GridContainer spacing={2}>
       <GridItem xs={12}>
-        <HorizontalStepper count={count} />
+        <ProgressBar>
+          <HorizontalStepper count={count} />
+        </ProgressBar>
       </GridItem>
       <GridItem xs={12}>
         <Heading>
@@ -79,16 +80,20 @@ export const UserProfile = () => {
             : 'Select any 5 options to help us to  set and priorities your interests.'}
         </Paragraph>
       </GridItem>
-      {count === 1 ? (
-        <GridItem xs={12}>
-          <SearchBar />
-        </GridItem>
-      ) : null}
-      {count === 1 ? (
-        <GridItem xs={12}>
-          <Tag />
-        </GridItem>
-      ) : null}
+      <GridItem xs={12}>
+        {count === 1 ? (
+          <SearchContainer>
+            <SearchBar />
+          </SearchContainer>
+        ) : null}
+      </GridItem>
+      <GridItem xs={12}>
+        {count === 1 ? (
+          <InterestTagContainer>
+            <Tag />
+          </InterestTagContainer>
+        ) : null}
+      </GridItem>
       {count === 0 ? (
         <AvatarSelectionContainer>
           {avatarList &&
@@ -117,14 +122,16 @@ export const UserProfile = () => {
           <Card />
         </InterestSelectionContainer>
       )}
-      <GridItem xs={8}>
-        <ButtonComponent
-          size="medium"
-          label="Next"
-          variant="contained"
-          fullWidth
-          onClick={handleClick}
-        />
+      <GridItem xs={12}>
+        <NextButtonContainer>
+          <ButtonComponent
+            size="medium"
+            label="Next"
+            variant="contained"
+            fullWidth
+            onClick={handleClick}
+          />
+        </NextButtonContainer>
       </GridItem>
       <GridItem xs={12}>
         <Link>I'll do it later</Link>

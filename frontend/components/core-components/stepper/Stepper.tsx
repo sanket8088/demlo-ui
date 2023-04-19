@@ -12,7 +12,7 @@ interface ChildProps {
 
 const HorizontalStepper = ({ count }: ChildProps) => {
   return (
-    <Box sx={{ width: '50%' }}>
+    <Box sx={{ width: '100%' }}>
       <Stepper activeStep={count} alternativeLabel>
         {steps.map((label) => (
           <Step
