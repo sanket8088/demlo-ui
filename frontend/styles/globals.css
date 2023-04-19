@@ -82,8 +82,11 @@ body {
 .grid-span-narrow {
   grid-column: 4/-4;
 }
+.grid-span-full {
+  grid-column: 1/-1;
+}
 
-.main-auth{
+.main-auth {
   width: 100%;
   height: 100%;
   min-height: 100vh;
@@ -95,4 +98,3 @@ body {
 ::-webkit-calendar-picker-indicator {
   filter: brightness(0) invert(1);
 }
-
