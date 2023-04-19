@@ -16,6 +16,9 @@ import SocialLink from "@/components/core-components/links/SocialLink";
 import GoogleIcon from "@/assets/icons/jsx/GoogleIcon";
 import MicrosoftIcon from "@/assets/icons/jsx/MicrosoftIcon";
 import { HR, SwitchTab, ForgotLink } from "./AuthForm.style";
+import { signIn } from "@/utility/auth";
+import { handleGoogleAuthentication } from "@/utility/auth";
+
 const LoginForm = () => {
   const router = useRouter();
   const formikRef = useRef();
@@ -44,12 +47,13 @@ const LoginForm = () => {
   });
   const handleSubmit = (values: any, actions: any) => {
     console.log("onsubmit", values);
+    console.log("username", typeof values?.username, typeof values?.password);
+    signIn(values?.username, values?.password);
+    // mutate({
+    //   password: values?.password,
 
-    mutate({
-      password: values?.password,
-
-      username: values?.username,
-    });
+    //   username: values?.username,
+    // });
   };
   useEffect(() => {
     console.log("login", dataVal);
@@ -79,13 +83,14 @@ const LoginForm = () => {
               <GridContainer spacing={2}>
                 <GridItem xs={6} paddingBottom="1.255rem">
                   <SocialLink
-                    label="Sign up with google"
+                    label="Sign in with google"
                     icon={<GoogleIcon />}
+                    onClick={handleGoogleAuthentication}
                   />
                 </GridItem>
                 <GridItem xs={6} paddingBottom="1.25rem">
                   <SocialLink
-                    label="Sign up with Microsoft"
+                    label="Sign in with Microsoft"
                     icon={<MicrosoftIcon />}
                   />
                 </GridItem>
