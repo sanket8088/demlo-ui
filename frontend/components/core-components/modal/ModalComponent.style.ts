@@ -8,6 +8,7 @@ const Title = styled.span`
   line-height: 120%;
   font-style: normal;
  display: block;
+ margin-bottom: 1em;
  
 `;
 

@@ -76,7 +76,7 @@ padding-top: 30px;
 `
 
 const SubtitleDiv = styled.div`
-padding-top: 30px;
+padding-top: 20px;
 `
 
 const OperationalDiv = styled.div`

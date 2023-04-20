@@ -10,31 +10,33 @@ import { Amplify, Auth } from "aws-amplify";
 
 interface props {
   handleBackToSignUp: (data: boolean) => void;
+  email: string;
 }
 
-const AccountConfirmationForm = ({ handleBackToSignUp }: props) => {
+const AccountConfirmationForm = ({ handleBackToSignUp, email }: props) => {
   const redirectToSignUp = () => {
-    console.log("onsubmit");
     handleBackToSignUp(false);
   };
 
   const resendConfirmation = () => {
-    console.log("Resend signup");
-    // Auth.resendSignUp("username")
+    // console.log("Resend signup");
+    Auth.resendSignUp(email)
   };
+
+  const subtitle = `An email with instructions on how to reset your password has been sent to ${email}`
 
   return (
     <>
       <ModalComponent
         title="Let's confirm your email"
-        subTitle="An email with instructions on how to reset your password has been sent to abc@gmail.com"
+        subTitle= {subtitle}
       >
         <SubtitleDiv>
           <GridItem xs={12} paddingBottom="30px"></GridItem>
           <GridItem xs={12} paddingBottom="1.25rem">
             <SwitchTab>
               Please verify your email id by clicking on the verification link
-              sent to "abc@gmail.com"
+              sent to {email}
               <Link href="/register">Edit</Link>
             </SwitchTab>
           </GridItem>

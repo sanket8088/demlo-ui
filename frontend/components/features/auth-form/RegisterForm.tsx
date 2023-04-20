@@ -48,16 +48,16 @@ const RegisterForm = () => {
 
   const { isLoading, isError, error, mutate, data } = useMutation(createUser, {
     onSuccess(data, variables, context) {
-      console.log("sucess", data);
       router.push({
         pathname: "/login",
       });
     },
   });
   const [successSignUp, setSuccessSignUp] = useState<boolean>(false);
+  const [signUpEmail, setSignUpEmail] = useState<string>("");
 
   const handleBackToSignUp = (data: boolean) => {
-    setSuccessSignUp(data);
+    setSuccessSignUp(false);
   };
 
   const handleSubmit = (values: any, actions: any) => {
@@ -69,7 +69,8 @@ const RegisterForm = () => {
       values?.lastName,
       values?.email
     ).then((data) => {
-      setSuccessSignUp(data);
+      setSuccessSignUp(true);
+      setSignUpEmail(values?.email);
     });
     // mutate({
     //   email: values?.email,
@@ -224,7 +225,7 @@ const RegisterForm = () => {
           </Formik>
         </ModalComponent>
       ) : (
-        <AccountConfirmationForm handleBackToSignUp={handleBackToSignUp} />
+        <AccountConfirmationForm handleBackToSignUp={handleBackToSignUp} email={signUpEmail}/>
       )}
     </>
   );
