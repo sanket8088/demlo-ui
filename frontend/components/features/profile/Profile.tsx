@@ -11,16 +11,20 @@ import {
 } from './Profile.style';
 import Box from '@mui/material/Box';
 import { useQuery } from 'react-query';
+import { UserContext } from '@/utility/Store';
 import SearchIcon from '@mui/icons-material/Search';
-import React, { useState, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Tag from '@/components/core-components/tag/Tag';
 import { fetchQueries } from '@/utility/queryController';
 import Card from '@/components/core-components/card/Card';
+import { getUserDetailsFromSession } from '@/utility/auth';
 import CircularProgress from '@mui/material/CircularProgress';
 import GridItem from '@/components/core-components/grid/GridItem';
+import { selectAuthState, setAuthState } from '../../../Store/slice';
 import BadgeAvatars from '@/components/core-components/avatar/Avatar';
 import SearchBar from '@/components/core-components/searchbar/Searchbar';
 import GridContainer from '@/components/core-components/grid/GridContainer';
+import React, { useEffect, useState, useContext, useCallback } from 'react';
 import HorizontalStepper from '@/components/core-components/stepper/Stepper';
 import ButtonComponent from '@/components/core-components/button/ButtonComponent';
 
@@ -31,7 +35,12 @@ interface Avatars {
 }
 
 export const UserProfile = () => {
+  const dispatch = useDispatch();
+  const value = useContext(UserContext);
   const [count, setCount] = useState<number>(0);
+  const authState = useSelector(selectAuthState);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [userName, setUserName] = useState<string>('Michael');
   const [avatarList, setAvatarList] = useState<Avatars[]>([]);
   const [selectedAvatarId, setSelectedAvatarId] = useState<number | null>(null);
 
@@ -50,6 +59,28 @@ export const UserProfile = () => {
     setSelectedAvatarId(id);
   };
 
+  useEffect(() => {
+    setLoading(true);
+    const userData = getUserDetailsFromSession();
+    userData
+      .then((data) => {
+        if (data !== null) {
+          console.log('profile user', data);
+          const {
+            attributes: { given_name },
+          } = data;
+          console.log('hgi', given_name);
+          setUserName(given_name);
+        }
+      })
+      .catch(() => {
+        setLoading(false);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
+
   if (isLoading)
     return (
       <Box
@@ -61,11 +92,23 @@ export const UserProfile = () => {
           justifyContent: 'center',
         }}
       >
-        <CircularProgress />
+        <CircularProgress size={100} />
       </Box>
     );
   return (
     <GridContainer spacing={2}>
+      {/* <div>
+        <div>{authState ? "Logged in" : "Not Logged In"}</div>
+        <button
+          onClick={() =>
+            authState
+              ? dispatch(setAuthState(false))
+              : dispatch(setAuthState(true))
+          }
+        >
+          {authState ? "Logout" : "LogIn"}
+        </button>
+      </div> */}
       <GridItem xs={12}>
         <ProgressBar>
           <HorizontalStepper count={count} />

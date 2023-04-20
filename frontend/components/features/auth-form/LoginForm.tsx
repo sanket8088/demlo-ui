@@ -46,9 +46,15 @@ const LoginForm = () => {
     },
   });
   const handleSubmit = (values: any, actions: any) => {
-    console.log("onsubmit", values);
-    console.log("username", typeof values?.username, typeof values?.password);
-    signIn(values?.username, values?.password);
+    signIn(values?.username, values?.password).then((data) =>{
+      if (data){
+        router.push({
+          pathname: "/profile",
+        });
+
+      }
+    })
+    
     // mutate({
     //   password: values?.password,
 
