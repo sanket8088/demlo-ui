@@ -23,8 +23,10 @@ import { fetchQueries } from "@/utility/queryController";
 import { useQuery, useQueries } from "react-query";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
+import { getUserDetailsFromSession } from "@/utility/auth";
 import { UserContext } from "@/utility/Store";
-
+import { useDispatch, useSelector } from "react-redux";
+import { selectAuthState, setAuthState } from "../../../Store/slice";
 interface ChildProps {
   count: number;
 }
@@ -40,11 +42,16 @@ export const UserProfile = () => {
 
   const [avatarList, setAvatarList] = useState<Avatars[]>([]);
   const [selectedAvatarId, setSelectedAvatarId] = useState<number | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [userName, setUserName] = useState<string>("Michael");
   const value = useContext(UserContext);
 
   const handleClick = useCallback(() => {
     setCount((count) => count + 1);
   }, []);
+
+  const authState = useSelector(selectAuthState);
+  const dispatch = useDispatch();
 
   const { isLoading, error, data } = useQuery({
     queryFn: () => fetchQueries("user/avatar"),
@@ -57,28 +64,65 @@ export const UserProfile = () => {
     setSelectedAvatarId(id);
   };
 
-  if (isLoading)
+  useEffect(() => {
+    setLoading(true);
+    const userData = getUserDetailsFromSession();
+    console.log("profile userdata", userData);
+    userData
+      .then((data) => {
+        if (data !== null) {
+          console.log("profile user", data);
+          const {
+            attributes: { given_name },
+          } = data;
+          console.log("hgi", given_name);
+          setUserName(given_name);
+        }
+      })
+      .catch(() => {
+        setLoading(false);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
+
+  console.log(loading);
+
+  if (loading)
     return (
       <Box
         sx={{
           display: "flex",
-          width: "100vw",
+          width: "100%",
           height: "100vh",
           justifyContent: "center",
           alignItems: "center",
         }}
       >
-        <CircularProgress />
+        <CircularProgress size={100} />
       </Box>
     );
   return (
     <Main>
+      {/* <div>
+        <div>{authState ? "Logged in" : "Not Logged In"}</div>
+        <button
+          onClick={() =>
+            authState
+              ? dispatch(setAuthState(false))
+              : dispatch(setAuthState(true))
+          }
+        >
+          {authState ? "Logout" : "LogIn"}
+        </button>
+      </div> */}
       <ProgressBar>
         <HorizontalStepper count={count} />
       </ProgressBar>
       <Instructions>
         <Heading>
-          {count === 0 ? " Welcome Michael!" : "Select your interests"}
+          {count === 0 ? `${userName}!` : "Select your interests"}
         </Heading>
         <Paragraph>
           {count === 0

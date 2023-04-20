@@ -18,6 +18,8 @@ import GoogleIcon from "@/assets/icons/jsx/GoogleIcon";
 import MicrosoftIcon from "@/assets/icons/jsx/MicrosoftIcon";
 import { signUp } from "@/utility/auth";
 import { handleGoogleAuthentication } from "@/utility/auth";
+import AccountConfirmationForm from "./AccountConfirmationForm";
+
 const RegisterForm = () => {
   const router = useRouter();
   const formikRef = useRef();
@@ -45,13 +47,6 @@ const RegisterForm = () => {
   };
 
   const { isLoading, isError, error, mutate, data } = useMutation(createUser, {
-    // onSettled(data, error, variables, context) {
-    //   console.log("settledData", data, error);
-    // },
-    // onError(error, variables, context) {
-    //   // console.log(error?.response?.data?.message);
-    //   toast.error("Something went wrong");
-    // },
     onSuccess(data, variables, context) {
       console.log("sucess", data);
       router.push({
@@ -59,6 +54,11 @@ const RegisterForm = () => {
       });
     },
   });
+  const [successSignUp, setSuccessSignUp] = useState<boolean>(false);
+
+  const handleBackToSignUp = (data: boolean) => {
+    setSuccessSignUp(data);
+  };
 
   const handleSubmit = (values: any, actions: any) => {
     console.log("onsubmit", values);
@@ -68,7 +68,9 @@ const RegisterForm = () => {
       values?.firstName,
       values?.lastName,
       values?.email
-    );
+    ).then((data) => {
+      setSuccessSignUp(data);
+    });
     // mutate({
     //   email: values?.email,
     //   dob: values?.dob,
@@ -78,11 +80,6 @@ const RegisterForm = () => {
     //   username: values?.username,
     // });
   };
-  useEffect(() => {
-    if (error) {
-      console.log("post", error);
-    }
-  }, [error]);
 
   useEffect(() => {
     if (data) {
@@ -92,8 +89,6 @@ const RegisterForm = () => {
       //   pathname: '/login'})
     }
   }, [data]);
-
-  console.log("loading", isLoading);
 
   const registerValidation = Yup.object().shape({
     email: Yup.string().email().required(),
@@ -111,120 +106,127 @@ const RegisterForm = () => {
     ),
   });
   return (
-    <ModalComponent
-      title="Create Account"
-      subTitle="Get started with an account on Demlo"
-    >
-      <Formik
-        validateOnMount
-        initialValues={{
-          email: "",
-          firstName: "",
-          lastName: "",
-          username: "",
-          password: "",
-          confirmPassword: "",
-          dob: "",
-          termsAndConditions: false,
-        }}
-        validationSchema={registerValidation}
-        onSubmit={handleSubmit}
-      >
-        {(props) => {
-          const {
-            email,
-            firstName,
-            lastName,
-            username,
-            password,
-            confirmPassword,
-            dob,
-          } = props.values;
-          return (
-            <form onSubmit={props.handleSubmit}>
-              <GridContainer spacing={2}>
-                <GridItem xs={6} paddingBottom="1.255rem">
-                  <SocialLink
-                    label="Sign up with google"
-                    icon={<GoogleIcon />}
-                    onClick={handleGoogleAuthentication}
-                  />
-                </GridItem>
-                <GridItem xs={6} paddingBottom="1.25rem">
-                  <SocialLink
-                    label="Sign up with Microsoft"
-                    icon={<MicrosoftIcon />}
-                  />
-                </GridItem>
-                <GridItem xs={12} paddingBottom="1.25rem">
-                  <HR>or sign up with email</HR>
-                </GridItem>
-                <GridItem xs={6} paddingBottom="1.875rem">
-                  <FastInput name="firstName" label="First Name" required />
-                </GridItem>
-                <GridItem xs={6} paddingBottom="1.875rem">
-                  <FastInput name="lastName" label="Last Name " required />
-                </GridItem>
-                <GridItem xs={6} paddingBottom="1.875rem">
-                  <FastInput name="email" label="Email" required />
-                </GridItem>
-                <GridItem xs={6} paddingBottom="1.875rem">
-                  <FastInput
-                    name="dob"
-                    label="Date of Birth"
-                    required
-                    type="date"
-                  />
-                </GridItem>
+    <>
+      {!successSignUp ? (
+        <ModalComponent
+          title="Create Account"
+          subTitle="Get started with an account on Demlo"
+        >
+          <Formik
+            validateOnMount
+            initialValues={{
+              email: "",
+              firstName: "",
+              lastName: "",
+              username: "",
+              password: "",
+              confirmPassword: "",
+              dob: "",
+              termsAndConditions: false,
+            }}
+            validationSchema={registerValidation}
+            onSubmit={handleSubmit}
+          >
+            {(props) => {
+              const {
+                email,
+                firstName,
+                lastName,
+                username,
+                password,
+                confirmPassword,
+                dob,
+              } = props.values;
+              return (
+                <form onSubmit={props.handleSubmit}>
+                  <GridContainer spacing={2}>
+                    <GridItem xs={6} paddingBottom="1.255rem">
+                      <SocialLink
+                        label="Sign up with google"
+                        icon={<GoogleIcon />}
+                        onClick={handleGoogleAuthentication}
+                      />
+                    </GridItem>
+                    <GridItem xs={6} paddingBottom="1.25rem">
+                      <SocialLink
+                        label="Sign up with Microsoft"
+                        icon={<MicrosoftIcon />}
+                      />
+                    </GridItem>
+                    <GridItem xs={12} paddingBottom="1.25rem">
+                      <HR>or sign up with email</HR>
+                    </GridItem>
+                    <GridItem xs={6} paddingBottom="1.875rem">
+                      <FastInput name="firstName" label="First Name" required />
+                    </GridItem>
+                    <GridItem xs={6} paddingBottom="1.875rem">
+                      <FastInput name="lastName" label="Last Name " required />
+                    </GridItem>
+                    <GridItem xs={6} paddingBottom="1.875rem">
+                      <FastInput name="email" label="Email" required />
+                    </GridItem>
+                    <GridItem xs={6} paddingBottom="1.875rem">
+                      <FastInput
+                        name="dob"
+                        label="Date of Birth"
+                        required
+                        type="date"
+                      />
+                    </GridItem>
 
-                <GridItem xs={12} paddingBottom="1.875rem">
-                  <FastInput name="username" label="Username" required />
-                </GridItem>
-                <GridItem xs={6}>
-                  <FastInput
-                    name="password"
-                    label="Password"
-                    type="password"
-                    required
-                  />
-                </GridItem>
-                <GridItem xs={6}>
-                  <FastInput
-                    name="confirmPassword"
-                    label="Confirm Password"
-                    type="password"
-                    required
-                  />
-                </GridItem>
-                <GridItem xs={12} paddingBottom="15px">
-                  <PolicyWrap>
-                    <FastCheckbox name="termsAndConditions" />
-                    <p>
-                      I agree <span>Terms</span> and <span>Policy</span>
-                    </p>
-                  </PolicyWrap>
-                </GridItem>
-                <GridItem xs={12} paddingBottom="1rem">
-                  <ButtonComponent
-                    label="Create account"
-                    variant="contained"
-                    fullWidth
-                    onClick={props.handleSubmit}
-                    disabled={isLoading}
-                    size="large"
-                  />
-                </GridItem>
-                <GridItem xs={12} paddingBottom="1.25rem">
-                  <SwitchTab>
-                    Already have an account? <Link href="/login">Log in</Link>
-                  </SwitchTab>
-                </GridItem>
-              </GridContainer>
-            </form>
-          );
-        }}
-      </Formik>
-    </ModalComponent>
+                    <GridItem xs={12} paddingBottom="1.875rem">
+                      <FastInput name="username" label="Username" required />
+                    </GridItem>
+                    <GridItem xs={6}>
+                      <FastInput
+                        name="password"
+                        label="Password"
+                        type="password"
+                        required
+                      />
+                    </GridItem>
+                    <GridItem xs={6}>
+                      <FastInput
+                        name="confirmPassword"
+                        label="Confirm Password"
+                        type="password"
+                        required
+                      />
+                    </GridItem>
+                    <GridItem xs={12} paddingBottom="15px">
+                      <PolicyWrap>
+                        <FastCheckbox name="termsAndConditions" />
+                        <p>
+                          I agree <span>Terms</span> and <span>Policy</span>
+                        </p>
+                      </PolicyWrap>
+                    </GridItem>
+                    <GridItem xs={12} paddingBottom="1rem">
+                      <ButtonComponent
+                        label="Create account"
+                        variant="contained"
+                        fullWidth
+                        onClick={props.handleSubmit}
+                        disabled={isLoading}
+                        size="large"
+                      />
+                    </GridItem>
+                    <GridItem xs={12} paddingBottom="1.25rem">
+                      <SwitchTab>
+                        Already have an account?{" "}
+                        <Link href="/login">Log in</Link>
+                      </SwitchTab>
+                    </GridItem>
+                  </GridContainer>
+                </form>
+              );
+            }}
+          </Formik>
+        </ModalComponent>
+      ) : (
+        <AccountConfirmationForm handleBackToSignUp={handleBackToSignUp} />
+      )}
+    </>
   );
 };
 

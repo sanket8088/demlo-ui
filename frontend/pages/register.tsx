@@ -12,8 +12,7 @@ const register = () => {
   };
   return (
     <OnBoardingTemplate>
-      {/* <RegisterForm /> */}
-      <AccountConfirmationForm />
+      <RegisterForm />
     </OnBoardingTemplate>
   );
 };

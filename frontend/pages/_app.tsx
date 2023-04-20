@@ -14,6 +14,7 @@ import createEmotionCache from "../utility/createEmotionCache";
 import "../styles/globals.css";
 import { getAuthFromStorage } from "@/utility/auth";
 import { UserContext } from "../utility/Store";
+import { wrapper } from "../Store/store";
 
 interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache;
@@ -31,13 +32,11 @@ const MyApp: NextPage<MyAppProps> = (props) => {
 
   useEffect(() => {
     const token = getAuthFromStorage();
-    token.then((data) =>{
-
+    token.then((data) => {
       if (!isOpenRoute && data === null) {
         nextRouter.push("/login");
       } else return;
-    })
-    
+    });
   }, []);
 
   return (
@@ -52,4 +51,4 @@ const MyApp: NextPage<MyAppProps> = (props) => {
   );
 };
 
-export default MyApp;
+export default wrapper.withRedux(MyApp);

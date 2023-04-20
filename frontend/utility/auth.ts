@@ -51,12 +51,12 @@ export async function signUp(username: string,password: string,given_name: strin
           // other custom attributes 
         },
         autoSignIn: { // optional - enables auto sign in after user is confirmed
-          enabled: true,
+          enabled: false,
         }
       });
-      console.log(user);
-    } catch (error) {
-      alert(error.message)
+ return true;
+    } catch (error:any) {
+      return false;
     }
   }
 
@@ -66,7 +66,7 @@ export async function signIn(userName: string,password: string){
     const user = await Auth.signIn(userName, password);
     console.log("userData",user)
   } catch (error) {
-    alert(error.message)
+    alert(error)
     console.log('error signing in', error);
   }
 }
@@ -93,7 +93,7 @@ export const setAuthToStorage = ( accessToken: string, refreshToken: string ) =>
         const session = await Auth.currentSession();
         if (session.isValid()){
           console.log( "hello",Auth.currentUserInfo().then((data) =>{
-            console.log(data)
+            console.log("ff",data)
 
           }))
           const token =  session.getAccessToken().getJwtToken()
@@ -110,3 +110,33 @@ export const setAuthToStorage = ( accessToken: string, refreshToken: string ) =>
         return null;
     }
   };
+
+
+
+
+
+  export const getUserDetailsFromSession = async  () => {
+    // const token = window.localStorage.getItem('token');
+    // const refreshToken = window.localStorage.getItem('refreshToken');
+
+    // return { token, refreshToken, };
+    try {
+      const session = await Auth.currentSession();
+      if (session.isValid()){
+      const userDat= Auth.currentUserInfo();
+      return userDat;
+       
+      
+      
+      }
+      else{
+       
+        return null
+        // Router.push("/login");
+      }    
+    } catch (error) {
+      console.log(error);
+      return null;
+  }
+};
+
