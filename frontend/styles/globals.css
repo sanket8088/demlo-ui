@@ -83,15 +83,28 @@ body {
 .grid-span-narrow {
   grid-column: 4/-4;
 }
+.grid-span-full {
+  grid-column: 1/-1;
+}
 
-.main-auth{
+.main-auth {
   width: 100%;
   height: 100%;
   min-height: 100vh;
   display: flex;
   align-items: center;
   position: relative;
-  background: radial-gradient(20.04% 35.63% at 20.04% 38.89%, rgba(0, 103, 255, 0.2) 0%, rgba(0, 103, 255, 0) 100%) , radial-gradient(30.97% 15.76% at 93.79% 86.18%, rgba(0, 231, 190, 0.1) 0%, rgba(0, 231, 190, 0) 100%), #1C232D;
+  background: radial-gradient(
+      20.04% 35.63% at 20.04% 38.89%,
+      rgba(0, 103, 255, 0.2) 0%,
+      rgba(0, 103, 255, 0) 100%
+    ),
+    radial-gradient(
+      30.97% 15.76% at 93.79% 86.18%,
+      rgba(0, 231, 190, 0.1) 0%,
+      rgba(0, 231, 190, 0) 100%
+    ),
+    #1c232d;
   z-index: 1;
 }
 
@@ -100,52 +113,64 @@ body {
   filter: brightness(0) invert(1);
 }
 
-[data-theme="light"] {
+[data-theme='light'] {
   --theme-bg: var(--color-white);
 }
-.top-right-planet{
+.top-right-planet {
   position: absolute;
   top: 1%;
   right: 14%;
   z-index: -9;
-  background: radial-gradient(50% 50% at 50% 50%, #00EBF3 0%, #00D5DD 7%, #008A8F 33%, #004F52 56%, #002425 76%, #000A0A 91%, #000000 100%);
-background-blend-mode: screen;
-mix-blend-mode: screen;
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    #00ebf3 0%,
+    #00d5dd 7%,
+    #008a8f 33%,
+    #004f52 56%,
+    #002425 76%,
+    #000a0a 91%,
+    #000000 100%
+  );
+  background-blend-mode: screen;
+  mix-blend-mode: screen;
 }
-.bottom-right-planet{
+.bottom-right-planet {
   position: absolute;
   right: 19%;
   z-index: -9;
   bottom: 28%;
-  background: radial-gradient(50% 50% at 50% 50%, #00DED3 0%, #000000 100%);
-background-blend-mode: screen;
-mix-blend-mode: screen;
+  background: radial-gradient(50% 50% at 50% 50%, #00ded3 0%, #000000 100%);
+  background-blend-mode: screen;
+  mix-blend-mode: screen;
 }
-.top-left-planet{
+.top-left-planet {
   position: absolute;
   top: 44%;
 
-    left: 13%;
+  left: 13%;
   z-index: -9;
-  background: radial-gradient(50% 50% at 50% 50%, #9B19FF 0%, #580E91 41%, #000000 97%);
-background-blend-mode: screen;
-mix-blend-mode: screen;
-  
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    #9b19ff 0%,
+    #580e91 41%,
+    #000000 97%
+  );
+  background-blend-mode: screen;
+  mix-blend-mode: screen;
 }
-.bottom-left-planet{
+.bottom-left-planet {
   position: absolute;
 
-    bottom: 12%;
+  bottom: 12%;
 
-    left: 20%;
+  left: 20%;
   z-index: -9;
-  background: radial-gradient(50% 50% at 50% 50%, #00DED3 0%, #000000 100%);
-background-blend-mode: screen;
-mix-blend-mode: screen;
-  
+  background: radial-gradient(50% 50% at 50% 50%, #00ded3 0%, #000000 100%);
+  background-blend-mode: screen;
+  mix-blend-mode: screen;
 }
 
-.stars{
+.stars {
   position: absolute;
   z-index: -10;
 }
