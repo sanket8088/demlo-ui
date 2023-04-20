@@ -1,35 +1,32 @@
 import {
-  Main,
   Link,
   Heading,
   Paragraph,
   ProgressBar,
-  Instructions,
   SearchContainer,
   NextButtonContainer,
   InterestTagContainer,
   AvatarSelectionContainer,
   InterestSelectionContainer,
-} from "./Profile.style";
-import axios from "axios";
-import React, { useEffect, useState, useContext, useCallback } from "react";
-import Tag from "@/components/core-components/tag/Tag";
-import Card from "@/components/core-components/card/Card";
-import BadgeAvatars from "@/components/core-components/avatar/Avatar";
-import SearchBar from "@/components/core-components/searchbar/Searchbar";
-import HorizontalStepper from "@/components/core-components/stepper/Stepper";
-import ButtonComponent from "@/components/core-components/button/ButtonComponent";
-import { fetchQueries } from "@/utility/queryController";
-import { useQuery, useQueries } from "react-query";
-import CircularProgress from "@mui/material/CircularProgress";
-import Box from "@mui/material/Box";
-import { getUserDetailsFromSession } from "@/utility/auth";
-import { UserContext } from "@/utility/Store";
-import { useDispatch, useSelector } from "react-redux";
-import { selectAuthState, setAuthState } from "../../../Store/slice";
-interface ChildProps {
-  count: number;
-}
+} from './Profile.style';
+import Box from '@mui/material/Box';
+import { useQuery } from 'react-query';
+import { UserContext } from '@/utility/Store';
+import SearchIcon from '@mui/icons-material/Search';
+import { useDispatch, useSelector } from 'react-redux';
+import Tag from '@/components/core-components/tag/Tag';
+import { fetchQueries } from '@/utility/queryController';
+import Card from '@/components/core-components/card/Card';
+import { getUserDetailsFromSession } from '@/utility/auth';
+import CircularProgress from '@mui/material/CircularProgress';
+import GridItem from '@/components/core-components/grid/GridItem';
+import { selectAuthState, setAuthState } from '../../../Store/slice';
+import BadgeAvatars from '@/components/core-components/avatar/Avatar';
+import SearchBar from '@/components/core-components/searchbar/Searchbar';
+import GridContainer from '@/components/core-components/grid/GridContainer';
+import React, { useEffect, useState, useContext, useCallback } from 'react';
+import HorizontalStepper from '@/components/core-components/stepper/Stepper';
+import ButtonComponent from '@/components/core-components/button/ButtonComponent';
 
 interface Avatars {
   id: number;
@@ -38,23 +35,21 @@ interface Avatars {
 }
 
 export const UserProfile = () => {
+  const dispatch = useDispatch();
+  const value = useContext(UserContext);
   const [count, setCount] = useState<number>(0);
-
+  const authState = useSelector(selectAuthState);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [userName, setUserName] = useState<string>('Michael');
   const [avatarList, setAvatarList] = useState<Avatars[]>([]);
   const [selectedAvatarId, setSelectedAvatarId] = useState<number | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [userName, setUserName] = useState<string>("Michael");
-  const value = useContext(UserContext);
 
   const handleClick = useCallback(() => {
     setCount((count) => count + 1);
   }, []);
 
-  const authState = useSelector(selectAuthState);
-  const dispatch = useDispatch();
-
   const { isLoading, error, data } = useQuery({
-    queryFn: () => fetchQueries("user/avatar"),
+    queryFn: () => fetchQueries('user/avatar'),
     onSuccess(data) {
       setAvatarList(data?.data);
     },
@@ -70,11 +65,11 @@ export const UserProfile = () => {
     userData
       .then((data) => {
         if (data !== null) {
-          console.log("profile user", data);
+          console.log('profile user', data);
           const {
             attributes: { given_name },
           } = data;
-          console.log("hgi", given_name);
+          console.log('hgi', given_name);
           setUserName(given_name);
         }
       })
@@ -86,24 +81,22 @@ export const UserProfile = () => {
       });
   }, []);
 
-  console.log(loading);
-
-  if (loading)
+  if (isLoading)
     return (
       <Box
         sx={{
-          display: "flex",
-          width: "100%",
-          height: "100vh",
-          justifyContent: "center",
-          alignItems: "center",
+          width: '100vw',
+          height: '100vh',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
         }}
       >
         <CircularProgress size={100} />
       </Box>
     );
   return (
-    <Main>
+    <GridContainer spacing={2}>
       {/* <div>
         <div>{authState ? "Logged in" : "Not Logged In"}</div>
         <button
@@ -116,24 +109,49 @@ export const UserProfile = () => {
           {authState ? "Logout" : "LogIn"}
         </button>
       </div> */}
-      <ProgressBar>
-        <HorizontalStepper count={count} />
-      </ProgressBar>
-      <Instructions>
+      <GridItem xs={12}>
+        <ProgressBar>
+          <HorizontalStepper count={count} />
+        </ProgressBar>
+      </GridItem>
+      <GridItem xs={12}>
         <Heading>
-          {count === 0 ? `Welcome ${userName}!` : "Select your interests"}
+          {count === 0 ? ' Welcome Michael!' : 'Select your interests'}
         </Heading>
         <Paragraph>
           {count === 0
-            ? " Pick your style"
-            : "Select any 5 options to help us to  set and priorities your interests."}
-          Pick your style
+            ? ' Pick your style'
+            : 'Select any 5 options to help us to  set and priorities your interests.'}
         </Paragraph>
-      </Instructions>
-      <SearchContainer>{count === 1 ? <SearchBar /> : null}</SearchContainer>
-      <InterestTagContainer>
-        {count === 1 ? <Tag /> : null}
-      </InterestTagContainer>
+      </GridItem>
+      <GridItem xs={12}>
+        {count === 1 ? (
+          <SearchContainer>
+            <SearchBar
+              placeholder="Search your topics"
+              fullWidth
+              InputProps={{
+                endAdornment: (
+                  <SearchIcon
+                    sx={{
+                      left: '10px',
+                      color: 'white',
+                      position: 'absolute',
+                    }}
+                  />
+                ),
+              }}
+            />
+          </SearchContainer>
+        ) : null}
+      </GridItem>
+      <GridItem xs={12}>
+        {count === 1 ? (
+          <InterestTagContainer>
+            <Tag />
+          </InterestTagContainer>
+        ) : null}
+      </GridItem>
       {count === 0 ? (
         <AvatarSelectionContainer>
           {avatarList &&
@@ -162,16 +180,20 @@ export const UserProfile = () => {
           <Card />
         </InterestSelectionContainer>
       )}
-      <NextButtonContainer>
-        <ButtonComponent
-          size="medium"
-          label="Next"
-          variant="contained"
-          fullWidth
-          onClick={handleClick}
-        />
+      <GridItem xs={12}>
+        <NextButtonContainer>
+          <ButtonComponent
+            size="medium"
+            label="Next"
+            variant="contained"
+            fullWidth
+            onClick={handleClick}
+          />
+        </NextButtonContainer>
+      </GridItem>
+      <GridItem xs={12}>
         <Link>I'll do it later</Link>
-      </NextButtonContainer>
-    </Main>
+      </GridItem>
+    </GridContainer>
   );
 };
