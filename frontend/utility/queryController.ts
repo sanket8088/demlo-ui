@@ -2,12 +2,10 @@ import axios from "axios";
 import { getAuthFromStorage } from "./auth";
 
 
-const { token } = getAuthFromStorage();
+
 const fetchQueries= (query?: any) =>
 axios
-  .get(`http://66.94.102.196:9001/v1/api/${query}`,{
-    headers:{Authorization:`Bearer ${token}`}
-  })
+  .get(`http://66.94.102.196:9001/v1/api/${query}`)
   .then(({ data }) => data);
 
 const postQueries = (id:string) =>{

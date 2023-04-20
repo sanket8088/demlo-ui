@@ -32,7 +32,8 @@ const MyApp: NextPage<MyAppProps> = (props) => {
   useEffect(() => {
     const token = getAuthFromStorage();
     token.then((data) =>{
-      if (!isOpenRoute && token === undefined) {
+
+      if (!isOpenRoute && data === null) {
         nextRouter.push("/login");
       } else return;
     })

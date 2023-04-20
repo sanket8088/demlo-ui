@@ -92,14 +92,18 @@ export const setAuthToStorage = ( accessToken: string, refreshToken: string ) =>
       try {
         const session = await Auth.currentSession();
         if (session.isValid()){
+          console.log( "hello",Auth.currentUserInfo().then((data) =>{
+            console.log(data)
+
+          }))
           const token =  session.getAccessToken().getJwtToken()
           const refreshToken =  session.getRefreshToken().getToken();
           return token;
         }
         else{
           Auth.signOut()
-          Router.push("/login");
-
+          return null
+          // Router.push("/login");
         }    
       } catch (error) {
         console.log(error);

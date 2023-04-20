@@ -57,7 +57,6 @@ export const UserProfile = () => {
     setSelectedAvatarId(id);
   };
 
-  console.log(avatarList);
   if (isLoading)
     return (
       <Box
@@ -96,7 +95,6 @@ export const UserProfile = () => {
         <AvatarSelectionContainer>
           {avatarList &&
             avatarList?.map((avatar) => {
-              console.log("avatar", avatar);
               return (
                 <BadgeAvatars
                   key={avatar?.id}
