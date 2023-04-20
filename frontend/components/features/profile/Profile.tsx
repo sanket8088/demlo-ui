@@ -67,7 +67,6 @@ export const UserProfile = () => {
   useEffect(() => {
     setLoading(true);
     const userData = getUserDetailsFromSession();
-    console.log("profile userdata", userData);
     userData
       .then((data) => {
         if (data !== null) {
@@ -122,7 +121,7 @@ export const UserProfile = () => {
       </ProgressBar>
       <Instructions>
         <Heading>
-          {count === 0 ? `${userName}!` : "Select your interests"}
+          {count === 0 ? `Welcome ${userName}!` : "Select your interests"}
         </Heading>
         <Paragraph>
           {count === 0

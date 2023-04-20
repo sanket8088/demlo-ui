@@ -61,13 +61,12 @@ export async function signUp(username: string,password: string,given_name: strin
   }
 
 export async function signIn(userName: string,password: string){
-  console.log("signin",userName,password)
   try {
     const user = await Auth.signIn(userName, password);
-    console.log("userData",user)
+    return true
   } catch (error) {
     alert(error)
-    console.log('error signing in', error);
+    return false
   }
 }
 
@@ -92,10 +91,6 @@ export const setAuthToStorage = ( accessToken: string, refreshToken: string ) =>
       try {
         const session = await Auth.currentSession();
         if (session.isValid()){
-          console.log( "hello",Auth.currentUserInfo().then((data) =>{
-            console.log("ff",data)
-
-          }))
           const token =  session.getAccessToken().getJwtToken()
           const refreshToken =  session.getRefreshToken().getToken();
           return token;
