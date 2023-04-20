@@ -67,7 +67,7 @@ body {
 .grid {
   width: 100%;
   margin-inline: auto;
-  max-width: 1440px;
+
   padding-inline: var(--spacing-7);
   display: grid;
   grid-template-columns: repeat(10, minmax(0, 1fr));
@@ -106,6 +106,25 @@ body {
     ),
     #1c232d;
   z-index: 1;
+}
+
+.main-dashboard{
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  position: relative;
+  background: radial-gradient(
+    20.04% 35.63% at 20.04% 38.89%,
+    rgba(0, 103, 255, 0.2) 0%,
+    rgba(0, 103, 255, 0) 100%
+  ),
+  radial-gradient(
+    30.97% 15.76% at 93.79% 86.18%,
+    rgba(0, 231, 190, 0.1) 0%,
+    rgba(0, 231, 190, 0) 100%
+  ),
+  #1c232d;
+z-index: 1;
 }
 
 /* //mui date picker calendar icon color override */
@@ -173,4 +192,22 @@ body {
 .stars {
   position: absolute;
   z-index: -10;
+}
+
+
+.red-planet{
+  position: absolute;
+  top: 5%;
+  right: 1%;
+  z-index: -9;
+  background: radial-gradient(50% 50% at 50% 50%, #FF9442 0%, #DD8039 10%, #8F5325 36%, #522F15 58%, #25160A 77%, #0A0603 91%, #000000 100%);
+  background-blend-mode: screen;
+  mix-blend-mode: screen;
+  top: 7%;
+}
+
+.ufo{
+  position: absolute;
+  z-index: -9;
+  top: 8%;
 }

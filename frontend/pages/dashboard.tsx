@@ -1,10 +1,12 @@
-import React from 'react';
-import Dashboard from '@/components/features/dashboard';
+import React from "react";
+import Dashboard from "@/components/features/dashboard";
+import DashboardTemplate from "@/layouts/DashboardTemplate";
 
 const dashboard = () => {
   return (
-
-          <Dashboard />
+    <DashboardTemplate>
+      <Dashboard />
+    </DashboardTemplate>
   );
 };
 
