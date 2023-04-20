@@ -1,32 +1,36 @@
 import {
+  Main,
   Link,
   Heading,
   Paragraph,
   ProgressBar,
+  Instructions,
   SearchContainer,
   NextButtonContainer,
   InterestTagContainer,
   AvatarSelectionContainer,
   InterestSelectionContainer,
 } from './Profile.style';
-import Box from '@mui/material/Box';
-import { useQuery } from 'react-query';
-import { UserContext } from '@/utility/Store';
-import SearchIcon from '@mui/icons-material/Search';
-import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
+import React, { useEffect, useState, useContext, useCallback } from 'react';
 import Tag from '@/components/core-components/tag/Tag';
-import { fetchQueries } from '@/utility/queryController';
 import Card from '@/components/core-components/card/Card';
-import { getUserDetailsFromSession } from '@/utility/auth';
-import CircularProgress from '@mui/material/CircularProgress';
-import GridItem from '@/components/core-components/grid/GridItem';
-import { selectAuthState, setAuthState } from '../../../Store/slice';
 import BadgeAvatars from '@/components/core-components/avatar/Avatar';
 import SearchBar from '@/components/core-components/searchbar/Searchbar';
-import GridContainer from '@/components/core-components/grid/GridContainer';
-import React, { useEffect, useState, useContext, useCallback } from 'react';
 import HorizontalStepper from '@/components/core-components/stepper/Stepper';
 import ButtonComponent from '@/components/core-components/button/ButtonComponent';
+import { fetchQueries } from '@/utility/queryController';
+import { useQuery, useQueries } from 'react-query';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
+import { getUserDetailsFromSession } from '@/utility/auth';
+import { UserContext } from '@/utility/Store';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectAuthState, setAuthState } from '../../../Store/slice';
+import SearchIcon from '@/assets/icons/jsx/SearchIcon';
+interface ChildProps {
+  count: number;
+}
 
 interface Avatars {
   id: number;
@@ -35,18 +39,20 @@ interface Avatars {
 }
 
 export const UserProfile = () => {
-  const dispatch = useDispatch();
-  const value = useContext(UserContext);
   const [count, setCount] = useState<number>(0);
-  const authState = useSelector(selectAuthState);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [userName, setUserName] = useState<string>('Michael');
+
   const [avatarList, setAvatarList] = useState<Avatars[]>([]);
   const [selectedAvatarId, setSelectedAvatarId] = useState<number | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [userName, setUserName] = useState<string>('Michael');
+  const value = useContext(UserContext);
 
   const handleClick = useCallback(() => {
     setCount((count) => count + 1);
   }, []);
+
+  const authState = useSelector(selectAuthState);
+  const dispatch = useDispatch();
 
   const { isLoading, error, data } = useQuery({
     queryFn: () => fetchQueries('user/avatar'),
@@ -81,22 +87,24 @@ export const UserProfile = () => {
       });
   }, []);
 
-  if (isLoading)
+  console.log(loading);
+
+  if (loading)
     return (
       <Box
         sx={{
-          width: '100vw',
-          height: '100vh',
           display: 'flex',
-          alignItems: 'center',
+          width: '100%',
+          height: '100vh',
           justifyContent: 'center',
+          alignItems: 'center',
         }}
       >
         <CircularProgress size={100} />
       </Box>
     );
   return (
-    <GridContainer spacing={2}>
+    <Main>
       {/* <div>
         <div>{authState ? "Logged in" : "Not Logged In"}</div>
         <button
@@ -109,49 +117,42 @@ export const UserProfile = () => {
           {authState ? "Logout" : "LogIn"}
         </button>
       </div> */}
-      <GridItem xs={12}>
-        <ProgressBar>
-          <HorizontalStepper count={count} />
-        </ProgressBar>
-      </GridItem>
-      <GridItem xs={12}>
+      <ProgressBar>
+        <HorizontalStepper count={count} />
+      </ProgressBar>
+      <Instructions>
         <Heading>
-          {count === 0 ? ' Welcome Michael!' : 'Select your interests'}
+          {count === 0 ? `Welcome ${userName}!` : 'Select your interests'}
         </Heading>
         <Paragraph>
           {count === 0
             ? ' Pick your style'
             : 'Select any 5 options to help us to  set and priorities your interests.'}
+          Pick your style
         </Paragraph>
-      </GridItem>
-      <GridItem xs={12}>
+      </Instructions>
+      <SearchContainer>
         {count === 1 ? (
-          <SearchContainer>
-            <SearchBar
-              placeholder="Search your topics"
-              fullWidth
-              InputProps={{
-                endAdornment: (
-                  <SearchIcon
-                    sx={{
-                      left: '10px',
-                      color: 'white',
-                      position: 'absolute',
-                    }}
-                  />
-                ),
-              }}
-            />
-          </SearchContainer>
+          <SearchBar
+            placeholder="Search your topics"
+            fullWidth
+            InputProps={{
+              endAdornment: (
+                <SearchIcon
+                  sx={{
+                    left: '10px',
+                    color: 'white',
+                    position: 'absolute',
+                  }}
+                />
+              ),
+            }}
+          />
         ) : null}
-      </GridItem>
-      <GridItem xs={12}>
-        {count === 1 ? (
-          <InterestTagContainer>
-            <Tag />
-          </InterestTagContainer>
-        ) : null}
-      </GridItem>
+      </SearchContainer>
+      <InterestTagContainer>
+        {count === 1 ? <Tag /> : null}
+      </InterestTagContainer>
       {count === 0 ? (
         <AvatarSelectionContainer>
           {avatarList &&
@@ -180,20 +181,16 @@ export const UserProfile = () => {
           <Card />
         </InterestSelectionContainer>
       )}
-      <GridItem xs={12}>
-        <NextButtonContainer>
-          <ButtonComponent
-            size="medium"
-            label="Next"
-            variant="contained"
-            fullWidth
-            onClick={handleClick}
-          />
-        </NextButtonContainer>
-      </GridItem>
-      <GridItem xs={12}>
+      <NextButtonContainer>
+        <ButtonComponent
+          size="medium"
+          label="Next"
+          variant="contained"
+          fullWidth
+          onClick={handleClick}
+        />
         <Link>I'll do it later</Link>
-      </GridItem>
-    </GridContainer>
+      </NextButtonContainer>
+    </Main>
   );
 };
