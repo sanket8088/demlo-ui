@@ -13,7 +13,7 @@ class AvatarView(APIView):
     A view to fetch avatar stored.
     """
 
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
     def get(self, request: HttpRequest) -> Response:
         """GET method to fetch user data

@@ -30,11 +30,13 @@ const MyApp: NextPage<MyAppProps> = (props) => {
     nextRouter.pathname === "/login" || nextRouter.pathname === "/register";
 
   useEffect(() => {
-    const {token} = getAuthFromStorage();
-    console.log("authtoken",token)
-    if (!isOpenRoute && !token) {
-      nextRouter.push("/login");
-    } else return;
+    const token = getAuthFromStorage();
+    token.then((data) =>{
+      if (!isOpenRoute && token === undefined) {
+        nextRouter.push("/login");
+      } else return;
+    })
+    
   }, []);
 
   return (

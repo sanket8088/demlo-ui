@@ -21,7 +21,6 @@ import HorizontalStepper from "@/components/core-components/stepper/Stepper";
 import ButtonComponent from "@/components/core-components/button/ButtonComponent";
 import { fetchQueries } from "@/utility/queryController";
 import { useQuery, useQueries } from "react-query";
-import { getAuthFromStorage } from "@/utility/auth";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import { UserContext } from "@/utility/Store";
@@ -37,8 +36,6 @@ interface Avatars {
 }
 
 export const UserProfile = () => {
-  const { token } = getAuthFromStorage();
-
   const [count, setCount] = useState<number>(0);
 
   const [avatarList, setAvatarList] = useState<Avatars[]>([]);
