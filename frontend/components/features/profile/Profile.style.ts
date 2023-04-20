@@ -106,6 +106,7 @@ const Link = styled.p`
   font-weight: 400;
   line-height: 27px;
   text-align: center;
+  cursor: pointer
 `;
 
 export {

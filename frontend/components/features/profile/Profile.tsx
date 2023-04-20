@@ -28,6 +28,7 @@ import { UserContext } from '@/utility/Store';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectAuthState, setAuthState } from '../../../Store/slice';
 import SearchIcon from '@/assets/icons/jsx/SearchIcon';
+import { useRouter } from "next/router";
 interface ChildProps {
   count: number;
 }
@@ -40,6 +41,7 @@ interface Avatars {
 
 export const UserProfile = () => {
   const [count, setCount] = useState<number>(0);
+  const router = useRouter();
 
   const [avatarList, setAvatarList] = useState<Avatars[]>([]);
   const [selectedAvatarId, setSelectedAvatarId] = useState<number | null>(null);
@@ -66,16 +68,23 @@ export const UserProfile = () => {
   };
 
   useEffect(() => {
+    if (count === 2){
+      router.push({
+        pathname: "/dashboard",
+      });
+
+    }
+  }, [count]);
+
+  useEffect(() => {
     setLoading(true);
     const userData = getUserDetailsFromSession();
     userData
       .then((data) => {
         if (data !== null) {
-          console.log('profile user', data);
           const {
             attributes: { given_name },
           } = data;
-          console.log('hgi', given_name);
           setUserName(given_name);
         }
       })
@@ -87,7 +96,8 @@ export const UserProfile = () => {
       });
   }, []);
 
-  console.log(loading);
+ 
+
 
   if (loading)
     return (
@@ -132,7 +142,7 @@ export const UserProfile = () => {
         </Paragraph>
       </Instructions>
       <SearchContainer>
-        {count === 1 ? (
+        {count > 0 ? (
           <SearchBar
             placeholder="Search your topics"
             fullWidth
@@ -151,7 +161,7 @@ export const UserProfile = () => {
         ) : null}
       </SearchContainer>
       <InterestTagContainer>
-        {count === 1 ? <Tag /> : null}
+        {count > 0 ? <Tag /> : null}
       </InterestTagContainer>
       {count === 0 ? (
         <AvatarSelectionContainer>
@@ -189,7 +199,7 @@ export const UserProfile = () => {
           fullWidth
           onClick={handleClick}
         />
-        <Link>I'll do it later</Link>
+        <Link onClick={handleClick}>I'll do it later</Link>
       </NextButtonContainer>
     </Main>
   );
