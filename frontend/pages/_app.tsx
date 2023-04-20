@@ -30,8 +30,9 @@ const MyApp: NextPage<MyAppProps> = (props) => {
     nextRouter.pathname === "/login" || nextRouter.pathname === "/register";
 
   useEffect(() => {
-    const { token: tokenFromLocalStorage } = getAuthFromStorage();
-    if (!isOpenRoute && !tokenFromLocalStorage) {
+    const {token} = getAuthFromStorage();
+    console.log("authtoken",token)
+    if (!isOpenRoute && !token) {
       nextRouter.push("/login");
     } else return;
   }, []);

@@ -11,6 +11,8 @@ import { useQuery, useMutation } from "react-query";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { Form, SwitchTab, SubtitleDiv } from "./AuthForm.style";
+import { Auth } from "aws-amplify";
+
 
 const ForgotPasswordForm = () => {
   const router = useRouter();
@@ -34,10 +36,10 @@ const ForgotPasswordForm = () => {
   );
   const handleSubmit = (values: any, actions: any) => {
     console.log("onsubmit", values);
+    Auth.forgotPassword(values.email)
+    .then(data => console.log(data))
+    .catch(err => console.log(err));
 
-    mutate({
-      email: values?.email,
-    });
   };
 
   useEffect(() => {}, [data]);

@@ -1,7 +1,8 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 
 import { RegisterForm } from "@/components/features/auth-form";
 import OnBoardingTemplate from "@/layouts/OnBoardingTemplate";
+import AccountConfirmationForm from "@/components/features/auth-form/AccountConfirmationForm";
 
 const register = () => {
   const formikRef = useRef();
@@ -11,7 +12,8 @@ const register = () => {
   };
   return (
     <OnBoardingTemplate>
-      <RegisterForm />
+      {/* <RegisterForm /> */}
+      <AccountConfirmationForm />
     </OnBoardingTemplate>
   );
 };

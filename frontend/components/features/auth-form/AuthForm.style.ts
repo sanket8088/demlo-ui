@@ -79,8 +79,13 @@ const SubtitleDiv = styled.div`
 padding-top: 30px;
 `
 
+const OperationalDiv = styled.div`
+padding-top: 30px;
+`
+
+
 export {
     PolicyWrap,
     HR,
-    SwitchTab,ForgotLink, Form, SubtitleDiv
+    SwitchTab,ForgotLink, Form, SubtitleDiv, OperationalDiv
   };

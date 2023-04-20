@@ -1,7 +1,11 @@
 
 import { Amplify,Auth } from "aws-amplify";
+import Router from "next/router";
 
 import { CognitoHostedUIIdentityProvider } from "@aws-amplify/auth/lib/types";
+
+// Old config
+
 Amplify.configure({
   Auth: {
     identityPoolId:'us-east-1:b373596e-9db0-4439-84ef-bc94547b2e8e',
@@ -14,7 +18,7 @@ Amplify.configure({
  //     ClientSecret:'1k244ql5na5rafshfurfbc3231r82halbe6um77atqouhi1185t8'
  oauth: {
   redirectSignIn: 'http://localhost:3000/profile',
-  redirectSignOut: 'http://localhost:3000',
+  redirectSignOut: 'http://localhost:3000/login',
   redirectUrl: 'http://localhost:3000/profile',
    responseType: 'code',
     domain: 'demlo841283f43-41283f43-dev.auth.us-east-1.amazoncognito.com',
@@ -23,17 +27,15 @@ Amplify.configure({
   }}
 });
 
-
 const currentConfig = Auth.configure();
 
-
 export const handleGoogleAuthentication = () =>{
-  Auth.federatedSignIn({
+  const google = Auth.federatedSignIn({
     provider: CognitoHostedUIIdentityProvider.Google
   });
+  console.log(google)
   console.log('clicked google buttton')
-  Auth.currentAuthenticatedUser().then((data)=>{console.log(data)})
-
+  // Auth.currentAuthenticatedUser().then((data)=>{console.log(data)})
 };
 
 export async function signUp(username: string,password: string,given_name: string,family_name: string,email: string) {
@@ -54,7 +56,7 @@ export async function signUp(username: string,password: string,given_name: strin
       });
       console.log(user);
     } catch (error) {
-      console.log('error signing up:', error);
+      alert(error.message)
     }
   }
 
@@ -64,6 +66,7 @@ export async function signIn(userName: string,password: string){
     const user = await Auth.signIn(userName, password);
     console.log("userData",user)
   } catch (error) {
+    alert(error.message)
     console.log('error signing in', error);
   }
 }
@@ -81,13 +84,25 @@ export const setAuthToStorage = ( accessToken: string, refreshToken: string ) =>
 
 
 
-  export const getAuthFromStorage = () => {
-    if (isWindow) {
-      const token = window.localStorage.getItem('token');
-      const refreshToken = window.localStorage.getItem('refreshToken');
-     
+  export const getAuthFromStorage = async  () => {
+      // const token = window.localStorage.getItem('token');
+      // const refreshToken = window.localStorage.getItem('refreshToken');
   
-      return { token, refreshToken, };
+      // return { token, refreshToken, };
+      try {
+        const session = await Auth.currentSession();
+        if (session.isValid()){
+          const token =  session.getAccessToken().getJwtToken()
+          const refreshToken =  session.getRefreshToken().getToken();
+          return token;
+        }
+        else{
+          Auth.signOut()
+          Router.push("/login");
+
+        }    
+      } catch (error) {
+        console.log(error);
+        return null;
     }
-    return {};
   };
