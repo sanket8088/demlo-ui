@@ -9,10 +9,10 @@ interface IModalTypes {
 
 const ConnectionContainer = ({ title, children }: IModalTypes) => {
   return (
-      <Modal>
-        <Title>{title}</Title> 
-        {children ? children : null}
-      </Modal>
+    <Modal>
+      <Title>{title}</Title>
+      {children ? children : null}
+    </Modal>
   );
 };
 

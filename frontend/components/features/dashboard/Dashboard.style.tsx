@@ -1,4 +1,4 @@
-import styled from '@emotion/styled';
+import styled from "@emotion/styled";
 
 // Header
 
@@ -9,6 +9,7 @@ const HeaderContainer = styled.div`
   border-radius: 20px;
   background: #1d2331;
   justify-content: space-between;
+  margin-bottom: 1.375rem;
 `;
 
 const HeaderLeftContainer = styled.div`
@@ -73,7 +74,8 @@ const NotificationContainer = styled.div`
 // Dashboard Left
 
 const DashboardLeftContainer = styled.div`
-  width: 20%;
+  grid-column: 1/-9;
+  grid-row: 1;
 `;
 
 const ProfileContainer = styled.div`

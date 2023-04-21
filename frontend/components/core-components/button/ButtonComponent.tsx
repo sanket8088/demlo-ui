@@ -33,6 +33,7 @@ const ButtonComponent = ({
   const fontSize =
     size === "large" ? "16px" : size === "small" ? "12px" : size === "xs" ? "10px" : "14px";
   const borderRadius = size === "small" ? "8px" : "14px";
+
   return (
     <Button
       size={size}
@@ -50,6 +51,7 @@ const ButtonComponent = ({
         borderRadius: borderRadius,
         paddingBlock: paddingBlock,
         paddingInline: paddingInline,
+
         "&:hover": {
           background:
             "linear-gradient(0deg, rgba(5, 56, 107, 0.4), rgba(5, 56, 107, 0.4)), linear-gradient(111.76deg, #0A66C2 27.13%, #00B5D1 90.6%)",
@@ -62,3 +64,7 @@ const ButtonComponent = ({
 };
 
 export default ButtonComponent;
+
+// border: 1px solid;
+
+// border-image-source: linear-gradient(92.29deg, #51CDDE 0%, rgba(81, 205, 222, 0.6) 100%);

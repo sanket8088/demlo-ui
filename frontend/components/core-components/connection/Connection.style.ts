@@ -31,7 +31,7 @@ const Modal = styled.div`
   backdrop-filter: blur(31px);
   padding-top:var(--spacing-3);
   padding-bottom:var(--spacing-3);
-padding-inline: var(--spacing-2);
+padding-inline: var(--spacing-3);
 z-index: 100; 
 margin-bottom: 1.8em;
 `

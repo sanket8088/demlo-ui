@@ -11,7 +11,7 @@ interface ITypesGridItem {
 const GridItem = ({ children, xs, paddingBottom }: ITypesGridItem) => {
   const spacingBottom = paddingBottom ? paddingBottom : "0px";
   return (
-    <Grid sx={{ padding: "0 15px", paddingBottom: spacingBottom }} item xs={xs}>
+    <Grid sx={{ paddingBottom: spacingBottom }} item xs={xs}>
       {children}
     </Grid>
   );

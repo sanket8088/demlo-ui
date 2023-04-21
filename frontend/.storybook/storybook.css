@@ -7,7 +7,24 @@ body {
 
   background: radial-gradient(20.04% 35.63% at 20.04% 38.89%, rgba(0, 103, 255, 0.2) 0%, rgba(0, 103, 255, 0) 100%), radial-gradient(30.97% 15.76% at 93.79% 86.18%, rgba(0, 231, 190, 0.1) 0%, rgba(0, 231, 190, 0) 100%), #1C232D;
 }
+:root {
+  /* Primary Colour palette */
+  --color-black: #000000;
+  --color-white: #ffffff;
+  /* Primary Tints */
+  --color-black-1: #191919;
+  --color-black-2: #333333;
+  --color-black-3: #4d4d4d;
 
+  /* Notification Colours */
+  --color-error: #b72d00;
+  --color-error-1: #ff460f;
+  --color-error-2: #ffebe5;
+  --theme-bg: var(--color-black);
+  --color-font-dark:#CDCDCD;
+  --color-font-light:##FFFFFF;
+;
+}
 :root {
   --spacing-1: 0.5rem;
   --spacing-2: 0.625rem;
