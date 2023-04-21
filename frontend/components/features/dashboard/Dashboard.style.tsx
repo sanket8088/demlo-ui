@@ -104,19 +104,57 @@ const UserName = styled.p`
 `;
 
 const StyleChnageButton = styled.div`
-  width: 100%;
+  width: 95%;
+  margin: auto;
   margin-top: 4%;
+`;
+
+const RewardAnnouncement = styled.div`
+  width: 100%;
+  padding: 10%;
+  margin: auto;
+  display: flex;
+  margin-top: 6%;
+  align-items: start;
+  border-radius: 14px;
+  flex-direction: column;
+  justify-content: space-between;
+  background: radial-gradient(
+    100% 100% at 0% 0%,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  box-shadow: inset -5px -5px 250px rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(21px);
+`;
+
+const RewardAHeading = styled.p`
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 120%;
+`;
+
+const RewardADescription = styled.p`
+  margin-top: 4%;
+  font-size: 0.8rem;
+  color: #a5a5a5;
+  font-weight: 400;
+  line-height: 120%;
 `;
 
 export {
   UserName,
   LogoContainer,
+  RewardAHeading,
   NavigationIcon,
   NavigationText,
   AvatarContainer,
   HeaderContainer,
   ProfileContainer,
   StyleChnageButton,
+  RewardADescription,
+  RewardAnnouncement,
   SearchBarContainer,
   HeaderLeftContainer,
   HeaderRightContainer,

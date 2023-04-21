@@ -2,9 +2,12 @@ import React from 'react';
 import { Avatar } from '@mui/material';
 import {
   UserName,
+  RewardAHeading,
   AvatarContainer,
   ProfileContainer,
   StyleChnageButton,
+  RewardADescription,
+  RewardAnnouncement,
 } from './Dashboard.style';
 import ButtonComponent from '@/components/core-components/button/ButtonComponent';
 
@@ -28,6 +31,12 @@ const Profile = () => {
           label="Change style"
         ></ButtonComponent>
       </StyleChnageButton>
+      <RewardAnnouncement>
+        <RewardAHeading>Hop to the Top</RewardAHeading>
+        <RewardADescription>
+          Start getting rewards by completing your goal activities
+        </RewardADescription>
+      </RewardAnnouncement>
     </ProfileContainer>
   );
 };
