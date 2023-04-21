@@ -9,10 +9,6 @@ import {
   Modal,
   Title,
 } from "./ModalComponent.style";
-import Image from "next/image";
-import TopRightPlanet from "../../../public/top-right-planet.svg";
-import BottomRightPlanet from "../../../public/bottom-right-planet.svg";
-import BottomLeftPlanet from "../../../public/bottom-left-planet.svg";
 
 interface IModalTypes {
   title: string;
