@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from './Header';
-import Profile from './Profile';
+import DashboardLeft from './DashboardLeft';
 import GridItem from '@/components/core-components/grid/GridItem';
 import GridContainer from '@/components/core-components/grid/GridContainer';
 
@@ -11,7 +11,7 @@ export const Dashboard = () => {
         <Header />
       </GridItem>
       <GridItem xs={12}>
-        <Profile />
+        <DashboardLeft />
       </GridItem>
     </GridContainer>
   );
