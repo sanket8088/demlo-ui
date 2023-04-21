@@ -41,6 +41,7 @@ body {
   --color-error-1: #ff460f;
   --color-error-2: #ffebe5;
   --theme-bg: var(--color-black);
+  
 }
 
 :root {
