@@ -33,8 +33,6 @@ export const handleGoogleAuthentication = () =>{
   const google = Auth.federatedSignIn({
     provider: CognitoHostedUIIdentityProvider.Google
   });
-  console.log(google)
-  console.log('clicked google buttton')
   // Auth.currentAuthenticatedUser().then((data)=>{console.log(data)})
 };
 
@@ -63,6 +61,17 @@ export async function signUp(username: string,password: string,given_name: strin
 export async function signIn(userName: string,password: string){
   try {
     const user = await Auth.signIn(userName, password);
+    return true
+  } catch (error) {
+    alert(error)
+    return false
+  }
+}
+
+
+export async function logout(){
+  try {
+    const user = await Auth.signOut();
     return true
   } catch (error) {
     alert(error)
@@ -121,11 +130,10 @@ export const setAuthToStorage = ( accessToken: string, refreshToken: string ) =>
       const userDat= Auth.currentUserInfo();
       return userDat;
        
-      
-      
+
       }
       else{
-       
+        Auth.signOut()
         return null
         // Router.push("/login");
       }    

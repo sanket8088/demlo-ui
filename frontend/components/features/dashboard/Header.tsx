@@ -22,8 +22,21 @@ import DownArrowIcon from '@/assets/icons/jsx/DownArrowIcon';
 import DemloverseIcon from '@/assets/icons/jsx/DemloverseIcon';
 import NotificationIcon from '@/assets/icons/jsx/NotificationIcon';
 import SearchBar from '@/components/core-components/searchbar/Searchbar';
+import { Auth } from 'aws-amplify';
+import Router from "next/router";
 
 const Header = () => {
+
+  const logoutUser =() =>{
+    Auth.signOut().then(() =>{
+      Router.push("/login")
+    })
+
+    
+
+  }
+
+
   return (
     <HeaderContainer>
       <HeaderLeftContainer>
@@ -74,8 +87,12 @@ const Header = () => {
         <NotificationContainer>
           <NotificationIcon />
           <HelpIcon />
-          <Avatar src="https://cdn.iconscout.com/icon/free/png-256/avatar-370-456322.png?f=webp&w=256" />
+          <div onClick={logoutUser}>
+           <Avatar src="https://cdn.iconscout.com/icon/free/png-256/avatar-370-456322.png?f=webp&w=256" />
+         
+          </div>
           <DownArrowIcon />
+         
         </NotificationContainer>
       </HeaderRightContainer>
     </HeaderContainer>
