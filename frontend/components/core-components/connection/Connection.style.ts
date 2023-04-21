@@ -33,7 +33,7 @@ const Modal = styled.div`
   padding-bottom:var(--spacing-3);
 padding-inline: var(--spacing-3);
 z-index: 100; 
-margin-bottom: 1.8em;
+margin-bottom: 1.5rem;
 `
 
 export {Title, Modal}

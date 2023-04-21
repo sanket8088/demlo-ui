@@ -4,7 +4,7 @@ import { CircleList } from "@/components/core-components/squad/Squad.style";
 import SquadContainer from "@/components/core-components/squad/Squad";
 import ConnectFriend from "@/components/core-components/connectFriend/Connectfriend";
 import { SquadList } from "@/components/core-components/connectFriend/ConnectFriend.style";
-import { Main, NextContainer, CircleNextContainer } from "./circle.style";
+import { Main, NextContainer, CircleNextContainer, CircleContent } from "./circle.style";
 import NextIcon from "@/assets/icons/jsx/Next";
 
 export const CircleContainer = () => {
@@ -13,7 +13,7 @@ export const CircleContainer = () => {
       <ConnectionContainer
         title="Circles to join"
         children={
-          <>
+          <CircleContent>
             <CircleNextContainer>
               <NextIcon />
             </CircleNextContainer>
@@ -21,7 +21,7 @@ export const CircleContainer = () => {
               <SquadContainer name={"Math Squad"} />
               <SquadContainer name={"Math Squad"} />
             </CircleList>
-          </>
+          </CircleContent>
         }
       />
       <ConnectionContainer
@@ -44,7 +44,8 @@ export const CircleContainer = () => {
               university={"Christian Middle"}
             />
             <NextContainer>
-              See More
+              <span>See More</span>
+              
               <NextIcon />
             </NextContainer>
           </SquadList>
