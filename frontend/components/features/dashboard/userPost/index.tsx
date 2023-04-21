@@ -23,7 +23,7 @@ const index = () => {
         postTime="23 minutes ago"
         textContent="Hello peers, i’m here to share my achievements. i made during this academic year :). I was the top performing kid of the grade 6 Hello peers, i’m here to share my achievements. i made during this academic year :). I was the top performing kid of the grade 6"
         avatarImage="https://picsum.photos/id/85/200/300"
-        postType="image"
+        postType="video"
       />
     </SocialPostContainer>
   );

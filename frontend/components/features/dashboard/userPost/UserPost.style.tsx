@@ -8,6 +8,7 @@ const SocialPostContainer = styled.section`
 const UserPostCardWrapper = styled.div`
   padding-inline: var(--spacing-3);
   padding-bottom: var(--spacing-3);
+  margin-bottom: var(--spacing-2);
   background: radial-gradient(
     100% 100% at 0% 0%,
     rgba(255, 255, 255, 0.024) 0%,
@@ -43,6 +44,7 @@ const TextPost = styled.p`
   font-size: 0.875rem;
   line-height: var(--spacing-4);
   color: var(--color-font-dark);
+  padding-right: var(--spacing-3);
 `;
 
 const AvatarInfo = styled.div`
@@ -98,8 +100,11 @@ const ButtonAligner = styled.div`
   flex-direction: row;
   gap: var(--spacing-2);
   align-items: center;
+  padding-right: var(--spacing-3);
 `;
-
+const PaddingRight = styled.div`
+  padding-right: var(--spacing-3);
+`;
 export {
   SocialPostContainer,
   UserPostCardWrapper,
@@ -109,4 +114,5 @@ export {
   AvatarInfo,
   AlignInteractions,
   ButtonAligner,
+  PaddingRight,
 };

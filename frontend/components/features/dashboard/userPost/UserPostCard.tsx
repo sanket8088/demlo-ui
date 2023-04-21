@@ -9,6 +9,7 @@ import {
   TextPost,
   AvatarInfo,
   ButtonAligner,
+  PaddingRight,
 } from "./UserPost.style";
 import GlobeIcon from "@/assets/icons/jsx/GlobeIcon";
 import ThreeDotBtn from "@/assets/icons/jsx/ThreeDotBtn";
@@ -16,6 +17,7 @@ import ImageCarousel from "@/components/core-components/imageCarousel/ImageCasou
 import Interactions from "../Interactions";
 import ButtonComponent from "@/components/core-components/button/ButtonComponent";
 import CustomAvatar from "@/components/core-components/avatar/CustomAvatar";
+import VideoComponent from "@/components/core-components/video/video";
 interface ITypesUserPostCard {
   creatorName: string;
   postTime: string;
@@ -31,6 +33,12 @@ const UserPostCard = ({
   avatarImage,
   postType,
 }: ITypesUserPostCard) => {
+  const postComponent =
+    postType === "image" ? (
+      <ImageCarousel />
+    ) : postType === "video" ? (
+      <VideoComponent />
+    ) : null;
   return (
     <UserPostCardWrapper>
       <header>
@@ -56,7 +64,7 @@ const UserPostCard = ({
             <TextPost>{textContent}</TextPost>
           </GridItem>
           <GridItem xs={12}>
-            {postType === "image" ? <ImageCarousel /> : null}
+            <PaddingRight>{postComponent}</PaddingRight>
           </GridItem>
           <GridItem xs={6}>
             <Interactions />
