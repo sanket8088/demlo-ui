@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
 
+// Header
+
 const HeaderContainer = styled.div`
   width: 100%;
   display: flex;
@@ -68,11 +70,53 @@ const NotificationContainer = styled.div`
   justify-content: space-around;
 `;
 
+// Profile
+
+const ProfileContainer = styled.div`
+  width: 20%;
+  padding: 2%;
+  position: relative;
+  border-radius: 14px;
+  background: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0.04) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  backdrop-filter: blur(21px);
+`;
+
+const AvatarContainer = styled.div`
+  width: 80%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+`;
+
+const UserName = styled.p`
+  margin-top: 5%;
+  font-size: 0.9rem;
+  color: #ffffff;
+  font-weight: 700;
+  line-height: 120%;
+  text-align: center;
+`;
+
+const StyleChnageButton = styled.div`
+  width: 100%;
+  margin-top: 4%;
+`;
+
 export {
+  UserName,
   LogoContainer,
   NavigationIcon,
   NavigationText,
+  AvatarContainer,
   HeaderContainer,
+  ProfileContainer,
+  StyleChnageButton,
   SearchBarContainer,
   HeaderLeftContainer,
   HeaderRightContainer,
