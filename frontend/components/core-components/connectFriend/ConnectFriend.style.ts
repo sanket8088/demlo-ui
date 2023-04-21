@@ -17,6 +17,7 @@ const SquadList = styled.div`
 const StudentDetails = styled.div`
   display: flex;
   flex-direction: column;
+  padding-left: 0.5rem;
 `;
 
 const Name = styled.span`
@@ -37,4 +38,10 @@ color: #A5A5A5;
 
 `;
 
-export { StudentDetails, Name, GradeUniversityName, SquadList, MainDiv}
+const SuggestInfoContainer = styled.span`
+display: flex;
+justify-content: space-evenly;
+
+`;
+
+export { StudentDetails, Name, GradeUniversityName, SquadList, MainDiv, SuggestInfoContainer}
