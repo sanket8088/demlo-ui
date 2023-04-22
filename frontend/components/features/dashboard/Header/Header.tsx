@@ -14,6 +14,7 @@ import Router from 'next/router';
 import { Auth } from 'aws-amplify';
 import { Avatar } from '@mui/material';
 import { InputAdornment } from '@mui/material';
+import MikeIcon from '@/assets/icons/jsx/MikeIcon';
 import HomeIcon from '@/assets/icons/jsx/HomeIcon';
 import HelpIcon from '@/assets/icons/jsx/HelpIcon';
 import SiteIcon from '@/assets/icons/jsx/SiteIcon';
@@ -47,6 +48,11 @@ const Header = () => {
               startAdornment: (
                 <InputAdornment position="start">
                   <SearchIcon />
+                </InputAdornment>
+              ),
+              endAdornment: (
+                <InputAdornment position="end">
+                  <MikeIcon />
                 </InputAdornment>
               ),
             }}
