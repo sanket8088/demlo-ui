@@ -10,28 +10,24 @@ import {
   InterestTagContainer,
   AvatarSelectionContainer,
   InterestSelectionContainer,
-} from "./Profile.style";
-import axios from "axios";
-import React, { useEffect, useState, useContext, useCallback } from "react";
-import Tag from "@/components/core-components/tag/Tag";
-import Card from "@/components/core-components/card/Card";
-import BadgeAvatars from "@/components/core-components/avatar/Avatar";
-import SearchBar from "@/components/core-components/searchbar/Searchbar";
-import HorizontalStepper from "@/components/core-components/stepper/Stepper";
-import ButtonComponent from "@/components/core-components/button/ButtonComponent";
-import { fetchQueries } from "@/utility/queryController";
-import { useQuery, useQueries } from "react-query";
-import CircularProgress from "@mui/material/CircularProgress";
-import Box from "@mui/material/Box";
-import { getUserDetailsFromSession } from "@/utility/auth";
-import { UserContext } from "@/utility/Store";
-import { useDispatch, useSelector } from "react-redux";
-import { selectAuthState, setAuthState } from "../../../Store/slice";
-import SearchIcon from "@/assets/icons/jsx/SearchIcon";
-import { useRouter } from "next/router";
-interface ChildProps {
-  count: number;
-}
+} from './Profile.style';
+import Box from '@mui/material/Box';
+import { useQuery } from 'react-query';
+import { useRouter } from 'next/router';
+import { InputAdornment } from '@mui/material';
+import { selectAuthState } from '../../../Store/slice';
+import SearchIcon from '@/assets/icons/jsx/SearchIcon';
+import { useDispatch, useSelector } from 'react-redux';
+import Tag from '@/components/core-components/tag/Tag';
+import { fetchQueries } from '@/utility/queryController';
+import Card from '@/components/core-components/card/Card';
+import { getUserDetailsFromSession } from '@/utility/auth';
+import CircularProgress from '@mui/material/CircularProgress';
+import BadgeAvatars from '@/components/core-components/avatar/Avatar';
+import SearchBar from '@/components/core-components/searchbar/Searchbar';
+import React, { useEffect, useState, useContext, useCallback } from 'react';
+import HorizontalStepper from '@/components/core-components/stepper/Stepper';
+import ButtonComponent from '@/components/core-components/button/ButtonComponent';
 
 interface Avatars {
   id: number;
@@ -40,24 +36,21 @@ interface Avatars {
 }
 
 export const UserProfile = () => {
-  const [count, setCount] = useState<number>(0);
   const router = useRouter();
-
-  const [avatarList, setAvatarList] = useState<Avatars[]>([]);
-  const [selectedAvatarId, setSelectedAvatarId] = useState<number | null>(null);
+  const dispatch = useDispatch();
+  const [count, setCount] = useState<number>(0);
+  const authState = useSelector(selectAuthState);
   const [loading, setLoading] = useState<boolean>(false);
-  const [userName, setUserName] = useState<string>("Michael");
-  const value = useContext(UserContext);
+  const [avatarList, setAvatarList] = useState<Avatars[]>([]);
+  const [userName, setUserName] = useState<string>('Michael');
+  const [selectedAvatarId, setSelectedAvatarId] = useState<number | null>(null);
 
   const handleClick = useCallback(() => {
     setCount((count) => count + 1);
   }, []);
 
-  const authState = useSelector(selectAuthState);
-  const dispatch = useDispatch();
-
   const { isLoading, error, data } = useQuery({
-    queryFn: () => fetchQueries("user/avatar"),
+    queryFn: () => fetchQueries('user/avatar'),
     onSuccess(data) {
       setAvatarList(data?.data);
     },
@@ -70,7 +63,7 @@ export const UserProfile = () => {
   useEffect(() => {
     if (count === 2) {
       router.push({
-        pathname: "/dashboard",
+        pathname: '/dashboard',
       });
     }
   }, [count]);
@@ -99,11 +92,11 @@ export const UserProfile = () => {
     return (
       <Box
         sx={{
-          display: "flex",
-          width: "100%",
-          height: "100vh",
-          justifyContent: "center",
-          alignItems: "center",
+          display: 'flex',
+          width: '100%',
+          height: '100vh',
+          justifyContent: 'center',
+          alignItems: 'center',
         }}
       >
         <CircularProgress size={100} />
@@ -128,12 +121,12 @@ export const UserProfile = () => {
       </ProgressBar>
       <Instructions>
         <Heading>
-          {count === 0 ? `Welcome ${userName}!` : "Select your interests"}
+          {count === 0 ? `Welcome ${userName}!` : 'Select your interests'}
         </Heading>
         <Paragraph>
           {count === 0
-            ? " Pick your style"
-            : "Select any 5 options to help us to  set and priorities your interests."}
+            ? ' Pick your style'
+            : 'Select any 5 options to help us to  set and priorities your interests.'}
           Pick your style
         </Paragraph>
       </Instructions>
@@ -143,7 +136,11 @@ export const UserProfile = () => {
             placeholder="Search your topics"
             fullWidth
             InputProps={{
-              endAdornment: <SearchIcon />,
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon />
+                </InputAdornment>
+              ),
             }}
           />
         ) : null}

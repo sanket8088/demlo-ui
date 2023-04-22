@@ -15,7 +15,7 @@ const CustomInput = styled(TextField)`
     font-family: 'poppins';
   }
   .MuiInputBase-root {
-    border-radius: 22px;
+    border-radius: 14px;
   }
 
   & label.Mui-focused {
@@ -61,27 +61,28 @@ export default function SearchBar({
       InputProps={InputProps}
       placeholder={placeholder}
       sx={{
-        border: '0',
         outline: '0',
+        height: '35px',
         fontFamily: 'poppins',
         backdropFilter: 'blur(21px)',
+
+        borderRadius: '14px',
+        border: '0.1px solid rgba(255, 255, 255, 0.16)',
+        boxShadow: 'inset -5px -5px 250px rgba(255, 255, 255, 0.02)',
+        background:
+          'radial-gradient(100% 100% at 0% 0%, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0) 100%)',
+
+        padding: '0px',
         input: {
-          outline: '0',
-          height: '5px',
+          padding: '0px',
+          paddingLeft: '5px',
           color: '#A5A5A5',
-          borderRadius: '22px',
-          fontFamily: 'poppins',
-          border: '0.1px solid rgba(255, 255, 255, 0.16)',
-          padding: 'var(--spacing-3)',
-          boxShadow: 'inset -5px -5px 250px rgba(255, 255, 255, 0.02)',
-          background:
-            'radial-gradient(100% 100% at 0% 0%, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0) 100%)',
-          backdropFilter: 'blur(21px)',
+          borderRadius: '14px !important',
+          height: '35px',
           '&::placeholder': {
             textOverflow: 'ellipsis !important',
             color: '#A5A5A5',
           },
-          paddingLeft: '40px',
         },
       }}
     />
