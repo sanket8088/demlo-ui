@@ -12,16 +12,15 @@ import {
   DashboardLeftContainer,
   AdvertisementContainer,
   RewardAnnouncementConatiner,
-} from "./Dashboard.style";
-import React from "react";
-import Image from "next/image";
-import { Avatar } from "@mui/material";
-import Gift from "../../../assets/icons/gift.svg";
-import Advertisement from "../../../assets/icons/advertisement.svg";
-import ButtonComponent from "@/components/core-components/button/ButtonComponent";
-import CustomAvatar from "@/components/core-components/avatar/CustomAvatar";
+} from './ProfileAndReward.style';
+import React from 'react';
+import Image from 'next/image';
+import Gift from '../../../../assets/icons/gift.svg';
+import Advertisement from '../../../../assets/icons/advertisement.svg';
+import CustomAvatar from '@/components/core-components/avatar/CustomAvatar';
+import ButtonComponent from '@/components/core-components/button/ButtonComponent';
 
-const DashboardLeft = () => {
+const ProfileAndReward = () => {
   return (
     <DashboardLeftContainer>
       <ProfileContainer>
@@ -48,7 +47,7 @@ const DashboardLeft = () => {
         </RewardAnnouncementConatiner>
         <RewardClaimContainer>
           <PrizeImageContainer>
-            <Image src={Gift} alt={"Surprize Gift"} width={60} height={60} />
+            <Image src={Gift} alt={'Surprize Gift'} width={60} height={60} />
           </PrizeImageContainer>
           <RewardClaimTiming>
             <RewardAHeading>Rewards</RewardAHeading>
@@ -60,13 +59,13 @@ const DashboardLeft = () => {
       <AdvertisementContainer>
         <Image
           src={Advertisement}
-          alt={"Surprize Gift"}
-          width={224}
-          height={163}
+          alt={'Surprize Gift'}
+          width={220}
+          height={160}
         />
       </AdvertisementContainer>
     </DashboardLeftContainer>
   );
 };
 
-export default DashboardLeft;
+export default ProfileAndReward;

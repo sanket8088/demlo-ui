@@ -8,27 +8,27 @@ import {
   HeaderRightContainer,
   NavigationsContainer,
   NotificationContainer,
-} from "./Dashboard.style";
-import React from "react";
-import { Avatar } from "@mui/material";
-import HomeIcon from "@/assets/icons/jsx/HomeIcon";
-import HelpIcon from "@/assets/icons/jsx/HelpIcon";
-import SiteIcon from "@/assets/icons/jsx/SiteIcon";
-import BuzzIcon from "@/assets/icons/jsx/BuzzIcon";
-import SearchIcon from "@mui/icons-material/Search";
-import SkillIcon from "@/assets/icons/jsx/SkillIcon";
-import CircleIcon from "@/assets/icons/jsx/CircleIcon";
-import DownArrowIcon from "@/assets/icons/jsx/DownArrowIcon";
-import DemloverseIcon from "@/assets/icons/jsx/DemloverseIcon";
-import NotificationIcon from "@/assets/icons/jsx/NotificationIcon";
-import SearchBar from "@/components/core-components/searchbar/Searchbar";
-import { Auth } from "aws-amplify";
-import Router from "next/router";
+} from './Header.style';
+import React from 'react';
+import { Avatar } from '@mui/material';
+import HomeIcon from '@/assets/icons/jsx/HomeIcon';
+import HelpIcon from '@/assets/icons/jsx/HelpIcon';
+import SiteIcon from '@/assets/icons/jsx/SiteIcon';
+import BuzzIcon from '@/assets/icons/jsx/BuzzIcon';
+import SearchIcon from '@mui/icons-material/Search';
+import SkillIcon from '@/assets/icons/jsx/SkillIcon';
+import CircleIcon from '@/assets/icons/jsx/CircleIcon';
+import DownArrowIcon from '@/assets/icons/jsx/DownArrowIcon';
+import DemloverseIcon from '@/assets/icons/jsx/DemloverseIcon';
+import NotificationIcon from '@/assets/icons/jsx/NotificationIcon';
+import SearchBar from '@/components/core-components/searchbar/Searchbar';
+import { Auth } from 'aws-amplify';
+import Router from 'next/router';
 
 const Header = () => {
   const logoutUser = () => {
     Auth.signOut().then(() => {
-      Router.push("/login");
+      Router.push('/login');
     });
   };
 
@@ -46,9 +46,9 @@ const Header = () => {
               endAdornment: (
                 <SearchIcon
                   sx={{
-                    left: "10px",
-                    color: "white",
-                    position: "absolute",
+                    left: '10px',
+                    color: 'white',
+                    position: 'absolute',
                   }}
                 />
               ),

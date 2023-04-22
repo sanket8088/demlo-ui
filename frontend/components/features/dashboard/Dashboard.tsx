@@ -1,10 +1,8 @@
-import React from "react";
-import Header from "./Header";
-import GridItem from "@/components/core-components/grid/GridItem";
-import GridContainer from "@/components/core-components/grid/GridContainer";
-import { CircleContainer } from "./circle/circle";
-import DashboardLeft from "./DashboardLeft";
-import UserPost from "@/components/features/dashboard/userPost";
+import React from 'react';
+import Header from './Header/Header';
+import { CircleContainer } from './circle/circle';
+import UserPost from '@/components/features/dashboard/userPost';
+import ProfileAndReward from './ProfileAndReward/ProfileAndReward';
 
 export const Dashboard = () => {
   return (
@@ -12,7 +10,7 @@ export const Dashboard = () => {
       <Header />
       <div className="grid">
         <CircleContainer />
-        <DashboardLeft />
+        <ProfileAndReward />
         <UserPost />
       </div>
     </>
