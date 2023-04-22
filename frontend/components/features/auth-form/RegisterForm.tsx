@@ -210,6 +210,7 @@ const RegisterForm = () => {
                         onClick={props.handleSubmit}
                         disabled={isLoading}
                         size="large"
+                        customPaddingBlock="0.813rem"
                       />
                     </GridItem>
                     <GridItem xs={12} paddingBottom="1.25rem">
@@ -225,7 +226,10 @@ const RegisterForm = () => {
           </Formik>
         </ModalComponent>
       ) : (
-        <AccountConfirmationForm handleBackToSignUp={handleBackToSignUp} email={signUpEmail}/>
+        <AccountConfirmationForm
+          handleBackToSignUp={handleBackToSignUp}
+          email={signUpEmail}
+        />
       )}
     </>
   );

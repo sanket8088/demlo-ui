@@ -17,7 +17,7 @@ const NextContainer = styled.div`
   font-weight: 400;
   font-size: 14px;
   line-height: 21px;
-  span{
+  span {
     margin-top: 0.5rem;
   }
 `;
@@ -29,8 +29,8 @@ const CircleNextContainer = styled.div`
   bottom: 50%;
 `;
 
-const CircleContent = styled.div`
-margin-top: 1rem;
+const CircleContentMargin = styled.div`
+  margin-top: 1rem;
 `;
 
-export { Main, NextContainer, CircleNextContainer, CircleContent };
+export { Main, NextContainer, CircleNextContainer, CircleContentMargin };

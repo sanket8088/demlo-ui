@@ -8,7 +8,7 @@ p{
     font-size: 14px;
     font-weight: 500;
     color: #CDCDCD;
-
+margin: 0;
     span{
         color:#0A66C2;
     }
@@ -25,6 +25,7 @@ font-size: 11px;
 color: rgba(255, 255, 255, 0.6);
 display: block;
 text-align: center;
+margin: 0;
 ::before{
     content:" ";
   display: block;

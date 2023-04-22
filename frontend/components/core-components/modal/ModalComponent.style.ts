@@ -8,8 +8,8 @@ const Title = styled.span`
   line-height: 120%;
   font-style: normal;
  display: block;
- margin-bottom: 1em;
- 
+ margin:0;
+ margin-bottom: 0.4rem;
 `;
 
 const SubTitleSpan = styled.span`
@@ -18,8 +18,9 @@ const SubTitleSpan = styled.span`
   font-weight: 400;
   line-height: 21px;
   color: #cdcdcd;
-  margin-top: 6px;
+ margin: 0;
   display: block;
+
 `;
 
 

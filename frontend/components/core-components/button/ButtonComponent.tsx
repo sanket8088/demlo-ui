@@ -4,13 +4,14 @@ import Button from "@mui/material/Button";
 import styled from "@emotion/styled";
 import GoogleIcon from "../../../assets/icons/jsx/GoogleIcon";
 interface IButtonTypes {
-  size?: "medium" | "small" | "large" | "xs" | undefined;
+  size?: "medium" | "small" | "large" | undefined;
   variant?: "text" | "contained" | "outlined" | undefined;
   label: string;
   disabled?: boolean;
   fullWidth?: boolean;
   onClick?: () => void;
   icon?: React.ReactNode;
+  customPaddingBlock?: string;
 }
 
 const ButtonComponent = ({
@@ -21,19 +22,22 @@ const ButtonComponent = ({
   size = "medium",
   icon,
   onClick,
+  customPaddingBlock,
 }: IButtonTypes) => {
   const background =
     variant === "contained"
       ? "linear-gradient(111.76deg, #0A66C2 27.13%, #00B5D1 90.6%)"
       : "rgba(81, 205, 222, 0.1)";
   const paddingInline =
-    size === "large" ? "34px" : size === "small" ? "24px" : size === "xs" ? "14px" : "36px";
+    size === "large" ? "34px" : size === "small" ? "24px" : "36px";
   const paddingBlock =
-    size === "large" ? "16px" : size === "small" ? "var(--spacing-1)" : size === "xs" ? "7px" : "10px";
+    size === "large" ? "16px" : size === "small" ? "var(--spacing-1)" : "10px";
   const fontSize =
-    size === "large" ? "16px" : size === "small" ? "12px" : size === "xs" ? "10px" : "14px";
+    size === "large" ? "16px" : size === "small" ? "12px" : "14px";
   const borderRadius = size === "small" ? "8px" : "14px";
-
+  const customPaddingBlockSelection = customPaddingBlock
+    ? customPaddingBlock
+    : paddingBlock;
   return (
     <Button
       size={size}
@@ -49,7 +53,7 @@ const ButtonComponent = ({
         fontSize: fontSize,
         background: background,
         borderRadius: borderRadius,
-        paddingBlock: paddingBlock,
+        paddingBlock: customPaddingBlockSelection,
         paddingInline: paddingInline,
 
         "&:hover": {
