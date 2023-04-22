@@ -1,9 +1,11 @@
-import BadgeAvatars from "@/components/core-components/avatar/Avatar";
-import UserPostCard from "./UserPostCard";
-import { SocialPostContainer } from "./UserPost.style";
+import BadgeAvatars from '@/components/core-components/avatar/Avatar';
+import UserPostCard from './UserPostCard';
+import { SocialPostContainer } from './UserPost.style';
+import ProfileSetup from '../ProfileSetup/ProfileSetup';
 const index = () => {
   return (
     <SocialPostContainer>
+      <ProfileSetup />
       <UserPostCard
         creatorName="Nancy"
         postTime="23 minutes ago"
