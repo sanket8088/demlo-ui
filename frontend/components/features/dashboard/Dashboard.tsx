@@ -1,16 +1,24 @@
-import React from 'react';
-import Header from './Header/Header';
-import { CircleContainer } from './circle/circle';
-import UserPost from '@/components/features/dashboard/userPost';
-import ProfileAndReward from './ProfileAndReward/ProfileAndReward';
+import React, { useEffect, useState } from "react";
+import Header from "./Header/Header";
+import { CircleContainer } from "./circle/circle";
+import UserPost from "@/components/features/dashboard/userPost";
+import ProfileAndReward from "./ProfileAndReward/ProfileAndReward";
+import AuthProvider from "@/contexts/AuthContext";
+import useAuth from "@/hooks/useAuth";
 
 export const Dashboard = () => {
+  const [userName, setUserName] = useState("username");
+  const { user } = useAuth();
+
+  useEffect(() => {
+    setUserName(user?.username);
+  }, [user]);
   return (
     <>
       <Header />
       <div className="grid">
         <CircleContainer />
-        <ProfileAndReward />
+        <ProfileAndReward username={userName} />
         <UserPost />
       </div>
     </>

@@ -12,15 +12,19 @@ import {
   DashboardLeftContainer,
   AdvertisementContainer,
   RewardAnnouncementConatiner,
-} from './ProfileAndReward.style';
-import React from 'react';
-import Image from 'next/image';
-import Gift from '../../../../assets/icons/gift.svg';
-import Advertisement from '../../../../assets/icons/advertisement.svg';
-import CustomAvatar from '@/components/core-components/avatar/CustomAvatar';
-import ButtonComponent from '@/components/core-components/button/ButtonComponent';
+} from "./ProfileAndReward.style";
+import React from "react";
+import Image from "next/image";
+import Gift from "../../../../assets/icons/gift.svg";
+import Advertisement from "../../../../assets/icons/advertisement.svg";
+import CustomAvatar from "@/components/core-components/avatar/CustomAvatar";
+import ButtonComponent from "@/components/core-components/button/ButtonComponent";
 
-const ProfileAndReward = () => {
+interface ITypesProfileAndReward {
+  username?: any;
+}
+
+const ProfileAndReward = ({ username }: ITypesProfileAndReward) => {
   return (
     <DashboardLeftContainer>
       <ProfileContainer>
@@ -30,7 +34,7 @@ const ProfileAndReward = () => {
             width={80}
             height={80}
           />
-          <UserName>Oliver</UserName>
+          <UserName>{username}</UserName>
         </AvatarContainer>
         <StyleChnageButton>
           <ButtonComponent
@@ -47,7 +51,7 @@ const ProfileAndReward = () => {
         </RewardAnnouncementConatiner>
         <RewardClaimContainer>
           <PrizeImageContainer>
-            <Image src={Gift} alt={'Surprize Gift'} width={60} height={60} />
+            <Image src={Gift} alt={"Surprize Gift"} width={60} height={60} />
           </PrizeImageContainer>
           <RewardClaimTiming>
             <RewardAHeading>Rewards</RewardAHeading>
@@ -59,7 +63,7 @@ const ProfileAndReward = () => {
       <AdvertisementContainer>
         <Image
           src={Advertisement}
-          alt={'Surprize Gift'}
+          alt={"Surprize Gift"}
           width={220}
           height={160}
         />

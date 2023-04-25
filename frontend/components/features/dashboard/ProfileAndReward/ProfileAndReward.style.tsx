@@ -1,4 +1,4 @@
-import styled from '@emotion/styled';
+import styled from "@emotion/styled";
 
 const DashboardLeftContainer = styled.div`
   grid-column: 1/-9;
@@ -34,6 +34,9 @@ const UserName = styled.p`
   font-weight: 700;
   line-height: 120%;
   text-align: center;
+  max-width: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
 `;
 
 const StyleChnageButton = styled.div`

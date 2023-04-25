@@ -8,21 +8,21 @@ import { CognitoHostedUIIdentityProvider } from "@aws-amplify/auth/lib/types";
 
 Amplify.configure({
   Auth: {
-    identityPoolId:'us-east-1:b373596e-9db0-4439-84ef-bc94547b2e8e',
+    identityPoolId:'us-east-1:9459b680-f8ff-4859-a2a4-06c4c53e4d24',
     //identityPoolId:'us-east-1:b373596e-9db0-4439-84ef-bc94547b2e8e',
       region:'us-east-1',
  //     identityPoolRegion:'us-east-1',
-    userPoolId: 'us-east-1_Rqu9NE3eB',
-    userPoolWebClientId:'6r6ion0mlj8ljp2gps7e9vl6pj',
-      ClientId: '6r6ion0mlj8ljp2gps7e9vl6pj',
+    userPoolId: 'us-east-1_UROFeLxw2',
+    userPoolWebClientId:'2ij0q4h53ino8r5u107kcfljg',
+      ClientId: '2ij0q4h53ino8r5u107kcfljg',
  //     ClientSecret:'1k244ql5na5rafshfurfbc3231r82halbe6um77atqouhi1185t8'
  oauth: {
   redirectSignIn: 'http://localhost:3000/profile',
   redirectSignOut: 'http://localhost:3000/login',
   redirectUrl: 'http://localhost:3000/profile',
    responseType: 'code',
-    domain: 'demlo841283f43-41283f43-dev.auth.us-east-1.amazoncognito.com',
-    scope: ['email', 'openid', 'profile'],
+    domain: 'demlo-authen.auth.us-east-1.amazoncognito.com',
+    scope: ['phone', 'email', 'profile', 'openid', 'aws.cognito.signin.user.admin'],
     identityProvider: 'Google',
   }}
 });

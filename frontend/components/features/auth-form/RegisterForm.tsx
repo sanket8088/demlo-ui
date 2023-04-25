@@ -16,11 +16,22 @@ import { PolicyWrap, HR, SwitchTab } from "./AuthForm.style";
 import SocialLink from "@/components/core-components/links/SocialLink";
 import GoogleIcon from "@/assets/icons/jsx/GoogleIcon";
 import MicrosoftIcon from "@/assets/icons/jsx/MicrosoftIcon";
-import { signUp } from "@/utility/auth";
+// import { signUp } from "@/utility/auth";
 import { handleGoogleAuthentication } from "@/utility/auth";
 import AccountConfirmationForm from "./AccountConfirmationForm";
 
+import useAuth from "@/hooks/useAuth";
+
 const RegisterForm = () => {
+  const {
+    signUp,
+    isAuthenticated,
+    isAuthenticating,
+    unverifiedAccount,
+    confirmAccount,
+    google_signIn,
+    user,
+  } = useAuth();
   const router = useRouter();
   const formikRef = useRef();
 
@@ -38,40 +49,56 @@ const RegisterForm = () => {
     last_name: string;
     username: string;
   }
-  const createUser = async (data: ITypesUser) => {
-    const { data: response } = await axios.post(
-      "http://66.94.102.196:9001/v1/api/user/signup",
-      data
-    );
-    return response.data;
-  };
+  // const createUser = async (data: ITypesUser) => {
+  //   const { data: response } = await axios.post(
+  //     "http://66.94.102.196:9001/v1/api/user/signup",
+  //     data
+  //   );
+  //   return response.data;
+  // };
 
-  const { isLoading, isError, error, mutate, data } = useMutation(createUser, {
-    onSuccess(data, variables, context) {
-      router.push({
-        pathname: "/login",
-      });
-    },
-  });
+  // const { isLoading, isError, error, mutate, data } = useMutation(createUser, {
+  //   onSuccess(data, variables, context) {
+  //     router.push({
+  //       pathname: "/login",
+  //     });
+  //   },
+  // });
   const [successSignUp, setSuccessSignUp] = useState<boolean>(false);
   const [signUpEmail, setSignUpEmail] = useState<string>("");
 
   const handleBackToSignUp = (data: boolean) => {
     setSuccessSignUp(false);
   };
-
-  const handleSubmit = (values: any, actions: any) => {
-    console.log("onsubmit", values);
-    signUp(
-      values?.username,
-      values?.password,
-      values?.firstName,
-      values?.lastName,
-      values?.email
-    ).then((data) => {
+  const [loading, setLoading] = useState<boolean>(false);
+  const handleSubmit = async (values: any, actions: any) => {
+    try {
+      setLoading(true);
+      await signUp({
+        username: values.username,
+        password: values.password,
+        firstName: values.firstName,
+        lastName: values.lastName,
+        email: values.email,
+      });
+      setLoading(false);
       setSuccessSignUp(true);
-      setSignUpEmail(values?.email);
-    });
+    } catch (err: any) {
+      console.log(err.message);
+      setLoading(false);
+      setSuccessSignUp(false);
+    }
+
+    // signUp(
+    //   values?.username,
+    //   values?.password,
+    //   values?.firstName,
+    //   values?.lastName,
+    //   values?.email
+    // ).then((data) => {
+    //   setSuccessSignUp(true);
+    //   setSignUpEmail(values?.email);
+    // });
     // mutate({
     //   email: values?.email,
     //   dob: values?.dob,
@@ -82,14 +109,22 @@ const RegisterForm = () => {
     // });
   };
 
-  useEffect(() => {
-    if (data) {
-      console.log(data);
+  // useEffect(() => {
+  //   console.log("loading", loading);
+  //   if (loading) {
+  //     console.log("loading", loading);
+  //     console.log(
+  //       "in register",
+  //       isAuthenticated,
+  //       isAuthenticating,
+  //       unverifiedAccount,
+  //       confirmAccount
+  //     );
+  //   }
 
-      // router.push({
-      //   pathname: '/login'})
-    }
-  }, [data]);
+  // router.push({
+  //   pathname: '/login'})
+  // }, [loading]);
 
   const registerValidation = Yup.object().shape({
     email: Yup.string().email().required(),
@@ -106,6 +141,11 @@ const RegisterForm = () => {
       "You need to accept the terms and conditions"
     ),
   });
+  // useEffect(() => {
+  //   console.log("isAuthenticating", isAuthenticating);
+  // }, []);
+  // console.log("isAuthenticating out>>", isAuthenticating, user);
+
   return (
     <>
       {!successSignUp ? (
@@ -145,7 +185,7 @@ const RegisterForm = () => {
                       <SocialLink
                         label="Sign up with google"
                         icon={<GoogleIcon />}
-                        onClick={handleGoogleAuthentication}
+                        onClick={google_signIn}
                       />
                     </GridItem>
                     <GridItem xs={6} paddingBottom="1.25rem">
@@ -208,7 +248,7 @@ const RegisterForm = () => {
                         variant="contained"
                         fullWidth
                         onClick={props.handleSubmit}
-                        disabled={isLoading}
+                        disabled={loading}
                         size="large"
                         customPaddingBlock="0.813rem"
                       />

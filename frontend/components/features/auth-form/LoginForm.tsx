@@ -19,11 +19,17 @@ import { HR, SwitchTab, ForgotLink } from "./AuthForm.style";
 import { signIn } from "@/utility/auth";
 import { handleGoogleAuthentication } from "@/utility/auth";
 
+import useAuth from "@/hooks/useAuth";
+
 const LoginForm = () => {
+  const { signIn, isAuthenticated, isAuthenticating, google_signIn } =
+    useAuth();
   const router = useRouter();
   const formikRef = useRef();
 
   const [dataVal, setDataVal] = useState(null);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [successSignIn, setSuccessSignIn] = useState<boolean>(false);
   interface ITypesFetchUser {
     password: string;
 
@@ -45,16 +51,27 @@ const LoginForm = () => {
       });
     },
   });
-  const handleSubmit = (values: any, actions: any) => {
-    signIn(values?.username, values?.password).then((data) =>{
-      if (data){
-        router.push({
-          pathname: "/profile",
-        });
+  const handleSubmit = async (values: any, actions: any) => {
+    try {
+      setLoading(true);
+      await signIn({ username: values.username, password: values.password });
+      setLoading(false);
+      setSuccessSignIn(true);
+    } catch (err: any) {
+      console.log(err.message);
+      setLoading(false);
+      setSuccessSignIn(false);
+    }
 
-      }
-    })
-    
+    // signIn(values?.username, values?.password).then((data) =>{
+    //   if (data){
+    //     router.push({
+    //       pathname: "/profile",
+    //     });
+
+    //   }
+    // })
+
     // mutate({
     //   password: values?.password,
 
@@ -68,6 +85,16 @@ const LoginForm = () => {
     username: Yup.string().required(),
     password: Yup.string().required(),
   });
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      router.replace("/profile");
+      console.log("signed in");
+    }
+  }, [isAuthenticated]);
+  // if (isAuthenticating || isAuthenticated) {
+  //   return <h1>Loading</h1>;
+  // }
   return (
     <ModalComponent
       title="Welcome back !"
@@ -91,7 +118,7 @@ const LoginForm = () => {
                   <SocialLink
                     label="Sign in with google"
                     icon={<GoogleIcon />}
-                    onClick={handleGoogleAuthentication}
+                    onClick={google_signIn}
                   />
                 </GridItem>
                 <GridItem xs={6} paddingBottom="1.25rem">
@@ -126,7 +153,7 @@ const LoginForm = () => {
                     variant="contained"
                     fullWidth
                     onClick={props.handleSubmit}
-                    disabled={isLoading}
+                    disabled={loading}
                     size="large"
                   />
                 </GridItem>

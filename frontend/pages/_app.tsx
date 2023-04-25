@@ -15,6 +15,7 @@ import "../styles/globals.css";
 import { getAuthFromStorage } from "@/utility/auth";
 import { UserContext } from "../utility/Store";
 import { wrapper } from "../Store/store";
+import AuthProvider from "@/contexts/AuthContext";
 
 interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache;
@@ -40,14 +41,16 @@ const MyApp: NextPage<MyAppProps> = (props) => {
   }, []);
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <CacheProvider value={emotionCache}>
-        <CssBaseline />
-        <UserContext.Provider value="test">
-          <Component {...pageProps} />
-        </UserContext.Provider>
-      </CacheProvider>
-    </QueryClientProvider>
+    <AuthProvider>
+      <QueryClientProvider client={queryClient}>
+        <CacheProvider value={emotionCache}>
+          <CssBaseline />
+          <UserContext.Provider value="test">
+            <Component {...pageProps} />
+          </UserContext.Provider>
+        </CacheProvider>
+      </QueryClientProvider>
+    </AuthProvider>
   );
 };
 

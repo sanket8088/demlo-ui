@@ -10,25 +10,26 @@ import {
   InterestTagContainer,
   AvatarSelectionContainer,
   InterestSelectionContainer,
-} from './Profile.style';
-import Box from '@mui/material/Box';
-import { useQuery } from 'react-query';
-import { useRouter } from 'next/router';
-import { InputAdornment } from '@mui/material';
-import { selectAuthState } from '../../../Store/slice';
-import SearchIcon from '@/assets/icons/jsx/SearchIcon';
-import { useDispatch, useSelector } from 'react-redux';
-import Tag from '@/components/core-components/tag/Tag';
-import { fetchQueries } from '@/utility/queryController';
-import Card from '@/components/core-components/card/Card';
-import { getUserDetailsFromSession } from '@/utility/auth';
-import CircularProgress from '@mui/material/CircularProgress';
-import BadgeAvatars from '@/components/core-components/avatar/Avatar';
-import SearchBar from '@/components/core-components/searchbar/Searchbar';
-import React, { useEffect, useState, useContext, useCallback } from 'react';
-import HorizontalStepper from '@/components/core-components/stepper/Stepper';
-import ButtonComponent from '@/components/core-components/button/ButtonComponent';
-
+} from "./Profile.style";
+import Box from "@mui/material/Box";
+import { useQuery } from "react-query";
+import { useRouter } from "next/router";
+import { InputAdornment } from "@mui/material";
+import { selectAuthState } from "../../../Store/slice";
+import SearchIcon from "@/assets/icons/jsx/SearchIcon";
+import { useDispatch, useSelector } from "react-redux";
+import Tag from "@/components/core-components/tag/Tag";
+import { fetchQueries } from "@/utility/queryController";
+import Card from "@/components/core-components/card/Card";
+import { getUserDetailsFromSession } from "@/utility/auth";
+import CircularProgress from "@mui/material/CircularProgress";
+import BadgeAvatars from "@/components/core-components/avatar/Avatar";
+import SearchBar from "@/components/core-components/searchbar/Searchbar";
+import React, { useEffect, useState, useContext, useCallback } from "react";
+import HorizontalStepper from "@/components/core-components/stepper/Stepper";
+import ButtonComponent from "@/components/core-components/button/ButtonComponent";
+import { Auth, Hub } from "aws-amplify";
+import useAuth from "@/hooks/useAuth";
 interface Avatars {
   id: number;
   name: string;
@@ -36,13 +37,42 @@ interface Avatars {
 }
 
 export const UserProfile = () => {
+  const { user } = useAuth();
+  const fetchAuthUser = async () => {
+    try {
+      console.log("fetchAuthUser");
+      const fetchedUser = await Auth.currentAuthenticatedUser();
+      // setIsAuthenticating(false);
+      // setUser(fetchedUser);
+      console.log(fetchedUser);
+    } catch (err) {
+      console.log("err");
+    }
+  };
+  console.log("user from my conetx", user);
+  useEffect(() => {
+    fetchAuthUser();
+
+    const authListener = Hub.listen(
+      "auth",
+      async ({ payload: { event, data } }) => {
+        console.log("Auth Status Changed Event: ", event);
+        console.log("Auth Status Changed Data: ", data);
+      }
+    );
+
+    return () => {
+      authListener();
+    };
+  });
+
   const router = useRouter();
   const dispatch = useDispatch();
   const [count, setCount] = useState<number>(0);
   const authState = useSelector(selectAuthState);
   const [loading, setLoading] = useState<boolean>(false);
   const [avatarList, setAvatarList] = useState<Avatars[]>([]);
-  const [userName, setUserName] = useState<string>('Michael');
+  const [userName, setUserName] = useState<string>("Michael");
   const [selectedAvatarId, setSelectedAvatarId] = useState<number | null>(null);
 
   const handleClick = useCallback(() => {
@@ -50,7 +80,7 @@ export const UserProfile = () => {
   }, []);
 
   const { isLoading, error, data } = useQuery({
-    queryFn: () => fetchQueries('user/avatar'),
+    queryFn: () => fetchQueries("user/avatar"),
     onSuccess(data) {
       setAvatarList(data?.data);
     },
@@ -63,7 +93,7 @@ export const UserProfile = () => {
   useEffect(() => {
     if (count === 2) {
       router.push({
-        pathname: '/dashboard',
+        pathname: "/dashboard",
       });
     }
   }, [count]);
@@ -92,11 +122,11 @@ export const UserProfile = () => {
     return (
       <Box
         sx={{
-          display: 'flex',
-          width: '100%',
-          height: '100vh',
-          justifyContent: 'center',
-          alignItems: 'center',
+          display: "flex",
+          width: "100%",
+          height: "100vh",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
         <CircularProgress size={100} />
@@ -121,12 +151,12 @@ export const UserProfile = () => {
       </ProgressBar>
       <Instructions>
         <Heading>
-          {count === 0 ? `Welcome ${userName}!` : 'Select your interests'}
+          {count === 0 ? `Welcome ${userName}!` : "Select your interests"}
         </Heading>
         <Paragraph>
           {count === 0
-            ? ' Pick your style'
-            : 'Select any 5 options to help us to  set and priorities your interests.'}
+            ? " Pick your style"
+            : "Select any 5 options to help us to  set and priorities your interests."}
           Pick your style
         </Paragraph>
       </Instructions>
