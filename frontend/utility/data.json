@@ -1,0 +1,17 @@
+{
+    "data":{
+        identityPoolId:'us-east-1:b373596e-9db0-4439-84ef-bc94547b2e8e',
+        //identityPoolId:'us-east-1:b373596e-9db0-4439-84ef-bc94547b2e8e',
+          region:'us-east-1',
+     //     identityPoolRegion:'us-east-1',
+        userPoolId: 'us-east-1_Rqu9NE3eB',
+        userPoolWebClientId:'6r6ion0mlj8ljp2gps7e9vl6pj',
+          ClientId: '6r6ion0mlj8ljp2gps7e9vl6pj',
+    }
+}
+
+
+older google :=
+
+Client id = 1023425348188-np7au1jq1d2ob8gjhpvdr722do1hb4k3.apps.googleusercontent.com
+Client secret = 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
