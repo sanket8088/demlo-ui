@@ -48,7 +48,7 @@ const ImageCarousel = ({ imageArray }: ITypesImageCarousel) => {
         {imageGallery.map((imageData, index) => (
           <ImagePreview onClick={() => handleImageSelection(imageData)}>
             <img
-              key={imageData?.id}
+              key={imageData?.src}
               src={imageData?.src}
               alt="test"
               width={200}

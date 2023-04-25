@@ -30,7 +30,7 @@ const RedHeartEmoji = () => (
         width="76.2839"
         height="71.7493"
         filterUnits="userSpaceOnUse"
-        color-interpolation-filters="sRGB"
+        colorInterpolationFilters="sRGB"
       >
         <feFlood flood-opacity="0" result="BackgroundImageFix" />
         <feColorMatrix

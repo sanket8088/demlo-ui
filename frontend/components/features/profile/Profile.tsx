@@ -15,9 +15,10 @@ import Box from "@mui/material/Box";
 import { useQuery } from "react-query";
 import { useRouter } from "next/router";
 import { InputAdornment } from "@mui/material";
-import { selectAuthState } from "../../../Store/slice";
+
 import SearchIcon from "@/assets/icons/jsx/SearchIcon";
 import { useDispatch, useSelector } from "react-redux";
+
 import Tag from "@/components/core-components/tag/Tag";
 import { fetchQueries } from "@/utility/queryController";
 import Card from "@/components/core-components/card/Card";
@@ -69,7 +70,7 @@ export const UserProfile = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [count, setCount] = useState<number>(0);
-  const authState = useSelector(selectAuthState);
+
   const [loading, setLoading] = useState<boolean>(false);
   const [avatarList, setAvatarList] = useState<Avatars[]>([]);
   const [userName, setUserName] = useState<string>("Michael");
@@ -134,18 +135,6 @@ export const UserProfile = () => {
     );
   return (
     <Main>
-      {/* <div>
-        <div>{authState ? "Logged in" : "Not Logged In"}</div>
-        <button
-          onClick={() =>
-            authState
-              ? dispatch(setAuthState(false))
-              : dispatch(setAuthState(true))
-          }
-        >
-          {authState ? "Logout" : "LogIn"}
-        </button>
-      </div> */}
       <ProgressBar>
         <HorizontalStepper count={count} />
       </ProgressBar>

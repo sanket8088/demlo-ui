@@ -51,14 +51,14 @@ const AvatarInfo = styled.div`
   p {
     margin: 0;
   }
-  p:first-child {
+  p:first-of-type {
     font-size: var(--spacing-3);
     font-weight: 500;
     color: var(--color-white);
     line-height: 120%;
     margin-bottom: 2px;
   }
-  p:nth-child(2) {
+  p:nth-of-type(2) {
     display: flex;
     text-align: center;
     align-items: center;

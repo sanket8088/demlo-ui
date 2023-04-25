@@ -9,6 +9,8 @@ import BottomLeftPlanet from "../assets/icons/bottom-left-planet.svg";
 
 import TopLeftPlanet from "../assets/icons/top-left-planet.svg";
 import Stars from "../assets/icons/Stars.svg";
+import { setAuthState } from "@/Store/slice";
+import { wrapper } from "@/Store/store";
 export default function Home() {
   // const {
   //   isLoading: load,
@@ -84,3 +86,21 @@ export default function Home() {
     </>
   );
 }
+export const getServerSideProps = wrapper.getServerSideProps(
+  (store: {
+      dispatch: (arg0: { payload: any; type: "auth/setAuthState" }) => any;
+      getState: () => any;
+    }) =>
+    async ({ params }) => {
+      // we can set the initial state from here
+      await store.dispatch(setAuthState(false));
+
+      console.log("State on server", store.getState());
+
+      return {
+        props: {
+          authState: false,
+        },
+      };
+    }
+);

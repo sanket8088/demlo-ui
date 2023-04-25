@@ -18,7 +18,8 @@ import MicrosoftIcon from "@/assets/icons/jsx/MicrosoftIcon";
 import { HR, SwitchTab, ForgotLink } from "./AuthForm.style";
 import { signIn } from "@/utility/auth";
 import { handleGoogleAuthentication } from "@/utility/auth";
-
+import { setAuthState } from "@/Store/slice";
+import { useDispatch, useSelector } from "react-redux";
 import useAuth from "@/hooks/useAuth";
 
 const LoginForm = () => {
@@ -26,6 +27,7 @@ const LoginForm = () => {
     useAuth();
   const router = useRouter();
   const formikRef = useRef();
+  const dispatch = useDispatch();
 
   const [dataVal, setDataVal] = useState(null);
   const [loading, setLoading] = useState<boolean>(false);
@@ -88,6 +90,7 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
+      dispatch(setAuthState(true));
       router.replace("/profile");
       console.log("signed in");
     }

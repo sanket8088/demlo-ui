@@ -8,29 +8,32 @@ import {
   HeaderRightContainer,
   NavigationsContainer,
   NotificationContainer,
-} from './Header.style';
-import React from 'react';
-import Router from 'next/router';
-import { Auth } from 'aws-amplify';
-import { Avatar } from '@mui/material';
-import { InputAdornment } from '@mui/material';
-import MikeIcon from '@/assets/icons/jsx/MikeIcon';
-import HomeIcon from '@/assets/icons/jsx/HomeIcon';
-import HelpIcon from '@/assets/icons/jsx/HelpIcon';
-import SiteIcon from '@/assets/icons/jsx/SiteIcon';
-import BuzzIcon from '@/assets/icons/jsx/BuzzIcon';
-import SkillIcon from '@/assets/icons/jsx/SkillIcon';
-import SearchIcon from '@/assets/icons/jsx/SearchIcon';
-import CircleIcon from '@/assets/icons/jsx/CircleIcon';
-import DownArrowIcon from '@/assets/icons/jsx/DownArrowIcon';
-import DemloverseIcon from '@/assets/icons/jsx/DemloverseIcon';
-import NotificationIcon from '@/assets/icons/jsx/NotificationIcon';
-import SearchBar from '@/components/core-components/searchbar/Searchbar';
-
+} from "./Header.style";
+import React from "react";
+import Router from "next/router";
+import { Auth } from "aws-amplify";
+import { Avatar } from "@mui/material";
+import { InputAdornment } from "@mui/material";
+import MikeIcon from "@/assets/icons/jsx/MikeIcon";
+import HomeIcon from "@/assets/icons/jsx/HomeIcon";
+import HelpIcon from "@/assets/icons/jsx/HelpIcon";
+import SiteIcon from "@/assets/icons/jsx/SiteIcon";
+import BuzzIcon from "@/assets/icons/jsx/BuzzIcon";
+import SkillIcon from "@/assets/icons/jsx/SkillIcon";
+import SearchIcon from "@/assets/icons/jsx/SearchIcon";
+import CircleIcon from "@/assets/icons/jsx/CircleIcon";
+import DownArrowIcon from "@/assets/icons/jsx/DownArrowIcon";
+import DemloverseIcon from "@/assets/icons/jsx/DemloverseIcon";
+import NotificationIcon from "@/assets/icons/jsx/NotificationIcon";
+import SearchBar from "@/components/core-components/searchbar/Searchbar";
+import { useDispatch, useSelector } from "react-redux";
+import { setAuthState } from "@/Store/slice";
 const Header = () => {
+  const dispatch = useDispatch();
   const logoutUser = () => {
     Auth.signOut().then(() => {
-      Router.push('/login');
+      dispatch(setAuthState(false));
+      Router.push("/login");
     });
   };
 

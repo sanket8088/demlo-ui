@@ -16,6 +16,8 @@ import { getAuthFromStorage } from "@/utility/auth";
 import { UserContext } from "../utility/Store";
 import { wrapper } from "../Store/store";
 import AuthProvider from "@/contexts/AuthContext";
+import { PersistGate } from "redux-persist/integration/react";
+import { useStore } from "react-redux";
 
 interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache;
@@ -39,18 +41,20 @@ const MyApp: NextPage<MyAppProps> = (props) => {
       } else return;
     });
   }, []);
-
+  const store: any = useStore();
   return (
-    <AuthProvider>
-      <QueryClientProvider client={queryClient}>
-        <CacheProvider value={emotionCache}>
-          <CssBaseline />
-          <UserContext.Provider value="test">
-            <Component {...pageProps} />
-          </UserContext.Provider>
-        </CacheProvider>
-      </QueryClientProvider>
-    </AuthProvider>
+    <PersistGate persistor={store.__persistor} loading={<div>Loading</div>}>
+      <AuthProvider>
+        <QueryClientProvider client={queryClient}>
+          <CacheProvider value={emotionCache}>
+            <CssBaseline />
+            <UserContext.Provider value="test">
+              <Component {...pageProps} />
+            </UserContext.Provider>
+          </CacheProvider>
+        </QueryClientProvider>
+      </AuthProvider>
+    </PersistGate>
   );
 };
 

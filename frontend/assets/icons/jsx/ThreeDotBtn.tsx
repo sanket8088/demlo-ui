@@ -26,9 +26,9 @@ const ThreeDotBtn = () => (
         width="114"
         height="114"
         filterUnits="userSpaceOnUse"
-        color-interpolation-filters="sRGB"
+        colorInterpolationFilters="sRGB"
       >
-        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feFlood floodOpacity="0" result="BackgroundImageFix" />
         <feGaussianBlur in="BackgroundImageFix" stdDeviation="21" />
         <feComposite
           in2="SourceAlpha"
