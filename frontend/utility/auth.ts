@@ -12,16 +12,16 @@ Amplify.configure({
     //identityPoolId:'us-east-1:b373596e-9db0-4439-84ef-bc94547b2e8e',
       region:'us-east-1',
  //     identityPoolRegion:'us-east-1',
-    userPoolId: 'us-east-1_UROFeLxw2',
-    userPoolWebClientId:'2ij0q4h53ino8r5u107kcfljg',
-      ClientId: '2ij0q4h53ino8r5u107kcfljg',
+    userPoolId: 'us-east-1_jcuKi8uJG',
+    userPoolWebClientId:'4j277mtl42lo6o9b7re902kq52',
+      ClientId: '4j277mtl42lo6o9b7re902kq52',
  //     ClientSecret:'1k244ql5na5rafshfurfbc3231r82halbe6um77atqouhi1185t8'
  oauth: {
   redirectSignIn: 'http://localhost:3000/profile',
   redirectSignOut: 'http://localhost:3000/login',
   redirectUrl: 'http://localhost:3000/profile',
    responseType: 'code',
-    domain: 'demlo-authen.auth.us-east-1.amazoncognito.com',
+    domain: 'dev-demlo-v1.auth.us-east-1.amazoncognito.com',
     scope: ['phone', 'email', 'profile', 'openid', 'aws.cognito.signin.user.admin'],
     identityProvider: 'Google',
   }}

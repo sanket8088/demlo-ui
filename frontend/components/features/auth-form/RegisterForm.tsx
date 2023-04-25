@@ -84,7 +84,7 @@ const RegisterForm = () => {
       setLoading(false);
       setSuccessSignUp(true);
     } catch (err: any) {
-      console.log(err.message);
+      alert(err.message);
       setLoading(false);
       setSuccessSignUp(false);
     }

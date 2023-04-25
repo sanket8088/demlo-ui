@@ -11,7 +11,7 @@ export const Dashboard = () => {
   const { user } = useAuth();
 
   useEffect(() => {
-    setUserName(user?.username);
+    setUserName(user?.attributes?.given_name);
   }, [user]);
   return (
     <>

@@ -60,7 +60,7 @@ const LoginForm = () => {
       setLoading(false);
       setSuccessSignIn(true);
     } catch (err: any) {
-      console.log(err.message);
+      alert(err.message);
       setLoading(false);
       setSuccessSignIn(false);
     }
