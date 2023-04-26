@@ -36,7 +36,7 @@ const SquadContainer = ({ name }: ITypesSquad) => {
         <SquadCategory>
           <PublicIcon /> &nbsp;Public
         </SquadCategory>
-        <ButtonComponent label={"Join"} variant="contained" size="xs" />
+        <ButtonComponent label={"Join"} variant="contained" size="small" />
       </SquadJoinInfoContainer>
 
       <MembersContainer>
