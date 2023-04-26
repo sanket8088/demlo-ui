@@ -31,6 +31,7 @@ import SearchBar from '@/components/core-components/searchbar/Searchbar';
 
 const Header = () => {
   const dispatch = useDispatch();
+
   const logoutUser = () => {
     Auth.signOut().then(() => {
       dispatch(setAuthState(false));
@@ -89,10 +90,8 @@ const Header = () => {
         <NotificationContainer>
           <NotificationIcon />
           <HelpIcon />
-          <div onClick={logoutUser}>
-            <Avatar src="https://cdn.iconscout.com/icon/free/png-256/avatar-370-456322.png?f=webp&w=256" />
-          </div>
-          <Menu />
+          <Avatar src="https://cdn.iconscout.com/icon/free/png-256/avatar-370-456322.png?f=webp&w=256" />
+          <Menu onLogout={logoutUser} />
         </NotificationContainer>
       </HeaderRightContainer>
     </HeaderContainer>

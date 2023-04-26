@@ -6,16 +6,27 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 const options = ['About Me', 'My Wallet', 'Activities', 'Settings', 'Log Out'];
 
+interface MenuProps {
+  onLogout: () => void;
+}
+
 const ITEM_HEIGHT = 50;
 
-export default function LongMenu() {
+export default function LongMenu({ onLogout }: MenuProps) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleLogout = () => {
+    onLogout();
+    handleClose();
   };
 
   return (
@@ -53,8 +64,8 @@ export default function LongMenu() {
         {options.map((option) => (
           <MenuItem
             key={option}
-            selected={option === 'Pyxis'}
-            onClick={handleClose}
+            selected={option === 'Log Out'}
+            onClick={option === 'Log Out' ? handleLogout : handleClose}
           >
             {option}
           </MenuItem>
