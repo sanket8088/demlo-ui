@@ -19,8 +19,9 @@ import MicrosoftIcon from "@/assets/icons/jsx/MicrosoftIcon";
 // import { signUp } from "@/utility/auth";
 import { handleGoogleAuthentication } from "@/utility/auth";
 import AccountConfirmationForm from "./AccountConfirmationForm";
-
+import moment from "moment";
 import useAuth from "@/hooks/useAuth";
+import { toast } from "react-hot-toast";
 
 const RegisterForm = () => {
   const {
@@ -80,11 +81,13 @@ const RegisterForm = () => {
         firstName: values.firstName,
         lastName: values.lastName,
         email: values.email,
+        birthdate: values.dob,
       });
       setLoading(false);
       setSuccessSignUp(true);
+      toast.success("Successfully Registered");
     } catch (err: any) {
-      alert(err.message);
+      toast.error(err.message);
       setLoading(false);
       setSuccessSignUp(false);
     }
@@ -132,7 +135,14 @@ const RegisterForm = () => {
     lastName: Yup.string().required(),
     username: Yup.string().required(),
     password: Yup.string().required(),
-    dob: Yup.string().required(),
+    dob: Yup.string()
+      .required()
+      .test("DOB", "Age must be between 12 to 20", (value) => {
+        const twelveCheck = moment().diff(moment(value), "years") >= 12;
+        const twentyCheck = moment().diff(moment(value), "years") <= 20;
+
+        return twelveCheck && twentyCheck;
+      }),
     confirmPassword: Yup.string()
       .oneOf([Yup.ref("password"), undefined], "Passwords must match")
       .required("Required"),

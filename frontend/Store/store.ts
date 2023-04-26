@@ -1,16 +1,19 @@
-import { configureStore, ThunkAction, Action,  combineReducers, } from "@reduxjs/toolkit";
+import { configureStore, ThunkAction, Action,  combineReducers } from "@reduxjs/toolkit";
 import { authSlice } from "./slice";
+import { themeSlice } from "./themeSlice";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { createWrapper } from "next-redux-wrapper";
 const rootReducer = combineReducers({
   [authSlice.name]: authSlice.reducer,
+  [themeSlice.name]: themeSlice.reducer,
 });
 
 const makeConfiguredStore = () =>
   configureStore({
     reducer: rootReducer,
     devTools: true,
+   
   });
 
 export const makeStore = () => {
@@ -23,7 +26,7 @@ export const makeStore = () => {
 
     const persistConfig = {
       key: "nextjs",
-      whitelist: ["auth"], // make sure it does not clash with server keys
+      whitelist: ["auth","theme"], // make sure it does not clash with server keys
       storage,
     };
 
@@ -31,6 +34,7 @@ export const makeStore = () => {
     let store: any = configureStore({
       reducer: persistedReducer,
       devTools: process.env.NODE_ENV !== "production",
+      
     });
 
     store.__persistor = persistStore(store); // Nasty hack

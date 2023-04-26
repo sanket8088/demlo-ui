@@ -1,4 +1,4 @@
-import styled from '@emotion/styled';
+import styled from "@emotion/styled";
 
 // Header
 
@@ -7,7 +7,7 @@ const HeaderContainer = styled.div`
   display: flex;
   align-items: center;
   border-radius: 20px;
-  background: #1d2331;
+  background: var(--header-bg);
   justify-content: space-between;
   margin-bottom: 1.375rem;
 `;

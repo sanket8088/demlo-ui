@@ -18,7 +18,7 @@ import { wrapper } from "../Store/store";
 import AuthProvider from "@/contexts/AuthContext";
 import { PersistGate } from "redux-persist/integration/react";
 import { useStore } from "react-redux";
-
+import { Toaster } from "react-hot-toast";
 interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache;
 }
@@ -49,6 +49,7 @@ const MyApp: NextPage<MyAppProps> = (props) => {
           <CacheProvider value={emotionCache}>
             <CssBaseline />
             <UserContext.Provider value="test">
+              <Toaster />
               <Component {...pageProps} />
             </UserContext.Provider>
           </CacheProvider>
