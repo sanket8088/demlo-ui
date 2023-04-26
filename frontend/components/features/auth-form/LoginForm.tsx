@@ -21,6 +21,7 @@ import { handleGoogleAuthentication } from "@/utility/auth";
 import { setAuthState } from "@/Store/slice";
 import { useDispatch, useSelector } from "react-redux";
 import useAuth from "@/hooks/useAuth";
+import { toast } from "react-hot-toast";
 
 const LoginForm = () => {
   const { signIn, isAuthenticated, isAuthenticating, google_signIn } =
@@ -60,7 +61,7 @@ const LoginForm = () => {
       setLoading(false);
       setSuccessSignIn(true);
     } catch (err: any) {
-      alert(err.message);
+      toast.error(err.message);
       setLoading(false);
       setSuccessSignIn(false);
     }
@@ -80,6 +81,7 @@ const LoginForm = () => {
     //   username: values?.username,
     // });
   };
+
   useEffect(() => {
     console.log("login", dataVal);
   }, [data]);
@@ -90,6 +92,7 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
+      toast.success("Successfully Logged in");
       dispatch(setAuthState(true));
       router.replace("/profile");
       console.log("signed in");

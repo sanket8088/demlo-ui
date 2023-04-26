@@ -32,6 +32,9 @@ export default function LongMenu({ onLogout }: MenuProps) {
   return (
     <div>
       <IconButton
+        sx={{
+          padding: '0px',
+        }}
         aria-label="more"
         id="long-button"
         aria-controls={open ? 'long-menu' : undefined}
@@ -64,7 +67,6 @@ export default function LongMenu({ onLogout }: MenuProps) {
         {options.map((option) => (
           <MenuItem
             key={option}
-            selected={option === 'Log Out'}
             onClick={option === 'Log Out' ? handleLogout : handleClose}
           >
             {option}

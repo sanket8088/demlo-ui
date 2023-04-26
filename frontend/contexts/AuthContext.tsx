@@ -15,6 +15,7 @@ export interface IAuthContextType {
     email: string;
     password: string;
     username: string;
+    birthdate: string;
   }) => Promise<any>;
   confirmAccount: (p: { code: string }) => Promise<any>;
 }
@@ -144,12 +145,14 @@ export const AuthProvider = ({ children }: IAuthProviderProps) => {
     firstName,
     lastName,
     username,
+    birthdate,
   }: {
     email: string;
     password: string;
     firstName: string;
     lastName: string;
     username: string;
+    birthdate: string;
   }) => {
     await Auth.signUp({
       username,
@@ -158,7 +161,7 @@ export const AuthProvider = ({ children }: IAuthProviderProps) => {
         email,
         given_name: firstName,
         family_name: lastName,
-        birthdate: "2001-01-10",
+        birthdate: birthdate,
       },
     });
     setUnverifiedAccount({ email, password });
