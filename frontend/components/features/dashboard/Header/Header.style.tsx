@@ -64,7 +64,7 @@ const NavigationText = styled.span`
 `;
 
 const NotificationContainer = styled.div`
-  width: 23%;
+  width: 25%;
   display: flex;
   cursor: pointer;
   align-items: center;
