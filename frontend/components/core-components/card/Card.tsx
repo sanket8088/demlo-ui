@@ -5,9 +5,24 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import CardContent from '@mui/material/CardContent';
 
-export default function InterestAreaCard() {
+interface CardProps {
+  id: number;
+  title: string;
+  img_url: string;
+  discription: string;
+  onClick: (subject: { id: number; title: string; img_url: string }) => void;
+}
+
+export default function InterestAreaCard({
+  id,
+  title,
+  img_url,
+  onClick,
+  discription,
+}: CardProps) {
   return (
     <Card
+      onClick={() => onClick({ id, title, img_url })}
       sx={{
         padding: '10px',
         maxWidth: '200px',
@@ -28,8 +43,8 @@ export default function InterestAreaCard() {
           sx={{ borderRadius: '7px' }}
           component="img"
           height="80"
-          image="https://img.freepik.com/free-vector/cartoon-galaxy-background_23-2148973052.jpg"
-          alt="green iguana"
+          image={img_url}
+          alt={title}
         />
         <CardContent
           sx={{
@@ -44,11 +59,10 @@ export default function InterestAreaCard() {
             gutterBottom
             component="div"
           >
-            Science
+            {title}
           </Typography>
           <Typography sx={{ color: '#A5A5A5', fontSize: '8px' }}>
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species.
+            {discription}
           </Typography>
         </CardContent>
       </CardActionArea>
