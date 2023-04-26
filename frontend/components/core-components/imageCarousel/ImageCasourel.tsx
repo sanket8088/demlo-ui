@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react";
 import Image from "next/image";
-// import { sampleData } from "./SampleData";
+import { sampleData } from "./sampleData";
 import {
   SelectImage,
   SelectedImage,
@@ -12,10 +12,12 @@ interface ITypesPreviewedImage {
   src: string;
 }
 export interface ITypesImageCarousel {
-  imageArray?: ITypesPreviewedImage[];
+  imageArray: ITypesPreviewedImage[];
 }
 
-const ImageCarousel = ({ imageArray }: ITypesImageCarousel) => {
+const ImageCarousel = ({
+  imageArray = sampleData.imageArray,
+}: ITypesImageCarousel) => {
   const [open, setOpen] = useState<boolean>(false);
   const [previewedImage, setPreviewedImage] = useState<ITypesPreviewedImage>({
     id: 678,
@@ -45,7 +47,7 @@ const ImageCarousel = ({ imageArray }: ITypesImageCarousel) => {
         <img src={previewedImage?.src} alt="testImage" />
       </SelectedImage>
       <SelectImage>
-        {imageGallery.map((imageData, index) => (
+        {imageArray.map((imageData, index) => (
           <ImagePreview onClick={() => handleImageSelection(imageData)}>
             <img
               key={imageData?.src}
